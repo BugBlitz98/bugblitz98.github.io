@@ -3,594 +3,1477 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visuo Labs | Apps & Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <title>Visuo Labs | Android Apps & Developer Tools</title>
+  <meta name="description" content="Discover modern developer tools, visual graph utilities, productivity apps, and fun games built by Visuo Labs on Google Play." />
+  <meta name="theme-color" content="#03050a" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #03050a;
-      --bg2: #070c16;
-      --surface: rgba(255,255,255,0.03);
-      --surface-hover: rgba(255,255,255,0.07);
-      --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(99,210,255,0.3);
+      --bg-alt: #070c16;
+      --surface: rgba(255, 255, 255, 0.03);
+      --surface-hover: rgba(255, 255, 255, 0.07);
+      --surface-active: rgba(255, 255, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(62, 240, 255, 0.35);
       --cyan: #3ef0ff;
+      --cyan-glow: rgba(62, 240, 255, 0.25);
       --green: #22ffa0;
+      --green-glow: rgba(34, 255, 160, 0.2);
       --purple: #a78bfa;
-      --text: #e8edf5;
+      --amber: #fbbf24;
+      --text: #f0f4fc;
+      --text-secondary: #94a3b8;
       --muted: #5a6a82;
-      --dim: #283040;
+      --dim: #1e2638;
+      --card-radius: 20px;
     }
 
     *, *::before, *::after {
       margin: 0; padding: 0; box-sizing: border-box;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 300;
       overflow-x: hidden;
-      cursor: none;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── CURSOR ─────────────────────────────────── */
-    #cursor {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      width: 10px; height: 10px;
-      background: var(--cyan);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: screen;
+    /* ─── CUSTOM CURSOR (DESKTOP) ───────────────── */
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        position: fixed; top: 0; left: 0; z-index: 9999;
+        width: 8px; height: 8px;
+        background: var(--cyan);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+        mix-blend-mode: screen;
+      }
+      #cursor-ring {
+        position: fixed; top: 0; left: 0; z-index: 9998;
+        width: 34px; height: 34px;
+        border: 1px solid rgba(62, 240, 255, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+      }
+      body:has(a:hover, button:hover, .card:hover, .filter-chip:hover) #cursor {
+        width: 14px; height: 14px;
+        background: var(--green);
+      }
+      body:has(a:hover, button:hover, .card:hover, .filter-chip:hover) #cursor-ring {
+        width: 48px; height: 48px;
+        border-color: rgba(34, 255, 160, 0.5);
+        background: rgba(34, 255, 160, 0.04);
+      }
     }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0; z-index: 9998;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(62,240,255,0.35);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: transform 0.12s ease, width 0.25s, height 0.25s, border-color 0.25s;
-    }
-    body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--green); }
-    body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(34,255,160,0.4); }
 
-    /* ─── NOISE OVERLAY ──────────────────────────── */
+    @media (hover: none) or (pointer: coarse) {
+      #cursor, #cursor-ring { display: none !important; }
+    }
+
+    /* ─── AMBIENT BACKGROUND & NOISE ─────────────── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
       background-repeat: repeat;
-      opacity: 0.55;
+      opacity: 0.6;
     }
 
-    /* ─── GRID BG ─────────────────────────────────── */
     .grid-bg {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(62,240,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(62,240,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 75%);
+        linear-gradient(rgba(62, 240, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62, 240, 255, 0.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 15%, black 0%, transparent 80%);
     }
 
-    /* ─── ORBS ───────────────────────────────────── */
     .orb {
-      position: fixed; border-radius: 50%; filter: blur(100px);
+      position: fixed; border-radius: 50%; filter: blur(120px);
       pointer-events: none; z-index: 0;
     }
     .orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(62,240,255,0.07), transparent 70%);
-      top: -200px; left: -100px;
-      animation: driftA 18s ease-in-out infinite alternate;
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(62, 240, 255, 0.08), transparent 70%);
+      top: -200px; left: -150px;
+      animation: driftA 22s ease-in-out infinite alternate;
     }
     .orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(34,255,160,0.06), transparent 70%);
-      bottom: -150px; right: -100px;
-      animation: driftB 22s ease-in-out infinite alternate;
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(34, 255, 160, 0.07), transparent 70%);
+      bottom: -150px; right: -120px;
+      animation: driftB 25s ease-in-out infinite alternate;
     }
     .orb-3 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(167,139,250,0.05), transparent 70%);
-      top: 40%; left: 50%;
-      animation: driftC 28s ease-in-out infinite alternate;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.06), transparent 70%);
+      top: 45%; left: 55%;
+      animation: driftC 30s ease-in-out infinite alternate;
     }
-    @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(80px,60px) scale(1.1); } }
-    @keyframes driftB { from { transform: translate(0,0); } to { transform: translate(-60px,-80px) scale(1.15); } }
-    @keyframes driftC { from { transform: translate(-50%,-50%) scale(0.9); } to { transform: translate(-50%,-55%) scale(1.05); } }
+    @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(90px,70px) scale(1.1); } }
+    @keyframes driftB { from { transform: translate(0,0); } to { transform: translate(-70px,-90px) scale(1.15); } }
+    @keyframes driftC { from { transform: translate(-50%,-50%) scale(0.95); } to { transform: translate(-45%,-55%) scale(1.08); } }
 
-    /* ─── LAYOUT ─────────────────────────────────── */
+    /* ─── LAYOUT CONTAINER ──────────────────────── */
     .wrap {
       position: relative; z-index: 2;
-      max-width: 1160px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 24px;
     }
 
-    /* ─── NAV ────────────────────────────────────── */
-    nav {
+    /* ─── HEADER / NAVBAR ───────────────────────── */
+    header {
       position: sticky; top: 0; z-index: 100;
-      padding: 18px 0;
-      background: rgba(3,5,10,0.6);
-      backdrop-filter: blur(20px) saturate(160%);
+      padding: 16px 0;
+      background: rgba(3, 5, 10, 0.75);
+      backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
     }
     .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-    .logo {
+    .brand-link {
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .brand-icon {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      color: #03080c; font-weight: 800; font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      box-shadow: 0 0 16px var(--cyan-glow);
+    }
+    .logo-text {
       font-family: 'Syne', sans-serif;
       font-weight: 800; font-size: 20px;
       letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--cyan), var(--green));
+      background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .logo span { -webkit-text-fill-color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; letter-spacing: 0; }
-    .nav-tag {
-      font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--muted);
+    .logo-text span {
+      -webkit-text-fill-color: var(--muted);
+      font-weight: 400; font-size: 13px; margin-left: 6px; letter-spacing: 0;
+    }
+    .nav-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-dev-profile {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
-      padding: 5px 12px; border-radius: 100px;
+      padding: 7px 16px;
+      border-radius: 100px;
+      transition: all 0.25s ease;
+    }
+    .btn-dev-profile:hover {
+      background: rgba(62, 240, 255, 0.1);
+      border-color: rgba(62, 240, 255, 0.4);
+      color: var(--cyan);
+      box-shadow: 0 0 15px rgba(62, 240, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    .play-icon {
+      width: 15px; height: 15px;
+      fill: currentColor;
     }
 
-    /* ─── HERO ───────────────────────────────────── */
+    /* ─── HERO SECTION ──────────────────────────── */
     .hero {
-      padding: 130px 0 80px;
+      padding: 100px 0 60px;
       text-align: center;
       position: relative;
     }
-    .hero-eyebrow {
+    .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      font-size: 12px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
       color: var(--cyan);
-      border: 1px solid rgba(62,240,255,0.2);
-      padding: 6px 16px; border-radius: 100px;
-      margin-bottom: 36px;
-      opacity: 0; animation: slideDown 0.7s 0.2s ease forwards;
+      background: rgba(62, 240, 255, 0.06);
+      border: 1px solid rgba(62, 240, 255, 0.25);
+      padding: 6px 18px; border-radius: 100px;
+      margin-bottom: 28px;
+      box-shadow: 0 0 20px rgba(62, 240, 255, 0.1);
+      opacity: 0; animation: fadeInUp 0.7s 0.1s ease forwards;
     }
-    .hero-eyebrow::before {
-      content: ''; width: 5px; height: 5px; border-radius: 50%;
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
       background: var(--cyan);
       box-shadow: 0 0 8px var(--cyan);
       animation: pulse 2s infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.85); } }
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(52px, 8vw, 96px);
+      font-size: clamp(40px, 7vw, 84px);
       font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -3px;
-      opacity: 0; animation: slideDown 0.8s 0.35s ease forwards;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 900px;
+      margin: 0 auto;
+      opacity: 0; animation: fadeInUp 0.8s 0.25s ease forwards;
     }
-    .hero h1 .line1 { display: block; color: var(--text); }
-    .hero h1 .line2 {
-      display: block;
-      background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 55%, var(--purple) 100%);
+    .hero h1 .text-white { color: #ffffff; }
+    .hero h1 .text-gradient {
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 50%, var(--purple) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-size: 200% auto;
-      animation: shimmer 4s linear infinite, slideDown 0.8s 0.35s ease forwards;
+      animation: shimmer 5s linear infinite;
     }
-    @keyframes shimmer { from{background-position:0 center;} to{background-position:200% center;} }
+    @keyframes shimmer { from { background-position: 0 center; } to { background-position: 200% center; } }
 
     .hero-sub {
-      margin-top: 28px;
-      font-size: 16px; color: var(--muted); line-height: 1.7;
-      max-width: 480px; margin-left: auto; margin-right: auto;
-      opacity: 0; animation: slideDown 0.8s 0.5s ease forwards;
+      margin-top: 24px;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 620px;
+      margin-left: auto; margin-right: auto;
+      opacity: 0; animation: fadeInUp 0.8s 0.4s ease forwards;
     }
 
+    .hero-buttons {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+      opacity: 0; animation: fadeInUp 0.8s 0.5s ease forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      color: #030a0e;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      box-shadow: 0 8px 24px var(--cyan-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(62, 240, 255, 0.45);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* ─── HERO STATS ────────────────────────────── */
     .hero-stats {
-      display: flex; align-items: center; justify-content: center; gap: 48px;
-      margin-top: 56px;
-      opacity: 0; animation: slideDown 0.8s 0.65s ease forwards;
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      margin-top: 54px;
+      padding: 22px 36px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      max-width: fit-content;
+      margin-left: auto; margin-right: auto;
+      backdrop-filter: blur(12px);
+      opacity: 0; animation: fadeInUp 0.8s 0.6s ease forwards;
     }
     .stat { text-align: center; }
     .stat-num {
       font-family: 'Syne', sans-serif;
-      font-size: 32px; font-weight: 700;
+      font-size: 28px; font-weight: 800;
       background: linear-gradient(135deg, var(--cyan), var(--green));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
     }
-    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
-    .stat-div { width: 1px; height: 40px; background: var(--border); }
+    .stat-label {
+      font-size: 11px; color: var(--text-secondary);
+      letter-spacing: 1.2px; text-transform: uppercase;
+      margin-top: 5px; font-weight: 500;
+    }
+    .stat-div { width: 1px; height: 32px; background: var(--border); }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-16px); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── SECTION HEADER ──────────────────────────── */
-    .section-header {
-      margin-bottom: 48px;
-      display: flex; align-items: flex-end; justify-content: space-between;
+    /* ─── CONTROLS & FILTER BAR ─────────────────── */
+    .controls-section {
+      padding: 30px 0 20px;
+      position: sticky; top: 73px; z-index: 90;
+      background: linear-gradient(180deg, rgba(3, 5, 10, 0.95) 75%, rgba(3, 5, 10, 0) 100%);
+      backdrop-filter: blur(14px);
     }
-    .section-kicker {
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 10px;
+    .controls-wrapper {
+      display: flex; flex-direction: column; gap: 16px;
     }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700; letter-spacing: -1px;
-      line-height: 1.1;
+    .search-and-filters {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex-wrap: wrap;
     }
-    .section-line {
-      flex: 1; height: 1px; background: var(--border);
-      margin-left: 32px; margin-bottom: 8px;
+    
+    /* Search box */
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+      max-width: 420px;
+    }
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 18px 12px 42px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      outline: none;
+    }
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(62, 240, 255, 0.15);
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .search-clear {
+      position: absolute; right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 14px; padding: 4px;
+      display: none;
+    }
+    .search-clear:hover { color: var(--text); }
+
+    /* Filter chips */
+    .filter-chips {
+      display: flex; align-items: center; gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .filter-chips::-webkit-scrollbar { display: none; }
+
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 100px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .filter-chip:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .filter-chip.active {
+      background: rgba(62, 240, 255, 0.12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 16px rgba(62, 240, 255, 0.12);
+    }
+    .filter-chip .chip-count {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 7px;
+      border-radius: 100px;
+      color: var(--muted);
+    }
+    .filter-chip.active .chip-count {
+      background: rgba(62, 240, 255, 0.25);
+      color: var(--cyan);
     }
 
-    /* ─── CARDS ──────────────────────────────────── */
-    .apps { padding: 40px 0 120px; }
+    /* Result count text */
+    .results-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; color: var(--muted);
+      padding: 0 4px;
+    }
+
+    /* ─── APP GRID & CARDS ──────────────────────── */
+    .apps-section {
+      padding: 10px 0 100px;
+    }
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
     }
 
     .card {
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
+      border-radius: var(--card-radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.2,0,0,1),
-                  border-color 0.35s ease,
-                  box-shadow 0.35s ease,
-                  background 0.35s ease;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease,
+                  background 0.3s ease;
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     .card.visible {
-      animation: cardIn 0.6s ease forwards;
+      animation: cardIn 0.5s ease forwards;
     }
     @keyframes cardIn {
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Card spotlight effect */
     .card::before {
       content: '';
-      position: absolute; inset: 0; border-radius: 20px;
-      background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(62,240,255,0.06), transparent 40%);
+      position: absolute; inset: 0; border-radius: var(--card-radius);
+      background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(62, 240, 255, 0.08), transparent 45%);
       opacity: 0;
-      transition: opacity 0.4s;
+      transition: opacity 0.35s ease;
       pointer-events: none;
     }
     .card:hover::before { opacity: 1; }
 
     .card:hover {
-      transform: translateY(-6px) scale(1.01);
+      transform: translateY(-6px);
       background: var(--surface-hover);
       border-color: var(--border-hover);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(62,240,255,0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(62, 240, 255, 0.06);
     }
 
-    /* featured card */
-    .card.featured {
-      background: linear-gradient(135deg, rgba(62,240,255,0.06), rgba(34,255,160,0.04));
-      border-color: rgba(62,240,255,0.15);
-      grid-column: span 2;
+    /* Featured App Card */
+    .card.featured-card {
+      background: linear-gradient(145deg, rgba(62, 240, 255, 0.06), rgba(34, 255, 160, 0.03), var(--surface));
+      border-color: rgba(62, 240, 255, 0.25);
     }
-    @media (max-width: 680px) {
-      .card.featured { grid-column: span 1; }
+    .card.featured-card:hover {
+      border-color: rgba(62, 240, 255, 0.5);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(62, 240, 255, 0.12);
     }
 
-    /* coming-soon */
-    .card.soon {
-      opacity: 0.55;
+    /* Card Top Header */
+    .card-top {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      margin-bottom: 18px;
     }
-    .card.soon:hover { opacity: 0.75; }
-
-    .card-icon {
-      width: 46px; height: 46px; border-radius: 12px;
+    .icon-container {
+      position: relative;
+      width: 58px; height: 58px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      margin-bottom: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
     }
-    .card.featured .card-icon {
-      background: linear-gradient(135deg, rgba(62,240,255,0.15), rgba(34,255,160,0.1));
-      border-color: rgba(62,240,255,0.2);
+    .card:hover .icon-container {
+      transform: scale(1.05);
+    }
+    .app-icon-img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .app-icon-fallback {
+      font-size: 28px; line-height: 1;
     }
 
-    .card-tag {
-      position: absolute; top: 20px; right: 20px;
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 100px;
+    .badge-group {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
     }
-    .card-tag.live {
-      background: rgba(34,255,160,0.1);
+    .tag-pill {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .tag-live {
+      background: rgba(34, 255, 160, 0.12);
       color: var(--green);
-      border: 1px solid rgba(34,255,160,0.2);
+      border: 1px solid rgba(34, 255, 160, 0.25);
     }
-    .card-tag.soon-tag {
-      background: rgba(90,106,130,0.15);
+    .tag-featured {
+      background: rgba(62, 240, 255, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(62, 240, 255, 0.35);
+    }
+    .tag-category {
+      font-size: 11px;
       color: var(--muted);
-      border: 1px solid rgba(90,106,130,0.2);
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .card h3 {
+    /* Card Content */
+    .card-body {
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+    .card-title {
       font-family: 'Syne', sans-serif;
       font-size: 18px; font-weight: 700;
-      color: var(--text);
+      color: #ffffff;
       margin-bottom: 8px;
-      letter-spacing: -0.3px;
+      line-height: 1.25;
+      letter-spacing: -0.2px;
+    }
+    .card-desc {
+      font-size: 13.5px; line-height: 1.6;
+      color: var(--text-secondary);
     }
 
-    .card p {
-      font-size: 14px; line-height: 1.65;
+    /* Card Footer & Action */
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .package-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       color: var(--muted);
-      margin-bottom: 24px;
+      max-width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
-    .card-cta {
+    .btn-get-app {
       display: inline-flex; align-items: center; gap: 8px;
       text-decoration: none;
-      font-size: 13px; font-weight: 400; letter-spacing: 0.3px;
-      color: var(--text);
+      font-size: 13px; font-weight: 600;
+      color: #030a0d;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
       padding: 9px 18px;
       border-radius: 10px;
       transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(62, 240, 255, 0.15);
+      margin-left: auto;
     }
-    .card-cta.active {
-      background: linear-gradient(135deg, var(--cyan), var(--green));
-      color: #030a0d;
-      font-weight: 600;
+    .btn-get-app:hover {
+      box-shadow: 0 8px 24px rgba(62, 240, 255, 0.35);
+      transform: translateY(-2px);
     }
-    .card-cta.active:hover {
-      box-shadow: 0 8px 30px rgba(62,240,255,0.3);
-      transform: translateY(-1px);
+    .btn-get-app svg {
+      transition: transform 0.2s ease;
     }
-    .card-cta.inactive {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      cursor: default;
+    .btn-get-app:hover svg {
+      transform: translateX(3px);
     }
-    .card-cta.active svg { transition: transform 0.2s; }
-    .card-cta.active:hover svg { transform: translateX(3px); }
 
-    /* ─── FOOTER ──────────────────────────────────── */
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      display: none;
+    }
+    .empty-state.visible {
+      display: block;
+    }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.6; }
+    .empty-title { font-family: 'Syne', sans-serif; font-size: 20px; color: #fff; margin-bottom: 6px; }
+    .empty-desc { font-size: 14px; color: var(--muted); }
+
+    /* ─── DEVELOPER PROFILE SHOWCASE CALLOUT ─────── */
+    .dev-callout {
+      margin: 40px 0 80px;
+      background: linear-gradient(135deg, rgba(62, 240, 255, 0.07), rgba(167, 139, 250, 0.05), rgba(34, 255, 160, 0.04));
+      border: 1px solid rgba(62, 240, 255, 0.2);
+      border-radius: 24px;
+      padding: 44px 36px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+      position: relative; overflow: hidden;
+    }
+    .dev-callout::before {
+      content: '';
+      position: absolute; right: -50px; bottom: -50px;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(62, 240, 255, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .dev-callout-content {
+      max-width: 600px;
+    }
+    .dev-callout-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 10px;
+    }
+    .dev-callout-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 800; line-height: 1.2;
+      color: #ffffff; margin-bottom: 12px;
+    }
+    .dev-callout-desc {
+      font-size: 15px; color: var(--text-secondary); line-height: 1.6;
+    }
+    .dev-callout-action {
+      flex-shrink: 0;
+    }
+    .btn-google-play {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #03080c;
+      color: #ffffff;
+      border: 1px solid rgba(62, 240, 255, 0.35);
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .btn-google-play:hover {
+      background: rgba(62, 240, 255, 0.1);
+      border-color: var(--cyan);
+      box-shadow: 0 10px 30px rgba(62, 240, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* ─── FOOTER ────────────────────────────────── */
     footer {
       position: relative; z-index: 2;
       border-top: 1px solid var(--border);
-      padding: 40px 0;
+      padding: 48px 0 36px;
+      background: rgba(3, 5, 10, 0.85);
     }
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-brand {
+      display: flex; flex-direction: column; gap: 6px;
     }
     .footer-logo {
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
       background: linear-gradient(135deg, var(--cyan), var(--green));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .footer-copy {
+    .footer-desc {
       font-size: 13px; color: var(--muted);
     }
-    .footer-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 10px var(--green);
-      animation: pulse 2s infinite;
+    .footer-links {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .footer-link {
+      font-size: 13px; color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover {
+      color: var(--cyan);
+    }
+    .footer-copy {
+      font-size: 13px; color: var(--muted);
+      width: 100%;
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .footer-copy a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-copy a:hover { color: var(--cyan); }
+
+    /* ─── RESPONSIVE STYLES ─────────────────────── */
+    @media (max-width: 860px) {
+      .dev-callout {
+        flex-direction: column; text-align: center;
+        padding: 36px 24px;
+      }
+      .dev-callout-action { width: 100%; }
+      .btn-google-play { justify-content: center; width: 100%; }
+      .hero-stats {
+        gap: 20px; padding: 18px 24px;
+      }
+      .stat-num { font-size: 24px; }
+      .stat-label { font-size: 10px; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 70px 0 40px; }
+      .controls-section { top: 65px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .search-and-filters { flex-direction: column; align-items: stretch; }
+      .search-box { max-width: 100%; }
+      .hero-stats {
+        display: grid; grid-template-columns: 1fr 1fr 1fr;
+        border-radius: 20px; width: 100%;
+      }
+      .stat-div { display: none; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+  <!-- Dynamic Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
 
-<!-- ambient -->
-<div class="grid-bg"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
+  <!-- Ambient Light Orbs & Grid -->
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="wrap nav-inner">
-    <div class="logo">Visuo Labs <span>/ studio</span></div>
-    <div class="nav-tag">Apps &amp; Tools</div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="wrap">
-  <section class="hero">
-    <div class="hero-eyebrow">Crafting Developer Tools</div>
-    <h1>
-      <span class="line1">Build &amp; ship</span>
-      <span class="line2">faster.</span>
-    </h1>
-    <p class="hero-sub">Modern apps, tools &amp; developer experiences — built with obsessive attention to craft.</p>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">4+</div>
-        <div class="stat-label">Live Apps</div>
-      </div>
-      <div class="stat-div"></div>
-      <div class="stat">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Possibilities</div>
-      </div>
-      <div class="stat-div"></div>
-      <div class="stat">
-        <div class="stat-num">2026</div>
-        <div class="stat-label">Active</div>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="#" class="brand-link">
+        <div class="brand-icon">V</div>
+        <div class="logo-text">Visuo Labs <span>/ apps</span></div>
+      </a>
+      <div class="nav-actions">
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-dev-profile">
+          <svg class="play-icon" viewBox="0 0 24 24">
+            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
+          </svg>
+          Google Play Store
+        </a>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- APPS -->
-  <section class="apps">
-    <div class="section-header">
-      <div>
-        <div class="section-kicker">Our Work</div>
-        <div class="section-title">Apps &amp; Tools</div>
+  <!-- HERO SECTION -->
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-badge">Curated Android Applications</div>
+      <h1>
+        <span class="text-white">Smart visual tools &amp;</span>
+        <span class="text-gradient">delightful apps.</span>
+      </h1>
+      <p class="hero-sub">
+        Explore developer visualizers, graph editors, database clients, productivity suites, and games — built with precision and speed.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#apps" class="btn-primary">
+          Explore All Apps
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-secondary">
+          <svg class="play-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
+          </svg>
+          Developer Profile
+        </a>
       </div>
-      <div class="section-line"></div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num" id="hero-apps-count">17</div>
+          <div class="stat-label">Published Apps</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Play Verified</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div class="stat-num">4.5★</div>
+          <div class="stat-label">Top Experience</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STICKY FILTER & SEARCH CONTROLS -->
+    <div class="controls-section" id="apps">
+      <div class="controls-wrapper">
+        <div class="search-and-filters">
+          <!-- Search box -->
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="appSearch" class="search-input" placeholder="Search apps (JSON, XML, Mongo, Games, Notes...)" autocomplete="off" />
+            <button id="searchClear" class="search-clear" title="Clear search">✕</button>
+          </div>
+
+          <!-- Category filter chips -->
+          <div class="filter-chips">
+            <button class="filter-chip active" data-category="all">
+              All Apps <span class="chip-count">17</span>
+            </button>
+            <button class="filter-chip" data-category="dev-tools">
+              Developer Tools <span class="chip-count">10</span>
+            </button>
+            <button class="filter-chip" data-category="productivity">
+              Productivity &amp; Utility <span class="chip-count">2</span>
+            </button>
+            <button class="filter-chip" data-category="games">
+              Games &amp; Fun <span class="chip-count">5</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="results-bar">
+          <span id="resultsCount">Showing all 17 apps</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;">Direct Store Links Enabled</span>
+        </div>
+      </div>
     </div>
 
-    <div class="cards-grid">
+    <!-- APPS GRID -->
+    <section class="apps-section">
+      <div class="cards-grid" id="appsGrid">
 
-      <!-- JSON Viewer — featured -->
-      <div class="card featured">
-        <span class="card-tag live">Live</span>
-        <div class="card-icon">🌿</div>
-        <h3>JSON Viewer — Graph Visualizer</h3>
-        <p>Transform raw JSON into interactive graphs and tree visualizations. Built for developers who think visually.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.jsonviewer" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- 1. JSON Viewer -->
+        <div class="card featured-card" data-category="dev-tools" data-title="json viewer graph visualizer tree formatter" data-pkg="com.jsonviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/-xvRVghF7zwDGoV2RQZjTV93q_UHQHwlCjbCQRVtpQ7X9BR2li6E3LhoD-akmnqs7bgQnaqV-ZeELmAo3hZ6WQ=s180-rw" alt="JSON Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🌿</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-featured">Featured</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">JSON Viewer - Graph Visualizer</h3>
+            <p class="card-desc">Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads seamlessly.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.jsonviewer">com.jsonviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.jsonviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. XML Viewer -->
+        <div class="card" data-category="dev-tools" data-title="xml viewer graph visualizer markup parser" data-pkg="com.animesh.xmlviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/BGfxOJd5Qd3A0p_vQ56tw4bev4STCFRiQfruTIPIqVMgfo8-2hNNz98Pa8y7S-IkprU71G1Lcvpxkv6W_WUrYg=s180-rw" alt="XML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">📐</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">XML Viewer - Graph Visualizer</h3>
+            <p class="card-desc">Render nested XML structures as clean, readable interactive node graphs without squinting at tedious raw markup.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.animesh.xmlviewer">com.animesh.xmlviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.animesh.xmlviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. YAML Viewer -->
+        <div class="card" data-category="dev-tools" data-title="yaml viewer graph visualizer config kubernetes docker" data-pkg="com.animesh.yamlviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/J4nYmtNpz49bUehvjX8_vv3qP4uMXtccVOko6_vckdQIaQuQWiwmHyJ4lWpW7FSwIsRxVaudeJZ51bUr7CZxzA=s180-rw" alt="YAML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">📜</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">YAML Viewer - Graph Visualizer</h3>
+            <p class="card-desc">Visualize YAML configuration files into interactive diagrams. Ideal for inspecting CI/CD pipelines, Kubernetes, and Docker Compose configs.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.animesh.yamlviewer">com.animesh.yamlviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.animesh.yamlviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. JSON Compare -->
+        <div class="card" data-category="dev-tools" data-title="json compare diff viewer side by side visual delta" data-pkg="com.jsoncompare">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/CwmEy5qigZRZsj0Hzc09v2YnY5W3bAAER0vtkg4YGzNaeYjgrewP2HO8kj6SUFtIq5tmLcpV20ExsAuMVvilqg=s180-rw" alt="JSON Compare Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🔍</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">JSON Compare – Diff &amp; Viewer</h3>
+            <p class="card-desc">Compare two JSON files side-by-side with visual color-coded diff highlighting, key matching, and syntax error detection.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.jsoncompare">com.jsoncompare</span>
+            <a href="https://play.google.com/store/apps/details?id=com.jsoncompare" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. MongoLens -->
+        <div class="card" data-category="dev-tools" data-title="mongolens mongodb client database explorer collections queries" data-pkg="com.mongolens">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/rZCuYqwtbdRCnHwr6oM3kXrGK4XfCQ5ag5ESFjtdHTKzn4s7-gZZnKGG6ap4KmPhS9q3B8hAt9AK-2VZh3Mc=s180-rw" alt="MongoLens Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🔭</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Database Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">MongoLens - MongoDB Client</h3>
+            <p class="card-desc">Connect and manage MongoDB databases directly from your phone. Execute queries, inspect collections, edit documents with intuitive UI.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.mongolens">com.mongolens</span>
+            <a href="https://play.google.com/store/apps/details?id=com.mongolens" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. GLB Viewer -->
+        <div class="card" data-category="dev-tools" data-title="glb viewer 3d model viewer gltf augmented reality render" data-pkg="com.glbviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/NsdGM9jIp3-Le5IyiP4UCLBK064O1SaWW1r4SC-HOHi5oekM5z5-M-P30D3ax7XX7sBKW3QgLBe9fUIWMR-AUK0=s180-rw" alt="GLB Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🧊</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">4.1★</span>
+              <span class="tag-category">3D Graphics</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">GLB Viewer – 3D Model Viewer</h3>
+            <p class="card-desc">Fast, smooth 3D model viewer for GLB and glTF files. Rotate, zoom, inspect textures, animations, and lighting in real time.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.glbviewer">com.glbviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.glbviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. Mermaid Studio -->
+        <div class="card" data-category="dev-tools" data-title="mermaid studio diagram editor flowchart sequence architecture" data-pkg="com.mermaidviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/XgmQFZ9FYXmXxCCXyryT-lnHWo51vDSwqxZBsE7x_MWr7sxgrIyGYV4xGVMMbZ5MQgWIByzhmSCQF3f0VLxsKg=s180-rw" alt="Mermaid Studio Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🧜‍♀️</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Diagram Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Mermaid Studio: Diagram Editor</h3>
+            <p class="card-desc">Write Mermaid-js markdown syntax and generate flowcharts, sequence diagrams, class models, and state graphs instantly.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.mermaidviewer">com.mermaidviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.mermaidviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. HTML Runner -->
+        <div class="card" data-category="dev-tools" data-title="html runner live web editor javascript css preview playground" data-pkg="app.htmlrunner">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/ixSq6yTj0lJoFDc6W8mU5yd8r_gtjXYJASkwSiNaDau3nZdwg6d_Nfzxrz8l54YWNlpNNi9IyWYk8-gody_ixH0=s180-rw" alt="HTML Runner Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">⚡</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Web Editor</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">HTML Runner: Live Web Editor</h3>
+            <p class="card-desc">Instant web coding playground on Android. Code HTML, CSS, and JS with instant preview, console output, and offline support.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="app.htmlrunner">app.htmlrunner</span>
+            <a href="https://play.google.com/store/apps/details?id=app.htmlrunner" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 9. Chart Maker -->
+        <div class="card" data-category="dev-tools" data-title="chart maker graph creator bar pie line radar statistics visual" data-pkg="com.chartmaker">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/NbK2L6aDbntt5sXGcjaUOP-0ScvJQmt83MJa6wZqXHkw0X0rfQRtD_lT0V5iQfKRNRDCDOo071ySkobbZHG8=s180-rw" alt="Chart Maker Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">📊</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Design &amp; Charts</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Chart Maker - Graph Creator</h3>
+            <p class="card-desc">Create sleek, customizable charts (bar, line, pie, radar) with customizable themes, live data inputs, and high-res image exports.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.chartmaker">com.chartmaker</span>
+            <a href="https://play.google.com/store/apps/details?id=com.chartmaker" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 10. Organization Chart Builder -->
+        <div class="card" data-category="dev-tools" data-title="organization chart builder hierarchy company team structure org" data-pkg="com.orgchartbuilder">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/YFBkltn_N3svWN5kcMgLJj6ySQWTMtG0ccjNqhDXwghx-gymzMvpSlCDvZ8u2Iz4YtHS3ofc4XZD_pReegLKnQ=s180-rw" alt="Org Chart Builder Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🏢</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Business Tool</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Organization Chart Builder</h3>
+            <p class="card-desc">Design professional company hierarchies, team organizational trees, and reporting structures effortlessly with export options.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.orgchartbuilder">com.orgchartbuilder</span>
+            <a href="https://play.google.com/store/apps/details?id=com.orgchartbuilder" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 11. Graph Notes -->
+        <div class="card featured-card" data-category="productivity" data-title="graph notes visual notes mindmap knowledge base connected nodes" data-pkg="com.graphnotes">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/TlXc2znSuzzVaoGf6UZ0_gSuJi5CDF0yMg4F5qhZhOuHXL9-jtMFITZe3E-Xffqh508leUtdWl-SDNdkP7UjpSc=s180-rw" alt="Graph Notes Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🧠</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-featured">Featured</span>
+              <span class="tag-category">Productivity</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Graph Notes – Visual Notes</h3>
+            <p class="card-desc">Organize thoughts, brain dump ideas, and connect concepts in a powerful non-linear node graph network. Think in interconnected webs.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.graphnotes">com.graphnotes</span>
+            <a href="https://play.google.com/store/apps/details?id=com.graphnotes" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 12. Gym Timetable Maker -->
+        <div class="card" data-category="productivity" data-title="gym timetable maker workout planner fitness schedule routines split" data-pkg="com.gymtimetablemaker">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/DifPMyS6VU6E_zyNK0J20q-EMiGYGR97dDIi24xNz9pZZrkIIX-7YrOUOLPq7b6T77X8TuZOW5JplKbvXVw1=s180-rw" alt="Gym Timetable Maker Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">💪</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Fitness &amp; Routine</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Gym Timetable Maker</h3>
+            <p class="card-desc">Build customized weekly workout splits, timetable schedules, and exercise routines with ease to stay consistent at the gym.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.gymtimetablemaker">com.gymtimetablemaker</span>
+            <a href="https://play.google.com/store/apps/details?id=com.gymtimetablemaker" target="_blank" rel="noopener" class="btn-get-app">
+              Open App
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 13. Connect Path Puzzle -->
+        <div class="card" data-category="games" data-title="connect path puzzle logic brain teaser flow line grid" data-pkg="com.pathflow">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/QXAWIKh79SK4TgUNHdbYudwxsBlVQV4KhsRJSiKDhdl3okXtOTV7dprBQU76A81gJvFb_YYo1x5aG0bgZSVtQ98=s180-rw" alt="Connect Path Puzzle Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🧩</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Puzzle</span>
+              <span class="tag-category">Casual Game</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Connect Path Puzzle</h3>
+            <p class="card-desc">Engaging logic puzzle game. Connect matching color nodes and paths without overlapping lines across hundreds of exciting stages.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.pathflow">com.pathflow</span>
+            <a href="https://play.google.com/store/apps/details?id=com.pathflow" target="_blank" rel="noopener" class="btn-get-app">
+              Play Game
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 14. Cow Dash -->
+        <div class="card" data-category="games" data-title="cow dash endless runner arcade jump dodge action casual" data-pkg="com.cowrunnermobile">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/p2VdiQsXtQZruRQg_jemoCNfSfBJXMuagKKh0tupLbG_XJNkhYQ8V4ZAlF8cU_UrkEoYatzTbzhu_1K6F61gVkw=s180-rw" alt="Cow Dash Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🐄</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Arcade</span>
+              <span class="tag-category">Runner Game</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Cow Dash: Endless Runner</h3>
+            <p class="card-desc">Fast-paced, adrenaline-filled endless runner arcade game! Dodge hurdles, collect power-ups, and sprint for the highest global score.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.cowrunnermobile">com.cowrunnermobile</span>
+            <a href="https://play.google.com/store/apps/details?id=com.cowrunnermobile" target="_blank" rel="noopener" class="btn-get-app">
+              Play Game
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 15. FacePop -->
+        <div class="card" data-category="games" data-title="facepop emoji bubble shooter puzzle blast match pop" data-pkg="com.facepop">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/wLTg2NmqLwmGF_dRu1Hg2VSagkMWEdhQvlw9eX6Jonxo0b2nereDZJDRlGdP7B6YfIXIvEAjF1BDIMs4JVtg=s180-rw" alt="FacePop Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🎯</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Shooter</span>
+              <span class="tag-category">Casual Game</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">FacePop: Emoji Bubble Shooter</h3>
+            <p class="card-desc">Vibrant bubble shooter game powered with expressive animated emoji bubbles, chain reactions, and fun power boosters.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.facepop">com.facepop</span>
+            <a href="https://play.google.com/store/apps/details?id=com.facepop" target="_blank" rel="noopener" class="btn-get-app">
+              Play Game
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 16. Fly My Dragon -->
+        <div class="card" data-category="games" data-title="fly my dragon arcade flight action fantasy runner" data-pkg="com.flymydragon">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/kKXIsirAdvLJCiimy2r_UI65wdyaHiupirLuNp7DCpRJ6TZrQJHOuJdll0jqb8cZBVVoQKpfugTwmIbMchU=s180-rw" alt="Fly My Dragon Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🐉</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Action</span>
+              <span class="tag-category">Arcade Game</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Fly My Dragon</h3>
+            <p class="card-desc">Fly through mythical skies, maneuver through tight obstacles, and collect coins in this addictive dragon flight simulator.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.flymydragon">com.flymydragon</span>
+            <a href="https://play.google.com/store/apps/details?id=com.flymydragon" target="_blank" rel="noopener" class="btn-get-app">
+              Play Game
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 17. My Talking Donkey -->
+        <div class="card" data-category="games" data-title="my talking donkey virtual pet funny animal voice game" data-pkg="com.mytalkingdonkey">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/LsNhRKrrdnfT492rbWcBXJApVDiP4c1PqrPcU1--Iv5lvDK4bQXnefNfNsVnCVstQ2C7yndvA27nqF96JEjqN0g=s180-rw" alt="My Talking Donkey Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🫏</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">3.1★</span>
+              <span class="tag-category">Virtual Pet</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">My Talking Donkey</h3>
+            <p class="card-desc">Hilarious talking donkey companion! Repeats what you say in comical voices, performs funny dances, and offers casual mini-games.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.mytalkingdonkey">com.mytalkingdonkey</span>
+            <a href="https://play.google.com/store/apps/details?id=com.mytalkingdonkey" target="_blank" rel="noopener" class="btn-get-app">
+              Play Game
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Empty State When Search Finds Nothing -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🔍</div>
+          <div class="empty-title">No applications found</div>
+          <p class="empty-desc">Try adjusting your search query or clear the filter to see all applications.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GOOGLE PLAY DEVELOPER PROFILE CALLOUT BANNER -->
+    <section class="dev-callout">
+      <div class="dev-callout-content">
+        <span class="dev-callout-tag">Google Play Developer</span>
+        <h2 class="dev-callout-title">Explore the full catalog on Google Play</h2>
+        <p class="dev-callout-desc">
+          Get continuous updates, fast performance enhancements, and new utility releases straight from the official Google Play store.
+        </p>
+      </div>
+      <div class="dev-callout-action">
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-google-play">
+          <svg class="play-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
+          </svg>
+          Visit Developer Profile
         </a>
       </div>
+    </section>
+  </main>
 
-      <!-- XML Viewer -->
-
-       <div class="card">
-        <span class="card-tag live">Live</span>
-        <div class="card-icon">📐</div>
-        <h3>XML Viewer — Graph Visualizer</h3>
-        <p>Render XML structures as clean, readable graphs. No more squinting at raw markup</p>
-        <a href="https://play.google.com/store/apps/details?id=com.animesh.xmlviewer" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Visuo Labs</div>
+        <div class="footer-desc">Crafting lightweight, visual, and high-performance Android experiences.</div>
       </div>
-
-      
-      <div class="card">
-        <span class="card-tag live">Live</span>
-        <div class="card-icon">📐</div>
-        <h3>Graph Notes – Visual Notes</h3>
-        <p>Graph Notes – Visual Notes helps you organize your thoughts, ideas, and knowledge using a powerful graph-based note system.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.graphnotes" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <div class="footer-links">
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="footer-link">Google Play</a>
+        <a href="https://peerlist.io/bugblitzdev" target="_blank" rel="noopener" class="footer-link">Peerlist</a>
+        <a href="https://github.com/BugBlitz98" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        <a href="app-ads.txt" class="footer-link">app-ads.txt</a>
       </div>
-
-    
-  
-
-      <!-- Mongo Lens -->
-      <div class="card">
-        <span class="card-tag live">Live</span>
-        <div class="card-icon">🔭</div>
-        <h3>Mongo Lens</h3>
-        <p>Manage your MongoDB database right from your phone. Full-featured, fast, and intuitive.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.mongolens" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+      <div class="footer-copy">
+        © 2026 Visuo Labs • Built by <a href="https://peerlist.io/bugblitzdev" target="_blank" rel="noopener">Animesh Manna</a> • All rights reserved.
       </div>
-
-      <div class="card soon">
-        <span class="card-tag soon-tag">Soon</span>
-        <div class="card-icon">📄</div>
-        <h3>JSON Compare - Diff & Viewer</h3>
-        <p>Compare and visualize two json easily</p>
-        <a href="https://play.google.com/store/apps/details?id=com.jsoncompare" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- YAML Viewer -->
-      <div class="card soon">
-        <span class="card-tag soon-tag">Soon</span>
-        <div class="card-icon">📄</div>
-        <h3>YAML Viewer — Graph Visualizer</h3>
-        <p>Visualize YAML config files as graphs. Coming to the family soon.</p>
-         <a href="https://play.google.com/store/apps/details?id=com.animesh.yamlviewer" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- ORG Chart -->
-      <div class="card soon">
-        <span class="card-tag soon-tag">Soon</span>
-        <div class="card-icon">🗂️</div>
-        <h3>ORG Chart Builder</h3>
-        <p>Create beautiful organizational charts instantly — drag, drop, done.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.orgchartbuilder" class="card-cta active" target="_blank" rel="noopener">
-          Open App
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Cow Dash -->
-      <div class="card soon">
-        <span class="card-tag soon-tag">Soon</span>
-        <div class="card-icon">🐄</div>
-        <h3>Cow Dash</h3>
-        <p>A fun, endless runner game. Sometimes you just need to let loose and play.</p>
-        <span class="card-cta inactive">Coming Soon</span>
-      </div>
-
     </div>
-  </section>
-</div>
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap footer-inner">
-    <div class="footer-logo">Visuo Labs</div>
-    <div class="footer-copy">© 2026 — <a href="https://peerlist.io/bugblitzdev">Animesh Manna</a> — Built with ⚡ & ❤️</div>
-    <div class="footer-dot"></div>
-  </div>
-</footer>
+  <!-- SCRIPT: Cursor, Card Spotlight, Filter & Search -->
+  <script>
+    // ── 1. Smooth Interactive Cursor
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY;
 
-<script>
-  // ── Cursor
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursor-ring');
-  let rx = 0, ry = 0, mx = 0, my = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-  function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
+    if (cursor && ring) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+      });
 
-  // ── Card glow on mouse move
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width)  * 100;
-      const y = ((e.clientY - r.top)  / r.height) * 100;
-      card.style.setProperty('--mx', x + '%');
-      card.style.setProperty('--my', y + '%');
-    });
-  });
-
-  // ── Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const delay = [...document.querySelectorAll('.card')].indexOf(entry.target) * 80;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
+      function renderCursorRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(renderCursorRing);
       }
-    });
-  }, { threshold: 0.1 });
+      renderCursorRing();
+    }
 
-  document.querySelectorAll('.card').forEach(c => observer.observe(c));
-</script>
+    // ── 2. Card Glow Coordinates on Mouse Move
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+      });
+    });
+
+    // ── 3. Scroll Reveal Animation
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cardIndex = Array.from(allCards).indexOf(entry.target);
+          const delay = Math.min(cardIndex * 40, 400);
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    allCards.forEach(card => scrollObserver.observe(card));
+
+    // ── 4. Filtering and Live Search
+    const searchInput = document.getElementById('appSearch');
+    const searchClear = document.getElementById('searchClear');
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const resultsCount = document.getElementById('resultsCount');
+    const emptyState = document.getElementById('emptyState');
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterApps() {
+      let visibleCount = 0;
+      const query = searchQuery.trim().toLowerCase();
+
+      allCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const titleData = (card.getAttribute('data-title') || '').toLowerCase();
+        const pkgData = (card.getAttribute('data-pkg') || '').toLowerCase();
+        const cardText = card.innerText.toLowerCase();
+
+        const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+        const matchesSearch = (!query || titleData.includes(query) || pkgData.includes(query) || cardText.includes(query));
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = 'flex';
+          card.classList.add('visible');
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update result count text
+      if (query || activeCategory !== 'all') {
+        resultsCount.textContent = `Showing ${visibleCount} of ${allCards.length} apps`;
+      } else {
+        resultsCount.textContent = `Showing all ${allCards.length} apps`;
+      }
+
+      // Empty state
+      if (visibleCount === 0) {
+        emptyState.classList.add('visible');
+      } else {
+        emptyState.classList.remove('visible');
+      }
+    }
+
+    // Category Chip Click
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeCategory = chip.getAttribute('data-category');
+        filterApps();
+      });
+    });
+
+    // Search Input Event
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      searchClear.style.display = searchQuery ? 'block' : 'none';
+      filterApps();
+    });
+
+    // Search Clear Button
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      searchClear.style.display = 'none';
+      searchInput.focus();
+      filterApps();
+    });
+  </script>
 </body>
 </html>
