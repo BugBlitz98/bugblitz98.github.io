@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visuo Labs | Android Apps & Developer Tools</title>
-  <meta name="description" content="Discover modern developer tools, visual graph utilities, productivity apps, and fun games built by Visuo Labs on Google Play." />
+  <title>Visuo Labs | Multi-Platform Apps by Animesh Manna</title>
+  <meta name="description" content="Explore high-quality developer tools, visual graph visualizers, productivity suites, and arcade games created and managed by Animesh Manna across Google Play, Apple App Store, and Microsoft Store." />
+  <meta name="keywords" content="Animesh Manna, Visuo Labs, JSON Viewer, XML Viewer, YAML Viewer, MongoLens, Graph Notes, Canvas Notes Studio, GLB Viewer, Mermaid Studio, iOS Apps, Android Apps, Microsoft Store Apps" />
+  <meta name="author" content="Animesh Manna" />
   <meta name="theme-color" content="#03050a" />
 
   <!-- Google Fonts -->
@@ -16,18 +18,20 @@
     :root {
       --bg: #03050a;
       --bg-alt: #070c16;
-      --surface: rgba(255, 255, 255, 0.03);
-      --surface-hover: rgba(255, 255, 255, 0.07);
-      --surface-active: rgba(255, 255, 255, 0.1);
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(255, 255, 255, 0.075);
       --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(62, 240, 255, 0.35);
+      --border-hover: rgba(62, 240, 255, 0.4);
       --cyan: #3ef0ff;
       --cyan-glow: rgba(62, 240, 255, 0.25);
       --green: #22ffa0;
       --green-glow: rgba(34, 255, 160, 0.2);
       --purple: #a78bfa;
-      --amber: #fbbf24;
-      --text: #f0f4fc;
+      --purple-glow: rgba(167, 139, 250, 0.2);
+      --blue: #38bdf8;
+      --apple: #f5f5f7;
+      --microsoft: #00a4ef;
+      --text: #f1f5f9;
       --text-secondary: #94a3b8;
       --muted: #5a6a82;
       --dim: #1e2638;
@@ -62,26 +66,26 @@
         border-radius: 50%;
         pointer-events: none;
         transform: translate(-50%, -50%);
-        transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
         mix-blend-mode: screen;
       }
       #cursor-ring {
         position: fixed; top: 0; left: 0; z-index: 9998;
-        width: 34px; height: 34px;
-        border: 1px solid rgba(62, 240, 255, 0.4);
+        width: 36px; height: 36px;
+        border: 1px solid rgba(62, 240, 255, 0.45);
         border-radius: 50%;
         pointer-events: none;
         transform: translate(-50%, -50%);
         transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
       }
-      body:has(a:hover, button:hover, .card:hover, .filter-chip:hover) #cursor {
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .filter-chip:hover) #cursor {
         width: 14px; height: 14px;
         background: var(--green);
       }
-      body:has(a:hover, button:hover, .card:hover, .filter-chip:hover) #cursor-ring {
-        width: 48px; height: 48px;
-        border-color: rgba(34, 255, 160, 0.5);
-        background: rgba(34, 255, 160, 0.04);
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .filter-chip:hover) #cursor-ring {
+        width: 50px; height: 50px;
+        border-color: rgba(34, 255, 160, 0.55);
+        background: rgba(34, 255, 160, 0.05);
       }
     }
 
@@ -89,7 +93,7 @@
       #cursor, #cursor-ring { display: none !important; }
     }
 
-    /* ─── AMBIENT BACKGROUND & NOISE ─────────────── */
+    /* ─── AMBIENT NOISE & GRID ───────────────────── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -112,28 +116,28 @@
       pointer-events: none; z-index: 0;
     }
     .orb-1 {
-      width: 650px; height: 650px;
-      background: radial-gradient(circle, rgba(62, 240, 255, 0.08), transparent 70%);
-      top: -200px; left: -150px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(62, 240, 255, 0.09), transparent 70%);
+      top: -220px; left: -180px;
       animation: driftA 22s ease-in-out infinite alternate;
     }
     .orb-2 {
-      width: 550px; height: 550px;
+      width: 600px; height: 600px;
       background: radial-gradient(circle, rgba(34, 255, 160, 0.07), transparent 70%);
-      bottom: -150px; right: -120px;
+      bottom: -160px; right: -140px;
       animation: driftB 25s ease-in-out infinite alternate;
     }
     .orb-3 {
-      width: 450px; height: 450px;
+      width: 480px; height: 480px;
       background: radial-gradient(circle, rgba(167, 139, 250, 0.06), transparent 70%);
       top: 45%; left: 55%;
       animation: driftC 30s ease-in-out infinite alternate;
     }
-    @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(90px,70px) scale(1.1); } }
-    @keyframes driftB { from { transform: translate(0,0); } to { transform: translate(-70px,-90px) scale(1.15); } }
+    @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(100px,80px) scale(1.1); } }
+    @keyframes driftB { from { transform: translate(0,0); } to { transform: translate(-80px,-100px) scale(1.15); } }
     @keyframes driftC { from { transform: translate(-50%,-50%) scale(0.95); } to { transform: translate(-45%,-55%) scale(1.08); } }
 
-    /* ─── LAYOUT CONTAINER ──────────────────────── */
+    /* ─── CONTAINER ─────────────────────────────── */
     .wrap {
       position: relative; z-index: 2;
       max-width: 1240px;
@@ -144,102 +148,102 @@
     /* ─── HEADER / NAVBAR ───────────────────────── */
     header {
       position: sticky; top: 0; z-index: 100;
-      padding: 16px 0;
-      background: rgba(3, 5, 10, 0.75);
+      padding: 14px 0;
+      background: rgba(3, 5, 10, 0.82);
       backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      transition: border-color 0.3s, background 0.3s;
+      transition: all 0.3s;
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     .brand-link {
       text-decoration: none;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px;
     }
     .brand-icon {
-      width: 32px; height: 32px; border-radius: 10px;
+      width: 36px; height: 36px; border-radius: 10px;
       background: linear-gradient(135deg, var(--cyan), var(--green));
       display: flex; align-items: center; justify-content: center;
       color: #03080c; font-weight: 800; font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      box-shadow: 0 0 16px var(--cyan-glow);
+      font-size: 18px;
+      box-shadow: 0 0 20px var(--cyan-glow);
     }
     .logo-text {
       font-family: 'Syne', sans-serif;
       font-weight: 800; font-size: 20px;
       letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: flex; flex-direction: column;
     }
-    .logo-text span {
-      -webkit-text-fill-color: var(--muted);
-      font-weight: 400; font-size: 13px; margin-left: 6px; letter-spacing: 0;
+    .logo-author {
+      font-size: 11px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+      -webkit-text-fill-color: var(--text-secondary);
+      letter-spacing: 0.5px;
     }
-    .nav-actions {
-      display: flex; align-items: center; gap: 12px;
+    .nav-store-links {
+      display: flex; align-items: center; gap: 10px;
     }
-    .btn-dev-profile {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 500;
-      color: var(--text);
+    .nav-store-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-secondary);
       text-decoration: none;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
-      padding: 7px 16px;
+      padding: 7px 14px;
       border-radius: 100px;
       transition: all 0.25s ease;
     }
-    .btn-dev-profile:hover {
-      background: rgba(62, 240, 255, 0.1);
-      border-color: rgba(62, 240, 255, 0.4);
-      color: var(--cyan);
-      box-shadow: 0 0 15px rgba(62, 240, 255, 0.15);
+    .nav-store-btn:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
       transform: translateY(-1px);
     }
-    .play-icon {
-      width: 15px; height: 15px;
-      fill: currentColor;
-    }
+    .nav-store-btn.google:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow); }
+    .nav-store-btn.apple:hover { border-color: #ffffff; color: #ffffff; box-shadow: 0 0 12px rgba(255,255,255,0.2); }
+    .nav-store-btn.ms:hover { border-color: var(--microsoft); color: var(--microsoft); box-shadow: 0 0 12px rgba(0,164,239,0.25); }
 
     /* ─── HERO SECTION ──────────────────────────── */
     .hero {
-      padding: 100px 0 60px;
+      padding: 90px 0 50px;
       text-align: center;
       position: relative;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
       color: var(--cyan);
-      background: rgba(62, 240, 255, 0.06);
-      border: 1px solid rgba(62, 240, 255, 0.25);
-      padding: 6px 18px; border-radius: 100px;
-      margin-bottom: 28px;
-      box-shadow: 0 0 20px rgba(62, 240, 255, 0.1);
+      background: rgba(62, 240, 255, 0.08);
+      border: 1px solid rgba(62, 240, 255, 0.3);
+      padding: 7px 20px; border-radius: 100px;
+      margin-bottom: 26px;
+      box-shadow: 0 0 25px rgba(62, 240, 255, 0.12);
       opacity: 0; animation: fadeInUp 0.7s 0.1s ease forwards;
     }
     .hero-badge::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
       background: var(--cyan);
-      box-shadow: 0 0 8px var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
       animation: pulse 2s infinite;
     }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.85); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.8); } }
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(40px, 7vw, 84px);
+      font-size: clamp(38px, 6.5vw, 80px);
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.06;
       letter-spacing: -2px;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       opacity: 0; animation: fadeInUp 0.8s 0.25s ease forwards;
     }
     .hero h1 .text-white { color: #ffffff; }
     .hero h1 .text-gradient {
-      background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 50%, var(--purple) 100%);
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 45%, var(--purple) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-size: 200% auto;
       animation: shimmer 5s linear infinite;
@@ -247,73 +251,128 @@
     @keyframes shimmer { from { background-position: 0 center; } to { background-position: 200% center; } }
 
     .hero-sub {
-      margin-top: 24px;
+      margin-top: 22px;
       font-size: clamp(16px, 2vw, 19px);
       color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 620px;
+      line-height: 1.65;
+      max-width: 680px;
       margin-left: auto; margin-right: auto;
       opacity: 0; animation: fadeInUp 0.8s 0.4s ease forwards;
     }
-
-    .hero-buttons {
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-      margin-top: 36px;
-      flex-wrap: wrap;
-      opacity: 0; animation: fadeInUp 0.8s 0.5s ease forwards;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(135deg, var(--cyan), var(--green));
-      color: #030a0e;
+    .hero-author-tag {
+      color: var(--cyan);
       font-weight: 600;
-      font-size: 15px;
       text-decoration: none;
-      padding: 13px 28px;
-      border-radius: 12px;
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      box-shadow: 0 8px 24px var(--cyan-glow);
+      border-bottom: 1px dashed rgba(62, 240, 255, 0.4);
+      padding-bottom: 1px;
+      transition: all 0.2s;
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(62, 240, 255, 0.45);
-    }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      font-weight: 500;
-      font-size: 15px;
-      text-decoration: none;
-      padding: 13px 24px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      transition: all 0.25s ease;
-      backdrop-filter: blur(10px);
-    }
-    .btn-secondary:hover {
-      background: var(--surface-hover);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
+    .hero-author-tag:hover {
+      color: var(--green);
+      border-color: var(--green);
     }
 
-    /* ─── HERO STATS ────────────────────────────── */
+    /* ─── PLATFORM HUBS (3 STORES DECK) ─────────── */
+    .stores-deck {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+      opacity: 0; animation: fadeInUp 0.8s 0.55s ease forwards;
+    }
+    .store-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      text-align: left;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.3s cubic-bezier(0.2,0,0,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .store-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(350px circle at var(--smx,50%) var(--smy,50%), rgba(255,255,255,0.06), transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .store-card:hover::before { opacity: 1; }
+
+    .store-card.google:hover {
+      border-color: rgba(62, 240, 255, 0.5);
+      background: rgba(62, 240, 255, 0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 25px var(--cyan-glow);
+    }
+    .store-card.apple:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255,255,255,0.15);
+    }
+    .store-card.ms:hover {
+      border-color: rgba(0, 164, 239, 0.5);
+      background: rgba(0, 164, 239, 0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 164, 239, 0.25);
+    }
+
+    .store-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .store-icon-wrap {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+    }
+    .store-badge {
+      font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+      padding: 3px 8px; border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+    }
+    .store-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px; font-weight: 700;
+      color: #ffffff;
+    }
+    .store-card-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+    }
+    .store-card-link {
+      font-size: 12.5px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 4px;
+    }
+    .store-card.google .store-card-link { color: var(--cyan); }
+    .store-card.apple .store-card-link { color: #ffffff; }
+    .store-card.ms .store-card-link { color: var(--microsoft); }
+
+    /* ─── STATS PILL BAR ────────────────────────── */
     .hero-stats {
-      display: flex; align-items: center; justify-content: center; gap: 40px;
-      margin-top: 54px;
-      padding: 22px 36px;
-      background: rgba(255, 255, 255, 0.02);
+      display: flex; align-items: center; justify-content: center; gap: 36px;
+      margin-top: 44px;
+      padding: 18px 36px;
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--border);
       border-radius: 100px;
       max-width: fit-content;
       margin-left: auto; margin-right: auto;
       backdrop-filter: blur(12px);
-      opacity: 0; animation: fadeInUp 0.8s 0.6s ease forwards;
+      opacity: 0; animation: fadeInUp 0.8s 0.7s ease forwards;
     }
     .stat { text-align: center; }
     .stat-num {
       font-family: 'Syne', sans-serif;
-      font-size: 28px; font-weight: 800;
+      font-size: 26px; font-weight: 800;
       background: linear-gradient(135deg, var(--cyan), var(--green));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       line-height: 1;
@@ -321,27 +380,27 @@
     .stat-label {
       font-size: 11px; color: var(--text-secondary);
       letter-spacing: 1.2px; text-transform: uppercase;
-      margin-top: 5px; font-weight: 500;
+      margin-top: 4px; font-weight: 500;
     }
-    .stat-div { width: 1px; height: 32px; background: var(--border); }
+    .stat-div { width: 1px; height: 30px; background: var(--border); }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── CONTROLS & FILTER BAR ─────────────────── */
+    /* ─── CONTROLS & FILTER SECTION ─────────────── */
     .controls-section {
-      padding: 30px 0 20px;
-      position: sticky; top: 73px; z-index: 90;
-      background: linear-gradient(180deg, rgba(3, 5, 10, 0.95) 75%, rgba(3, 5, 10, 0) 100%);
-      backdrop-filter: blur(14px);
+      padding: 28px 0 16px;
+      position: sticky; top: 66px; z-index: 90;
+      background: linear-gradient(180deg, rgba(3, 5, 10, 0.96) 80%, rgba(3, 5, 10, 0) 100%);
+      backdrop-filter: blur(16px);
     }
     .controls-wrapper {
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex; flex-direction: column; gap: 14px;
     }
     .search-and-filters {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
       flex-wrap: wrap;
     }
     
@@ -350,7 +409,7 @@
       position: relative;
       flex: 1;
       min-width: 260px;
-      max-width: 420px;
+      max-width: 440px;
     }
     .search-input {
       width: 100%;
@@ -365,9 +424,9 @@
       outline: none;
     }
     .search-input:focus {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.08);
       border-color: var(--cyan);
-      box-shadow: 0 0 0 3px rgba(62, 240, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(62, 240, 255, 0.16);
     }
     .search-input::placeholder { color: var(--muted); }
     .search-icon {
@@ -387,7 +446,7 @@
     }
     .search-clear:hover { color: var(--text); }
 
-    /* Filter chips */
+    /* Platform & Category Filter chips */
     .filter-chips {
       display: flex; align-items: center; gap: 8px;
       overflow-x: auto;
@@ -403,7 +462,7 @@
       font-family: inherit;
       font-size: 13px;
       font-weight: 500;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 100px;
       cursor: pointer;
       white-space: nowrap;
@@ -433,16 +492,33 @@
       color: var(--cyan);
     }
 
-    /* Result count text */
-    .results-bar {
+    /* Secondary platform bar */
+    .platform-sub-filters {
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 13px; color: var(--muted);
+      gap: 12px; flex-wrap: wrap;
       padding: 0 4px;
     }
+    .platform-selector {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted);
+    }
+    .plat-btn {
+      background: none; border: none;
+      font-family: inherit; font-size: 12px; font-weight: 500;
+      color: var(--text-secondary);
+      padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .plat-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .plat-btn.active { color: var(--cyan); background: rgba(62,240,255,0.1); font-weight: 600; }
 
-    /* ─── APP GRID & CARDS ──────────────────────── */
+    .results-bar-text {
+      font-size: 13px; color: var(--muted);
+    }
+
+    /* ─── APPS GRID & CARDS ─────────────────────── */
     .apps-section {
-      padding: 10px 0 100px;
+      padding: 10px 0 90px;
     }
 
     .cards-grid {
@@ -475,7 +551,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Card spotlight effect */
     .card::before {
       content: '';
       position: absolute; inset: 0; border-radius: var(--card-radius);
@@ -506,7 +581,7 @@
     /* Card Top Header */
     .card-top {
       display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .icon-container {
       position: relative;
@@ -550,20 +625,44 @@
       color: var(--cyan);
       border: 1px solid rgba(62, 240, 255, 0.35);
     }
+    .tag-apple {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .tag-microsoft {
+      background: rgba(0, 164, 239, 0.15);
+      color: var(--microsoft);
+      border: 1px solid rgba(0, 164, 239, 0.35);
+    }
     .tag-category {
       font-size: 11px;
       color: var(--muted);
       font-family: 'JetBrains Mono', monospace;
     }
 
+    /* Platform availability badges */
+    .platform-badges {
+      display: flex; align-items: center; gap: 5px;
+      margin-bottom: 12px;
+    }
+    .plat-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10.5px; font-weight: 500;
+      padding: 2px 7px; border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+    }
+
     /* Card Content */
     .card-body {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       flex-grow: 1;
     }
     .card-title {
       font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 700;
+      font-size: 17.5px; font-weight: 700;
       color: #ffffff;
       margin-bottom: 8px;
       line-height: 1.25;
@@ -576,9 +675,10 @@
 
     /* Card Footer & Action */
     .card-footer {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding-top: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding-top: 14px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex-wrap: wrap;
     }
     .package-id {
       font-family: 'JetBrains Mono', monospace;
@@ -589,27 +689,44 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .btn-get-app {
-      display: inline-flex; align-items: center; gap: 8px;
-      text-decoration: none;
-      font-size: 13px; font-weight: 600;
-      color: #030a0d;
-      background: linear-gradient(135deg, var(--cyan), var(--green));
-      padding: 9px 18px;
-      border-radius: 10px;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 14px rgba(62, 240, 255, 0.15);
+    .card-actions {
+      display: flex; align-items: center; gap: 8px;
       margin-left: auto;
     }
+    .btn-get-app {
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none;
+      font-size: 12.5px; font-weight: 600;
+      color: #030a0d;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      padding: 8px 14px;
+      border-radius: 9px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(62, 240, 255, 0.15);
+    }
     .btn-get-app:hover {
-      box-shadow: 0 8px 24px rgba(62, 240, 255, 0.35);
+      box-shadow: 0 8px 20px rgba(62, 240, 255, 0.35);
       transform: translateY(-2px);
     }
-    .btn-get-app svg {
-      transition: transform 0.2s ease;
+    .btn-get-app.apple-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      box-shadow: none;
     }
-    .btn-get-app:hover svg {
-      transform: translateX(3px);
+    .btn-get-app.apple-btn:hover {
+      background: #ffffff; color: #03050a;
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
+    }
+    .btn-get-app.ms-btn {
+      background: rgba(0, 164, 239, 0.15);
+      border: 1px solid rgba(0, 164, 239, 0.35);
+      color: var(--microsoft);
+      box-shadow: none;
+    }
+    .btn-get-app.ms-btn:hover {
+      background: var(--microsoft); color: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 164, 239, 0.35);
     }
 
     /* Empty state */
@@ -626,60 +743,60 @@
     .empty-title { font-family: 'Syne', sans-serif; font-size: 20px; color: #fff; margin-bottom: 6px; }
     .empty-desc { font-size: 14px; color: var(--muted); }
 
-    /* ─── DEVELOPER PROFILE SHOWCASE CALLOUT ─────── */
-    .dev-callout {
+    /* ─── ABOUT ANIMESH MANNA (DEVELOPER SHOWCASE) ── */
+    .author-showcase {
       margin: 40px 0 80px;
-      background: linear-gradient(135deg, rgba(62, 240, 255, 0.07), rgba(167, 139, 250, 0.05), rgba(34, 255, 160, 0.04));
-      border: 1px solid rgba(62, 240, 255, 0.2);
+      background: linear-gradient(135deg, rgba(62, 240, 255, 0.06), rgba(167, 139, 250, 0.05), rgba(34, 255, 160, 0.04));
+      border: 1px solid rgba(62, 240, 255, 0.25);
       border-radius: 24px;
-      padding: 44px 36px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+      padding: 44px 38px;
+      display: flex; align-items: center; justify-content: space-between; gap: 36px;
       position: relative; overflow: hidden;
     }
-    .dev-callout::before {
+    .author-showcase::before {
       content: '';
       position: absolute; right: -50px; bottom: -50px;
-      width: 250px; height: 250px;
+      width: 280px; height: 280px;
       background: radial-gradient(circle, rgba(62, 240, 255, 0.15), transparent 70%);
       pointer-events: none;
     }
-    .dev-callout-content {
-      max-width: 600px;
+    .author-content {
+      max-width: 640px;
     }
-    .dev-callout-tag {
-      display: inline-block;
+    .author-tag {
+      display: inline-flex; align-items: center; gap: 8px;
       font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 10px;
+      color: var(--cyan); margin-bottom: 12px;
     }
-    .dev-callout-title {
+    .author-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(24px, 3.5vw, 32px);
+      font-size: clamp(26px, 3.5vw, 36px);
       font-weight: 800; line-height: 1.2;
-      color: #ffffff; margin-bottom: 12px;
+      color: #ffffff; margin-bottom: 14px;
     }
-    .dev-callout-desc {
-      font-size: 15px; color: var(--text-secondary); line-height: 1.6;
+    .author-desc {
+      font-size: 15px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 20px;
     }
-    .dev-callout-action {
-      flex-shrink: 0;
+    .author-links-grid {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     }
-    .btn-google-play {
-      display: inline-flex; align-items: center; gap: 12px;
+    .btn-profile-badge {
+      display: inline-flex; align-items: center; gap: 8px;
       background: #03080c;
       color: #ffffff;
-      border: 1px solid rgba(62, 240, 255, 0.35);
-      padding: 14px 28px;
-      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 18px;
+      border-radius: 12px;
       text-decoration: none;
-      font-size: 14px; font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      font-size: 13px; font-weight: 600;
+      transition: all 0.25s ease;
     }
-    .btn-google-play:hover {
-      background: rgba(62, 240, 255, 0.1);
+    .btn-profile-badge:hover {
+      background: rgba(255, 255, 255, 0.08);
       border-color: var(--cyan);
-      box-shadow: 0 10px 30px rgba(62, 240, 255, 0.25);
+      color: var(--cyan);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
     }
 
     /* ─── FOOTER ────────────────────────────────── */
@@ -687,7 +804,7 @@
       position: relative; z-index: 2;
       border-top: 1px solid var(--border);
       padding: 48px 0 36px;
-      background: rgba(3, 5, 10, 0.85);
+      background: rgba(3, 5, 10, 0.9);
     }
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -705,7 +822,7 @@
       font-size: 13px; color: var(--muted);
     }
     .footer-links {
-      display: flex; align-items: center; gap: 20px;
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     }
     .footer-link {
       font-size: 13px; color: var(--text-secondary);
@@ -730,29 +847,28 @@
     .footer-copy a:hover { color: var(--cyan); }
 
     /* ─── RESPONSIVE STYLES ─────────────────────── */
-    @media (max-width: 860px) {
-      .dev-callout {
+    @media (max-width: 900px) {
+      .stores-deck { grid-template-columns: 1fr; }
+      .author-showcase {
         flex-direction: column; text-align: center;
         padding: 36px 24px;
       }
-      .dev-callout-action { width: 100%; }
-      .btn-google-play { justify-content: center; width: 100%; }
+      .author-links-grid { justify-content: center; }
       .hero-stats {
-        gap: 20px; padding: 18px 24px;
+        gap: 20px; padding: 16px 24px;
       }
-      .stat-num { font-size: 24px; }
-      .stat-label { font-size: 10px; }
+      .nav-store-links .nav-store-btn:not(.google) { display: none; }
     }
 
     @media (max-width: 640px) {
-      .hero { padding: 70px 0 40px; }
-      .controls-section { top: 65px; }
+      .hero { padding: 65px 0 35px; }
+      .controls-section { top: 60px; }
       .cards-grid { grid-template-columns: 1fr; }
       .search-and-filters { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
       .hero-stats {
         display: grid; grid-template-columns: 1fr 1fr 1fr;
-        border-radius: 20px; width: 100%;
+        border-radius: 18px; width: 100%;
       }
       .stat-div { display: none; }
       .footer-inner { flex-direction: column; text-align: center; }
@@ -762,7 +878,7 @@
 </head>
 <body>
 
-  <!-- Dynamic Cursor -->
+  <!-- Interactive Dynamic Cursor -->
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
 
@@ -772,63 +888,117 @@
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <!-- HEADER -->
+  <!-- HEADER / NAVBAR -->
   <header>
     <div class="wrap nav-inner">
       <a href="#" class="brand-link">
         <div class="brand-icon">V</div>
-        <div class="logo-text">Visuo Labs <span>/ apps</span></div>
+        <div class="logo-text">
+          Visuo Labs
+          <span class="logo-author">by Animesh Manna</span>
+        </div>
       </a>
-      <div class="nav-actions">
-        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-dev-profile">
-          <svg class="play-icon" viewBox="0 0 24 24">
-            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
-          </svg>
-          Google Play Store
+      <div class="nav-store-links">
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="nav-store-btn google" title="Google Play Store Profile">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/></svg>
+          Google Play
+        </a>
+        <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="nav-store-btn apple" title="Apple App Store Profile">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1 .08 2.02-.49 2.65-1.24z"/></svg>
+          App Store
+        </a>
+        <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="nav-store-btn ms" title="Microsoft Store Profile">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg>
+          Microsoft Store
         </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
   <main class="wrap">
+    <!-- HERO SECTION -->
     <section class="hero">
-      <div class="hero-badge">Curated Android Applications</div>
+      <div class="hero-badge">Multi-Platform Ecosystem • Android • iOS • macOS • Windows</div>
       <h1>
         <span class="text-white">Smart visual tools &amp;</span>
         <span class="text-gradient">delightful apps.</span>
       </h1>
       <p class="hero-sub">
-        Explore developer visualizers, graph editors, database clients, productivity suites, and games — built with precision and speed.
+        Architected, developed, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a>. Interactive graph visualizers, developer diagnostics, database clients, productivity suites, and games published worldwide.
       </p>
 
-      <div class="hero-buttons">
-        <a href="#apps" class="btn-primary">
-          Explore All Apps
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <!-- 3 ECOSYSTEM HUBS (STORES DECK) -->
+      <div class="stores-deck">
+        <!-- Google Play -->
+        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="store-card google">
+          <div class="store-card-header">
+            <div class="store-icon-wrap" style="color:var(--cyan);">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/></svg>
+            </div>
+            <span class="store-badge">17 Android Apps</span>
+          </div>
+          <div>
+            <div class="store-card-title">Google Play Store</div>
+            <div class="store-card-desc">JSON &amp; XML Visualizers, MongoLens, Mermaid Studio, GLB 3D Viewer &amp; Arcade Games for Android.</div>
+          </div>
+          <div class="store-card-link">
+            Explore Android Apps
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
         </a>
-        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-secondary">
-          <svg class="play-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
-          </svg>
-          Developer Profile
+
+        <!-- Apple App Store -->
+        <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="store-card apple">
+          <div class="store-card-header">
+            <div class="store-icon-wrap" style="color:#ffffff;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1 .08 2.02-.49 2.65-1.24z"/></svg>
+            </div>
+            <span class="store-badge">7 iOS &amp; Mac Apps</span>
+          </div>
+          <div>
+            <div class="store-card-title">Apple App Store</div>
+            <div class="store-card-desc">Easy Prescription Maker, Canvas Notes Studio (Mac), Graph Notes, GLB Viewer &amp; Pocket Donkey.</div>
+          </div>
+          <div class="store-card-link">
+            Explore iOS &amp; Mac Apps
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+        <!-- Microsoft Store -->
+        <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="store-card ms">
+          <div class="store-card-header">
+            <div class="store-icon-wrap" style="color:var(--microsoft);">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg>
+            </div>
+            <span class="store-badge">Windows Apps</span>
+          </div>
+          <div>
+            <div class="store-card-title">Microsoft Store</div>
+            <div class="store-card-desc">Canvas Notes Studio (Infinite Mindmap Canvas) &amp; YourOrgTree Organization Hierarchy Maker.</div>
+          </div>
+          <div class="store-card-link">
+            Explore Windows Apps
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
         </a>
       </div>
 
+      <!-- STATS BAR -->
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-num" id="hero-apps-count">17</div>
-          <div class="stat-label">Published Apps</div>
+          <div class="stat-num" id="hero-apps-count">20+</div>
+          <div class="stat-label">Total Applications</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Major Stores</div>
         </div>
         <div class="stat-div"></div>
         <div class="stat">
           <div class="stat-num">100%</div>
-          <div class="stat-label">Play Verified</div>
-        </div>
-        <div class="stat-div"></div>
-        <div class="stat">
-          <div class="stat-num">4.5★</div>
-          <div class="stat-label">Top Experience</div>
+          <div class="stat-label">Animesh Manna</div>
         </div>
       </div>
     </section>
@@ -842,20 +1012,23 @@
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="appSearch" class="search-input" placeholder="Search apps (JSON, XML, Mongo, Games, Notes...)" autocomplete="off" />
+            <input type="text" id="appSearch" class="search-input" placeholder="Search apps by name, feature (JSON, Mongo, Prescription, Notes, 3D)..." autocomplete="off" />
             <button id="searchClear" class="search-clear" title="Clear search">✕</button>
           </div>
 
           <!-- Category filter chips -->
           <div class="filter-chips">
             <button class="filter-chip active" data-category="all">
-              All Apps <span class="chip-count">17</span>
+              All Apps <span class="chip-count" id="chipCountAll">20</span>
             </button>
             <button class="filter-chip" data-category="dev-tools">
               Developer Tools <span class="chip-count">10</span>
             </button>
             <button class="filter-chip" data-category="productivity">
-              Productivity &amp; Utility <span class="chip-count">2</span>
+              Productivity &amp; Medical <span class="chip-count">4</span>
+            </button>
+            <button class="filter-chip" data-category="visual-notes">
+              Visual Notes &amp; 3D <span class="chip-count">2</span>
             </button>
             <button class="filter-chip" data-category="games">
               Games &amp; Fun <span class="chip-count">5</span>
@@ -863,9 +1036,18 @@
           </div>
         </div>
 
-        <div class="results-bar">
-          <span id="resultsCount">Showing all 17 apps</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;">Direct Store Links Enabled</span>
+        <!-- Secondary Platform Selectors -->
+        <div class="platform-sub-filters">
+          <div class="platform-selector">
+            <span>Filter by Store:</span>
+            <button class="plat-btn active" data-platform="all">All</button>
+            <button class="plat-btn" data-platform="android">Android (Google Play)</button>
+            <button class="plat-btn" data-platform="apple">Apple (iOS &amp; Mac)</button>
+            <button class="plat-btn" data-platform="windows">Windows (Microsoft)</button>
+          </div>
+          <div class="results-bar-text">
+            <span id="resultsCount">Showing all 20 applications</span>
+          </div>
         </div>
       </div>
     </div>
@@ -874,17 +1056,83 @@
     <section class="apps-section">
       <div class="cards-grid" id="appsGrid">
 
-        <!-- 1. JSON Viewer -->
-        <div class="card featured-card" data-category="dev-tools" data-title="json viewer graph visualizer tree formatter" data-pkg="com.jsonviewer">
+        <!-- 1. Canvas Notes Studio (Mac / Windows) -->
+        <div class="card featured-card" data-category="visual-notes" data-platforms="apple windows" data-title="canvas notes studio visual notes mindmap infinite canvas local first mac windows" data-pkg="canvas-notes-studio">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/d9/b3/3fd9b35e-ccb9-2b03-3445-6d9dc9ed5893/icon.png/180x180bb.png" alt="Canvas Notes Studio Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🎨</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-featured">Mac &amp; Windows</span>
+              <span class="tag-category">Desktop App</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🍎 macOS</span>
+            <span class="plat-badge">🪟 Windows 11/10</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Canvas Notes Studio</h3>
+            <p class="card-desc">Visual note-taking and infinite mindmap canvas. Connect thoughts, organize complex ideas visually, with local-first secure storage.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="Canvas Notes Studio">Mac / Windows</span>
+            <div class="card-actions">
+              <a href="https://apps.apple.com/us/app/canvas-notes-studio/id6794408320?mt=12" target="_blank" rel="noopener" class="btn-get-app apple-btn" title="Get for Mac">
+                Mac App
+              </a>
+              <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="btn-get-app ms-btn" title="Get on Microsoft Store">
+                Windows
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Easy Prescription Maker (iOS) -->
+        <div class="card featured-card" data-category="productivity" data-platforms="apple" data-title="easy prescription maker doctor medical prescription rx rx creator iphone" data-pkg="id6796944989">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c4/78/24/c4782443-aaaa-68ae-8134-56fa974fe69e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/180x180wa.png" alt="Easy Prescription Maker Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">💊</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-apple">App Store</span>
+              <span class="tag-category">Medical &amp; Health</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">📱 iPhone</span>
+            <span class="plat-badge"> iOS</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Easy Prescription Maker</h3>
+            <p class="card-desc">Professional digital prescription and Rx generator for healthcare practitioners. Create, print, and export patient prescriptions in seconds.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="Easy Prescription Maker">iOS App Store</span>
+            <a href="https://apps.apple.com/us/app/easy-prescription-maker/id6796944989" target="_blank" rel="noopener" class="btn-get-app apple-btn">
+              Get on App Store
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. JSON Viewer (Android) -->
+        <div class="card featured-card" data-category="dev-tools" data-platforms="android" data-title="json viewer graph visualizer tree formatter parser android" data-pkg="com.jsonviewer">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/-xvRVghF7zwDGoV2RQZjTV93q_UHQHwlCjbCQRVtpQ7X9BR2li6E3LhoD-akmnqs7bgQnaqV-ZeELmAo3hZ6WQ=s180-rw" alt="JSON Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
               <div class="app-icon-fallback" style="display:none;">🌿</div>
             </div>
             <div class="badge-group">
-              <span class="tag-pill tag-featured">Featured</span>
+              <span class="tag-pill tag-featured">Top Tool</span>
               <span class="tag-category">Developer Tool</span>
             </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">Google Play</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">JSON Viewer - Graph Visualizer</h3>
@@ -893,114 +1141,43 @@
           <div class="card-footer">
             <span class="package-id" title="com.jsonviewer">com.jsonviewer</span>
             <a href="https://play.google.com/store/apps/details?id=com.jsonviewer" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 2. XML Viewer -->
-        <div class="card" data-category="dev-tools" data-title="xml viewer graph visualizer markup parser" data-pkg="com.animesh.xmlviewer">
+        <!-- 4. Graph Notes (Android & iOS) -->
+        <div class="card" data-category="visual-notes" data-platforms="android apple" data-title="graph notes visual notes mindmap connected nodes ideas android ios" data-pkg="com.graphnotes">
           <div class="card-top">
             <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/BGfxOJd5Qd3A0p_vQ56tw4bev4STCFRiQfruTIPIqVMgfo8-2hNNz98Pa8y7S-IkprU71G1Lcvpxkv6W_WUrYg=s180-rw" alt="XML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">📐</div>
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/TlXc2znSuzzVaoGf6UZ0_gSuJi5CDF0yMg4F5qhZhOuHXL9-jtMFITZe3E-Xffqh508leUtdWl-SDNdkP7UjpSc=s180-rw" alt="Graph Notes Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🧠</div>
             </div>
             <div class="badge-group">
-              <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Developer Tool</span>
+              <span class="tag-pill tag-live">Multi-Platform</span>
+              <span class="tag-category">Productivity</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">🍏 iOS / iPad</span>
+          </div>
           <div class="card-body">
-            <h3 class="card-title">XML Viewer - Graph Visualizer</h3>
-            <p class="card-desc">Render nested XML structures as clean, readable interactive node graphs without squinting at tedious raw markup.</p>
+            <h3 class="card-title">Graph Notes – Visual Notes</h3>
+            <p class="card-desc">Organize thoughts, brain dump ideas, and connect concepts in a non-linear visual node graph network. Think in interconnected webs.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.animesh.xmlviewer">com.animesh.xmlviewer</span>
-            <a href="https://play.google.com/store/apps/details?id=com.animesh.xmlviewer" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <span class="package-id" title="Graph Notes">Android &amp; iOS</span>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.graphnotes" target="_blank" rel="noopener" class="btn-get-app">Play</a>
+              <a href="https://apps.apple.com/us/app/graph-notes-visual-notes/id6799601737" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
+            </div>
           </div>
         </div>
 
-        <!-- 3. YAML Viewer -->
-        <div class="card" data-category="dev-tools" data-title="yaml viewer graph visualizer config kubernetes docker" data-pkg="com.animesh.yamlviewer">
-          <div class="card-top">
-            <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/J4nYmtNpz49bUehvjX8_vv3qP4uMXtccVOko6_vckdQIaQuQWiwmHyJ4lWpW7FSwIsRxVaudeJZ51bUr7CZxzA=s180-rw" alt="YAML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">📜</div>
-            </div>
-            <div class="badge-group">
-              <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Developer Tool</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">YAML Viewer - Graph Visualizer</h3>
-            <p class="card-desc">Visualize YAML configuration files into interactive diagrams. Ideal for inspecting CI/CD pipelines, Kubernetes, and Docker Compose configs.</p>
-          </div>
-          <div class="card-footer">
-            <span class="package-id" title="com.animesh.yamlviewer">com.animesh.yamlviewer</span>
-            <a href="https://play.google.com/store/apps/details?id=com.animesh.yamlviewer" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 4. JSON Compare -->
-        <div class="card" data-category="dev-tools" data-title="json compare diff viewer side by side visual delta" data-pkg="com.jsoncompare">
-          <div class="card-top">
-            <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/CwmEy5qigZRZsj0Hzc09v2YnY5W3bAAER0vtkg4YGzNaeYjgrewP2HO8kj6SUFtIq5tmLcpV20ExsAuMVvilqg=s180-rw" alt="JSON Compare Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">🔍</div>
-            </div>
-            <div class="badge-group">
-              <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Developer Tool</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">JSON Compare – Diff &amp; Viewer</h3>
-            <p class="card-desc">Compare two JSON files side-by-side with visual color-coded diff highlighting, key matching, and syntax error detection.</p>
-          </div>
-          <div class="card-footer">
-            <span class="package-id" title="com.jsoncompare">com.jsoncompare</span>
-            <a href="https://play.google.com/store/apps/details?id=com.jsoncompare" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 5. MongoLens -->
-        <div class="card" data-category="dev-tools" data-title="mongolens mongodb client database explorer collections queries" data-pkg="com.mongolens">
-          <div class="card-top">
-            <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/rZCuYqwtbdRCnHwr6oM3kXrGK4XfCQ5ag5ESFjtdHTKzn4s7-gZZnKGG6ap4KmPhS9q3B8hAt9AK-2VZh3Mc=s180-rw" alt="MongoLens Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">🔭</div>
-            </div>
-            <div class="badge-group">
-              <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Database Tool</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">MongoLens - MongoDB Client</h3>
-            <p class="card-desc">Connect and manage MongoDB databases directly from your phone. Execute queries, inspect collections, edit documents with intuitive UI.</p>
-          </div>
-          <div class="card-footer">
-            <span class="package-id" title="com.mongolens">com.mongolens</span>
-            <a href="https://play.google.com/store/apps/details?id=com.mongolens" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 6. GLB Viewer -->
-        <div class="card" data-category="dev-tools" data-title="glb viewer 3d model viewer gltf augmented reality render" data-pkg="com.glbviewer">
+        <!-- 5. GLB Viewer (Android & iOS) -->
+        <div class="card" data-category="dev-tools" data-platforms="android apple" data-title="glb viewer 3d model viewer gltf 3d render ar android ios" data-pkg="com.glbviewer">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/NsdGM9jIp3-Le5IyiP4UCLBK064O1SaWW1r4SC-HOHi5oekM5z5-M-P30D3ax7XX7sBKW3QgLBe9fUIWMR-AUK0=s180-rw" alt="GLB Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1011,21 +1188,139 @@
               <span class="tag-category">3D Graphics</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">🍏 iOS / iPhone</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">GLB Viewer – 3D Model Viewer</h3>
-            <p class="card-desc">Fast, smooth 3D model viewer for GLB and glTF files. Rotate, zoom, inspect textures, animations, and lighting in real time.</p>
+            <p class="card-desc">Smooth 3D model viewer for GLB and glTF files. Rotate, inspect meshes, textures, animations, and lighting in real time.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.glbviewer">com.glbviewer</span>
-            <a href="https://play.google.com/store/apps/details?id=com.glbviewer" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+            <span class="package-id" title="GLB Viewer">3D Viewer</span>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.glbviewer" target="_blank" rel="noopener" class="btn-get-app">Play</a>
+              <a href="https://apps.apple.com/us/app/glb-viewer-3d-model-viewer/id6792433740" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Organization Chart Builder (Android, iOS & Windows) -->
+        <div class="card" data-category="productivity" data-platforms="android apple windows" data-title="organization chart builder hierarchy company team structure yourorgtree android ios windows" data-pkg="com.orgchartbuilder">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/YFBkltn_N3svWN5kcMgLJj6ySQWTMtG0ccjNqhDXwghx-gymzMvpSlCDvZ8u2Iz4YtHS3ofc4XZD_pReegLKnQ=s180-rw" alt="Org Chart Builder Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🏢</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Cross-Platform</span>
+              <span class="tag-category">Business Tool</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">🍏 iOS / iPad</span>
+            <span class="plat-badge">🪟 Windows</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Organization Chart Builder</h3>
+            <p class="card-desc">Design professional company hierarchies, team organizational trees, and reporting workflows with easy export options.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="Org Chart Builder">All Platforms</span>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.orgchartbuilder" target="_blank" rel="noopener" class="btn-get-app">Play</a>
+              <a href="https://apps.apple.com/us/app/organization-chart-builder/id6789635187" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. XML Viewer (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="xml viewer graph visualizer markup parser android" data-pkg="com.animesh.xmlviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/BGfxOJd5Qd3A0p_vQ56tw4bev4STCFRiQfruTIPIqVMgfo8-2hNNz98Pa8y7S-IkprU71G1Lcvpxkv6W_WUrYg=s180-rw" alt="XML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">📐</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">XML Viewer - Graph Visualizer</h3>
+            <p class="card-desc">Render nested XML structures as clean, readable interactive node graphs without squinting at tedious raw markup.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.animesh.xmlviewer">com.animesh.xmlviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.animesh.xmlviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 7. Mermaid Studio -->
-        <div class="card" data-category="dev-tools" data-title="mermaid studio diagram editor flowchart sequence architecture" data-pkg="com.mermaidviewer">
+        <!-- 8. YAML Viewer (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="yaml viewer graph visualizer config kubernetes docker android" data-pkg="com.animesh.yamlviewer">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/J4nYmtNpz49bUehvjX8_vv3qP4uMXtccVOko6_vckdQIaQuQWiwmHyJ4lWpW7FSwIsRxVaudeJZ51bUr7CZxzA=s180-rw" alt="YAML Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">📜</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">YAML Viewer - Graph Visualizer</h3>
+            <p class="card-desc">Visualize YAML configuration files into interactive diagrams. Ideal for inspecting CI/CD pipelines, Kubernetes, and Docker configs.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.animesh.yamlviewer">com.animesh.yamlviewer</span>
+            <a href="https://play.google.com/store/apps/details?id=com.animesh.yamlviewer" target="_blank" rel="noopener" class="btn-get-app">
+              Google Play
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 9. MongoLens (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="mongolens mongodb client database collections queries explorer android" data-pkg="com.mongolens">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/rZCuYqwtbdRCnHwr6oM3kXrGK4XfCQ5ag5ESFjtdHTKzn4s7-gZZnKGG6ap4KmPhS9q3B8hAt9AK-2VZh3Mc=s180-rw" alt="MongoLens Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🔭</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Database Tool</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">MongoLens - MongoDB Client</h3>
+            <p class="card-desc">Connect and manage MongoDB databases directly on mobile. Run queries, view collections, and edit documents with an intuitive UI.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.mongolens">com.mongolens</span>
+            <a href="https://play.google.com/store/apps/details?id=com.mongolens" target="_blank" rel="noopener" class="btn-get-app">
+              Google Play
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 10. Mermaid Studio (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="mermaid studio diagram editor flowchart sequence architecture graphs android" data-pkg="com.mermaidviewer">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/XgmQFZ9FYXmXxCCXyryT-lnHWo51vDSwqxZBsE7x_MWr7sxgrIyGYV4xGVMMbZ5MQgWIByzhmSCQF3f0VLxsKg=s180-rw" alt="Mermaid Studio Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1036,6 +1331,9 @@
               <span class="tag-category">Diagram Tool</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Mermaid Studio: Diagram Editor</h3>
             <p class="card-desc">Write Mermaid-js markdown syntax and generate flowcharts, sequence diagrams, class models, and state graphs instantly.</p>
@@ -1043,14 +1341,14 @@
           <div class="card-footer">
             <span class="package-id" title="com.mermaidviewer">com.mermaidviewer</span>
             <a href="https://play.google.com/store/apps/details?id=com.mermaidviewer" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 8. HTML Runner -->
-        <div class="card" data-category="dev-tools" data-title="html runner live web editor javascript css preview playground" data-pkg="app.htmlrunner">
+        <!-- 11. HTML Runner (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="html runner live web editor javascript css preview playground android" data-pkg="app.htmlrunner">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/ixSq6yTj0lJoFDc6W8mU5yd8r_gtjXYJASkwSiNaDau3nZdwg6d_Nfzxrz8l54YWNlpNNi9IyWYk8-gody_ixH0=s180-rw" alt="HTML Runner Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1058,24 +1356,55 @@
             </div>
             <div class="badge-group">
               <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Web Editor</span>
+              <span class="tag-category">Web Playground</span>
             </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">HTML Runner: Live Web Editor</h3>
-            <p class="card-desc">Instant web coding playground on Android. Code HTML, CSS, and JS with instant preview, console output, and offline support.</p>
+            <p class="card-desc">Instant web coding sandbox on mobile. Write HTML, CSS, and JS with instant preview, console debugger, and offline support.</p>
           </div>
           <div class="card-footer">
             <span class="package-id" title="app.htmlrunner">app.htmlrunner</span>
             <a href="https://play.google.com/store/apps/details?id=app.htmlrunner" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 9. Chart Maker -->
-        <div class="card" data-category="dev-tools" data-title="chart maker graph creator bar pie line radar statistics visual" data-pkg="com.chartmaker">
+        <!-- 12. JSON Compare (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="json compare diff viewer side by side visual delta comparison android" data-pkg="com.jsoncompare">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/CwmEy5qigZRZsj0Hzc09v2YnY5W3bAAER0vtkg4YGzNaeYjgrewP2HO8kj6SUFtIq5tmLcpV20ExsAuMVvilqg=s180-rw" alt="JSON Compare Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🔍</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Live</span>
+              <span class="tag-category">Developer Tool</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">JSON Compare – Diff &amp; Viewer</h3>
+            <p class="card-desc">Compare two JSON files side-by-side with color-coded diff highlighting, key matching, and syntax error detection.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="com.jsoncompare">com.jsoncompare</span>
+            <a href="https://play.google.com/store/apps/details?id=com.jsoncompare" target="_blank" rel="noopener" class="btn-get-app">
+              Google Play
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 13. Chart Maker (Android) -->
+        <div class="card" data-category="dev-tools" data-platforms="android" data-title="chart maker graph creator bar pie line radar statistics visualizer android" data-pkg="com.chartmaker">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/NbK2L6aDbntt5sXGcjaUOP-0ScvJQmt83MJa6wZqXHkw0X0rfQRtD_lT0V5iQfKRNRDCDOo071ySkobbZHG8=s180-rw" alt="Chart Maker Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1086,71 +1415,24 @@
               <span class="tag-category">Design &amp; Charts</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Chart Maker - Graph Creator</h3>
-            <p class="card-desc">Create sleek, customizable charts (bar, line, pie, radar) with customizable themes, live data inputs, and high-res image exports.</p>
+            <p class="card-desc">Create sleek, customizable charts (bar, line, pie, radar) with customizable color palettes, live data inputs, and high-res image exports.</p>
           </div>
           <div class="card-footer">
             <span class="package-id" title="com.chartmaker">com.chartmaker</span>
             <a href="https://play.google.com/store/apps/details?id=com.chartmaker" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 10. Organization Chart Builder -->
-        <div class="card" data-category="dev-tools" data-title="organization chart builder hierarchy company team structure org" data-pkg="com.orgchartbuilder">
-          <div class="card-top">
-            <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/YFBkltn_N3svWN5kcMgLJj6ySQWTMtG0ccjNqhDXwghx-gymzMvpSlCDvZ8u2Iz4YtHS3ofc4XZD_pReegLKnQ=s180-rw" alt="Org Chart Builder Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">🏢</div>
-            </div>
-            <div class="badge-group">
-              <span class="tag-pill tag-live">Live</span>
-              <span class="tag-category">Business Tool</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Organization Chart Builder</h3>
-            <p class="card-desc">Design professional company hierarchies, team organizational trees, and reporting structures effortlessly with export options.</p>
-          </div>
-          <div class="card-footer">
-            <span class="package-id" title="com.orgchartbuilder">com.orgchartbuilder</span>
-            <a href="https://play.google.com/store/apps/details?id=com.orgchartbuilder" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 11. Graph Notes -->
-        <div class="card featured-card" data-category="productivity" data-title="graph notes visual notes mindmap knowledge base connected nodes" data-pkg="com.graphnotes">
-          <div class="card-top">
-            <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/TlXc2znSuzzVaoGf6UZ0_gSuJi5CDF0yMg4F5qhZhOuHXL9-jtMFITZe3E-Xffqh508leUtdWl-SDNdkP7UjpSc=s180-rw" alt="Graph Notes Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">🧠</div>
-            </div>
-            <div class="badge-group">
-              <span class="tag-pill tag-featured">Featured</span>
-              <span class="tag-category">Productivity</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Graph Notes – Visual Notes</h3>
-            <p class="card-desc">Organize thoughts, brain dump ideas, and connect concepts in a powerful non-linear node graph network. Think in interconnected webs.</p>
-          </div>
-          <div class="card-footer">
-            <span class="package-id" title="com.graphnotes">com.graphnotes</span>
-            <a href="https://play.google.com/store/apps/details?id=com.graphnotes" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 12. Gym Timetable Maker -->
-        <div class="card" data-category="productivity" data-title="gym timetable maker workout planner fitness schedule routines split" data-pkg="com.gymtimetablemaker">
+        <!-- 14. Gym Timetable Maker (Android) -->
+        <div class="card" data-category="productivity" data-platforms="android" data-title="gym timetable maker workout planner fitness schedule routines split exercises android" data-pkg="com.gymtimetablemaker">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/DifPMyS6VU6E_zyNK0J20q-EMiGYGR97dDIi24xNz9pZZrkIIX-7YrOUOLPq7b6T77X8TuZOW5JplKbvXVw1=s180-rw" alt="Gym Timetable Maker Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1161,6 +1443,9 @@
               <span class="tag-category">Fitness &amp; Routine</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Gym Timetable Maker</h3>
             <p class="card-desc">Build customized weekly workout splits, timetable schedules, and exercise routines with ease to stay consistent at the gym.</p>
@@ -1168,14 +1453,14 @@
           <div class="card-footer">
             <span class="package-id" title="com.gymtimetablemaker">com.gymtimetablemaker</span>
             <a href="https://play.google.com/store/apps/details?id=com.gymtimetablemaker" target="_blank" rel="noopener" class="btn-get-app">
-              Open App
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 13. Connect Path Puzzle -->
-        <div class="card" data-category="games" data-title="connect path puzzle logic brain teaser flow line grid" data-pkg="com.pathflow">
+        <!-- 15. Connect Path Puzzle (Android & iOS) -->
+        <div class="card" data-category="games" data-platforms="android apple" data-title="connect path puzzle logic brain teaser flow line grid colors android ios" data-pkg="com.pathflow">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/QXAWIKh79SK4TgUNHdbYudwxsBlVQV4KhsRJSiKDhdl3okXtOTV7dprBQU76A81gJvFb_YYo1x5aG0bgZSVtQ98=s180-rw" alt="Connect Path Puzzle Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1186,21 +1471,25 @@
               <span class="tag-category">Casual Game</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">🍏 iOS / iPhone</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Connect Path Puzzle</h3>
-            <p class="card-desc">Engaging logic puzzle game. Connect matching color nodes and paths without overlapping lines across hundreds of exciting stages.</p>
+            <p class="card-desc">Engaging logic puzzle game. Connect matching color nodes and paths without overlapping lines across hundreds of stages.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.pathflow">com.pathflow</span>
-            <a href="https://play.google.com/store/apps/details?id=com.pathflow" target="_blank" rel="noopener" class="btn-get-app">
-              Play Game
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <span class="package-id" title="Connect Path Puzzle">Multi-Platform</span>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.pathflow" target="_blank" rel="noopener" class="btn-get-app">Play</a>
+              <a href="https://apps.apple.com/us/app/connect-path-puzzle/id6792431900" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
+            </div>
           </div>
         </div>
 
-        <!-- 14. Cow Dash -->
-        <div class="card" data-category="games" data-title="cow dash endless runner arcade jump dodge action casual" data-pkg="com.cowrunnermobile">
+        <!-- 16. Cow Dash (Android) -->
+        <div class="card" data-category="games" data-platforms="android" data-title="cow dash endless runner arcade jump dodge action runner android" data-pkg="com.cowrunnermobile">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/p2VdiQsXtQZruRQg_jemoCNfSfBJXMuagKKh0tupLbG_XJNkhYQ8V4ZAlF8cU_UrkEoYatzTbzhu_1K6F61gVkw=s180-rw" alt="Cow Dash Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1211,21 +1500,53 @@
               <span class="tag-category">Runner Game</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Cow Dash: Endless Runner</h3>
-            <p class="card-desc">Fast-paced, adrenaline-filled endless runner arcade game! Dodge hurdles, collect power-ups, and sprint for the highest global score.</p>
+            <p class="card-desc">Fast-paced, adrenaline-filled endless runner arcade game! Dodge hurdles, collect power-ups, and sprint for high scores.</p>
           </div>
           <div class="card-footer">
             <span class="package-id" title="com.cowrunnermobile">com.cowrunnermobile</span>
             <a href="https://play.google.com/store/apps/details?id=com.cowrunnermobile" target="_blank" rel="noopener" class="btn-get-app">
-              Play Game
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 15. FacePop -->
-        <div class="card" data-category="games" data-title="facepop emoji bubble shooter puzzle blast match pop" data-pkg="com.facepop">
+        <!-- 17. Pocket Donkey / My Talking Donkey (Android & iOS) -->
+        <div class="card" data-category="games" data-platforms="android apple" data-title="pocket donkey my talking donkey virtual pet funny animal voice game android ios" data-pkg="com.mytalkingdonkey">
+          <div class="card-top">
+            <div class="icon-container">
+              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/LsNhRKrrdnfT492rbWcBXJApVDiP4c1PqrPcU1--Iv5lvDK4bQXnefNfNsVnCVstQ2C7yndvA27nqF96JEjqN0g=s180-rw" alt="Talking Donkey Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+              <div class="app-icon-fallback" style="display:none;">🫏</div>
+            </div>
+            <div class="badge-group">
+              <span class="tag-pill tag-live">Virtual Pet</span>
+              <span class="tag-category">Fun &amp; Casual</span>
+            </div>
+          </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+            <span class="plat-badge">🍏 iOS / iPhone</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">My Talking Donkey / Pocket Donkey</h3>
+            <p class="card-desc">Hilarious talking donkey companion! Repeats what you say in comical voices, performs funny dances, and offers mini-games.</p>
+          </div>
+          <div class="card-footer">
+            <span class="package-id" title="Talking Donkey">Android &amp; iOS</span>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.mytalkingdonkey" target="_blank" rel="noopener" class="btn-get-app">Play</a>
+              <a href="https://apps.apple.com/us/app/pocket-donkey/id6789635717" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18. FacePop (Android) -->
+        <div class="card" data-category="games" data-platforms="android" data-title="facepop emoji bubble shooter puzzle blast match pop arcade android" data-pkg="com.facepop">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/wLTg2NmqLwmGF_dRu1Hg2VSagkMWEdhQvlw9eX6Jonxo0b2nereDZJDRlGdP7B6YfIXIvEAjF1BDIMs4JVtg=s180-rw" alt="FacePop Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1236,21 +1557,24 @@
               <span class="tag-category">Casual Game</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">FacePop: Emoji Bubble Shooter</h3>
-            <p class="card-desc">Vibrant bubble shooter game powered with expressive animated emoji bubbles, chain reactions, and fun power boosters.</p>
+            <p class="card-desc">Vibrant bubble shooter game powered with expressive animated emoji bubbles, chain reactions, and power boosters.</p>
           </div>
           <div class="card-footer">
             <span class="package-id" title="com.facepop">com.facepop</span>
             <a href="https://play.google.com/store/apps/details?id=com.facepop" target="_blank" rel="noopener" class="btn-get-app">
-              Play Game
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 16. Fly My Dragon -->
-        <div class="card" data-category="games" data-title="fly my dragon arcade flight action fantasy runner" data-pkg="com.flymydragon">
+        <!-- 19. Fly My Dragon (Android) -->
+        <div class="card" data-category="games" data-platforms="android" data-title="fly my dragon arcade flight action fantasy runner dragon flying android" data-pkg="com.flymydragon">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/kKXIsirAdvLJCiimy2r_UI65wdyaHiupirLuNp7DCpRJ6TZrQJHOuJdll0jqb8cZBVVoQKpfugTwmIbMchU=s180-rw" alt="Fly My Dragon Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -1261,6 +1585,9 @@
               <span class="tag-category">Arcade Game</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🤖 Android</span>
+          </div>
           <div class="card-body">
             <h3 class="card-title">Fly My Dragon</h3>
             <p class="card-desc">Fly through mythical skies, maneuver through tight obstacles, and collect coins in this addictive dragon flight simulator.</p>
@@ -1268,32 +1595,35 @@
           <div class="card-footer">
             <span class="package-id" title="com.flymydragon">com.flymydragon</span>
             <a href="https://play.google.com/store/apps/details?id=com.flymydragon" target="_blank" rel="noopener" class="btn-get-app">
-              Play Game
+              Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
 
-        <!-- 17. My Talking Donkey -->
-        <div class="card" data-category="games" data-title="my talking donkey virtual pet funny animal voice game" data-pkg="com.mytalkingdonkey">
+        <!-- 20. YourOrgTree (Microsoft Store Windows) -->
+        <div class="card" data-category="productivity" data-platforms="windows" data-title="yourorgtree organization chart hierarchy company structure team windows microsoft store" data-pkg="yourorgtree">
           <div class="card-top">
             <div class="icon-container">
-              <img class="app-icon-img" src="https://play-lh.googleusercontent.com/LsNhRKrrdnfT492rbWcBXJApVDiP4c1PqrPcU1--Iv5lvDK4bQXnefNfNsVnCVstQ2C7yndvA27nqF96JEjqN0g=s180-rw" alt="My Talking Donkey Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-              <div class="app-icon-fallback" style="display:none;">🫏</div>
+              <div class="app-icon-fallback">🌲</div>
             </div>
             <div class="badge-group">
-              <span class="tag-pill tag-live">3.1★</span>
-              <span class="tag-category">Virtual Pet</span>
+              <span class="tag-pill tag-microsoft">Windows</span>
+              <span class="tag-category">Business Tool</span>
             </div>
           </div>
+          <div class="platform-badges">
+            <span class="plat-badge">🪟 Windows 11/10</span>
+            <span class="plat-badge">Microsoft Store</span>
+          </div>
           <div class="card-body">
-            <h3 class="card-title">My Talking Donkey</h3>
-            <p class="card-desc">Hilarious talking donkey companion! Repeats what you say in comical voices, performs funny dances, and offers casual mini-games.</p>
+            <h3 class="card-title">YourOrgTree - Org Chart Maker</h3>
+            <p class="card-desc">Organizational chart maker built for Windows professionals. Visualize corporate hierarchies, team departments, and export high-res charts.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.mytalkingdonkey">com.mytalkingdonkey</span>
-            <a href="https://play.google.com/store/apps/details?id=com.mytalkingdonkey" target="_blank" rel="noopener" class="btn-get-app">
-              Play Game
+            <span class="package-id" title="YourOrgTree">Microsoft Store</span>
+            <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="btn-get-app ms-btn">
+              Microsoft Store
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -1303,28 +1633,49 @@
         <div class="empty-state" id="emptyState">
           <div class="empty-icon">🔍</div>
           <div class="empty-title">No applications found</div>
-          <p class="empty-desc">Try adjusting your search query or clear the filter to see all applications.</p>
+          <p class="empty-desc">Try searching with different terms or reset your category/platform filters.</p>
         </div>
 
       </div>
     </section>
 
-    <!-- GOOGLE PLAY DEVELOPER PROFILE CALLOUT BANNER -->
-    <section class="dev-callout">
-      <div class="dev-callout-content">
-        <span class="dev-callout-tag">Google Play Developer</span>
-        <h2 class="dev-callout-title">Explore the full catalog on Google Play</h2>
-        <p class="dev-callout-desc">
-          Get continuous updates, fast performance enhancements, and new utility releases straight from the official Google Play store.
+    <!-- DEVELOPER PROFILE SHOWCASE: ANIMESH MANNA -->
+    <section class="author-showcase" id="author">
+      <div class="author-content">
+        <div class="author-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Sole Creator &amp; Maintainer
+        </div>
+        <h2 class="author-title">Created &amp; Managed by Animesh Manna</h2>
+        <p class="author-desc">
+          Passionate software engineer crafting developer tooling, visual data representations, productivity software, and casual games across Android, Apple (iOS &amp; macOS), and Windows. Focused on sleek craft, zero latency, and beautiful interactive UX.
         </p>
-      </div>
-      <div class="dev-callout-action">
-        <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-google-play">
-          <svg class="play-icon" viewBox="0 0 24 24" width="20" height="20">
-            <path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/>
-          </svg>
-          Visit Developer Profile
-        </a>
+        <div class="author-links-grid">
+          <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-profile-badge" style="border-color:rgba(62,240,255,0.35);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/></svg>
+            Google Play
+          </a>
+          <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="btn-profile-badge" style="border-color:rgba(255,255,255,0.3);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1 .08 2.02-.49 2.65-1.24z"/></svg>
+            Apple Developer
+          </a>
+          <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="btn-profile-badge" style="border-color:rgba(0,164,239,0.35);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg>
+            Microsoft Store
+          </a>
+          <a href="https://www.linkedin.com/in/animesh-manna-428633157/" target="_blank" rel="noopener" class="btn-profile-badge" style="border-color:rgba(10,102,194,0.4);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="#0a66c2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://peerlist.io/bugblitzdev" target="_blank" rel="noopener" class="btn-profile-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            Peerlist
+          </a>
+          <a href="https://github.com/BugBlitz98" target="_blank" rel="noopener" class="btn-profile-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -1334,21 +1685,24 @@
     <div class="wrap footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">Visuo Labs</div>
-        <div class="footer-desc">Crafting lightweight, visual, and high-performance Android experiences.</div>
+        <div class="footer-desc">Crafted &amp; Engineered by Animesh Manna • Available across Android, iOS, Mac &amp; Windows.</div>
       </div>
       <div class="footer-links">
         <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="footer-link">Google Play</a>
+        <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="footer-link">Apple App Store</a>
+        <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="footer-link">Microsoft Store</a>
+        <a href="https://www.linkedin.com/in/animesh-manna-428633157/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
         <a href="https://peerlist.io/bugblitzdev" target="_blank" rel="noopener" class="footer-link">Peerlist</a>
         <a href="https://github.com/BugBlitz98" target="_blank" rel="noopener" class="footer-link">GitHub</a>
         <a href="app-ads.txt" class="footer-link">app-ads.txt</a>
       </div>
       <div class="footer-copy">
-        © 2026 Visuo Labs • Built by <a href="https://peerlist.io/bugblitzdev" target="_blank" rel="noopener">Animesh Manna</a> • All rights reserved.
+        © 2026 Visuo Labs • All applications created &amp; managed by <a href="https://www.linkedin.com/in/animesh-manna-428633157/" target="_blank" rel="noopener">Animesh Manna</a> • All rights reserved.
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT: Cursor, Card Spotlight, Filter & Search -->
+  <!-- JAVASCRIPT: Cursor, Card Spotlight, Filter & Search -->
   <script>
     // ── 1. Smooth Interactive Cursor
     const cursor = document.getElementById('cursor');
@@ -1365,8 +1719,8 @@
       });
 
       function renderCursorRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
+        ringX += (mouseX - ringX) * 0.16;
+        ringY += (mouseY - ringY) * 0.16;
         ring.style.left = ringX + 'px';
         ring.style.top = ringY + 'px';
         requestAnimationFrame(renderCursorRing);
@@ -1375,7 +1729,7 @@
     }
 
     // ── 2. Card Glow Coordinates on Mouse Move
-    const allCards = document.querySelectorAll('.card');
+    const allCards = document.querySelectorAll('.card, .store-card');
     allCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -1383,49 +1737,56 @@
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         card.style.setProperty('--mx', x + '%');
         card.style.setProperty('--my', y + '%');
+        card.style.setProperty('--smx', x + '%');
+        card.style.setProperty('--smy', y + '%');
       });
     });
 
     // ── 3. Scroll Reveal Animation
+    const appCards = document.querySelectorAll('.card');
     const scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const cardIndex = Array.from(allCards).indexOf(entry.target);
-          const delay = Math.min(cardIndex * 40, 400);
+          const cardIndex = Array.from(appCards).indexOf(entry.target);
+          const delay = Math.min(cardIndex * 35, 350);
           setTimeout(() => {
             entry.target.classList.add('visible');
           }, delay);
           scrollObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
 
-    allCards.forEach(card => scrollObserver.observe(card));
+    appCards.forEach(card => scrollObserver.observe(card));
 
     // ── 4. Filtering and Live Search
     const searchInput = document.getElementById('appSearch');
     const searchClear = document.getElementById('searchClear');
     const filterChips = document.querySelectorAll('.filter-chip');
+    const platformBtns = document.querySelectorAll('.plat-btn');
     const resultsCount = document.getElementById('resultsCount');
     const emptyState = document.getElementById('emptyState');
 
     let activeCategory = 'all';
+    let activePlatform = 'all';
     let searchQuery = '';
 
     function filterApps() {
       let visibleCount = 0;
       const query = searchQuery.trim().toLowerCase();
 
-      allCards.forEach(card => {
+      appCards.forEach(card => {
         const category = card.getAttribute('data-category');
+        const platforms = (card.getAttribute('data-platforms') || '').toLowerCase();
         const titleData = (card.getAttribute('data-title') || '').toLowerCase();
         const pkgData = (card.getAttribute('data-pkg') || '').toLowerCase();
         const cardText = card.innerText.toLowerCase();
 
         const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+        const matchesPlatform = (activePlatform === 'all' || platforms.includes(activePlatform));
         const matchesSearch = (!query || titleData.includes(query) || pkgData.includes(query) || cardText.includes(query));
 
-        if (matchesCategory && matchesSearch) {
+        if (matchesCategory && matchesPlatform && matchesSearch) {
           card.style.display = 'flex';
           card.classList.add('visible');
           visibleCount++;
@@ -1435,10 +1796,10 @@
       });
 
       // Update result count text
-      if (query || activeCategory !== 'all') {
-        resultsCount.textContent = `Showing ${visibleCount} of ${allCards.length} apps`;
+      if (query || activeCategory !== 'all' || activePlatform !== 'all') {
+        resultsCount.textContent = `Showing ${visibleCount} of ${appCards.length} applications`;
       } else {
-        resultsCount.textContent = `Showing all ${allCards.length} apps`;
+        resultsCount.textContent = `Showing all ${appCards.length} applications`;
       }
 
       // Empty state
@@ -1455,6 +1816,16 @@
         filterChips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         activeCategory = chip.getAttribute('data-category');
+        filterApps();
+      });
+    });
+
+    // Platform Sub-Filter Button Click
+    platformBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        platformBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activePlatform = btn.getAttribute('data-platform');
         filterApps();
       });
     });
