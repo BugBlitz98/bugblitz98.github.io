@@ -250,17 +250,22 @@
       box-shadow: 0 0 24px rgba(255, 255, 255, 0.5);
     }
 
-    /* ─── HERO SECTION (DARK SKYLINE NOIR STYLE) ── */
-    .hero {
-      padding: clamp(65px, 10vw, 110px) 0 clamp(40px, 6vw, 65px);
-      text-align: center;
+    /* ─── HERO SECTION (FULL SCREEN NOIR SKYLINE STYLE) ── */
+    .hero-section {
+      width: 100%;
+      padding: clamp(75px, 12vw, 130px) 0 clamp(45px, 7vw, 75px);
       position: relative;
       background:
-        linear-gradient(180deg, rgba(5, 7, 9, 0.35) 0%, rgba(5, 7, 9, 0.85) 65%, #050709 100%),
-        url('./assets/hero_dark_bg.jpg') center 20% / cover no-repeat;
-      border-radius: 0 0 28px 28px;
+        linear-gradient(180deg, rgba(5, 7, 9, 0.25) 0%, rgba(5, 7, 9, 0.75) 55%, var(--bg) 100%),
+        url('./assets/hero_dark_bg.jpg') center top / cover no-repeat;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
+    }
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     .hero-top-pill {
       display: inline-flex; align-items: center; gap: 8px;
@@ -511,12 +516,16 @@
       box-shadow: 0 0 16px var(--lime-glow);
     }
     .search-input::placeholder { color: var(--muted); }
-    .search-icon {
+    .search-icon, svg.search-icon {
       position: absolute; left: 14px; top: 50%;
       transform: translateY(-50%);
       color: var(--muted);
       pointer-events: none;
-      display: flex;
+      width: 16px !important;
+      height: 16px !important;
+      max-width: 16px !important;
+      max-height: 16px !important;
+      display: block;
     }
     .search-clear {
       position: absolute; right: 12px; top: 50%;
@@ -1460,9 +1469,9 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <!-- HERO SECTION (DARK SKYLINE NOIR STYLE) -->
-    <section class="hero">
+  <!-- FULL SCREEN HERO SECTION (100% VIEWPORT WIDTH) -->
+  <section class="hero-section">
+    <div class="wrap hero-inner">
       <div class="hero-top-pill">
         <span class="pill-dot"></span>
         <span>EXPERIENCED FOUNDER • 8+ YEARS CODE CRAFT • 20+ APPS</span>
@@ -1563,15 +1572,17 @@
           <div class="stat-label">Mobile &amp; Web</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <main class="wrap">
     <!-- STICKY FILTER & SEARCH CONTROLS -->
     <div class="controls-section" id="apps">
       <div class="controls-wrapper">
         <div class="search-and-filters">
           <!-- Search box -->
           <div class="search-box">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
             <input type="text" id="appSearch" class="search-input" placeholder="Search apps by name, feature (JSON, Mongo, Prescription, Notes, 3D)..." autocomplete="off" />
