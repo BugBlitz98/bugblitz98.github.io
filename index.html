@@ -1335,6 +1335,164 @@
       color: #ffffff;
     }
 
+    /* ─── 1ST INTERNET DOLLAR MILESTONE SHOWCASE ── */
+    .first-dollar-showcase {
+      margin: 45px 0 35px;
+      background: linear-gradient(135deg, rgba(204, 255, 0, 0.06) 0%, rgba(13, 17, 24, 0.92) 45%, rgba(62, 240, 255, 0.05) 100%);
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      border-radius: 24px;
+      padding: clamp(26px, 5vw, 44px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(204, 255, 0, 0.06);
+    }
+    .first-dollar-showcase::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--lime), var(--cyan), transparent);
+    }
+    .first-dollar-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: clamp(24px, 4vw, 44px);
+      align-items: center;
+    }
+    .first-dollar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .first-dollar-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--lime);
+      background: rgba(204, 255, 0, 0.12);
+      border: 1px solid rgba(204, 255, 0, 0.4);
+      padding: 5px 14px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+    .first-dollar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      letter-spacing: 1.2px;
+      color: #ffffff;
+      line-height: 1.02;
+    }
+    .first-dollar-title span {
+      color: var(--lime);
+      text-shadow: 0 0 30px var(--lime-glow);
+    }
+    .first-dollar-desc {
+      font-size: clamp(14px, 1.8vw, 15px);
+      color: var(--text-ivory);
+      line-height: 1.68;
+    }
+    .first-dollar-insights {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+    }
+    .insight-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(204, 255, 0, 0.35);
+      transform: translateX(4px);
+    }
+    .insight-icon {
+      font-size: 18px;
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .insight-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .insight-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .insight-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Revenue Chart Media Card */
+    .first-dollar-media {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .revenue-card-frame {
+      position: relative;
+      background: #000000;
+      border: 1px solid rgba(204, 255, 0, 0.4);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(204, 255, 0, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .revenue-card-frame:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 45px rgba(204, 255, 0, 0.2);
+    }
+    .revenue-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .revenue-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(10, 14, 20, 0.95);
+      border-top: 1px solid var(--border);
+    }
+    .revenue-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lime);
+    }
+    .revenue-status {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    @media (max-width: 900px) {
+      .first-dollar-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ─── ABOUT ANIMESH MANNA (DEVELOPER SHOWCASE) ── */
     .author-showcase {
       margin: 40px 0 70px;
@@ -3057,6 +3215,62 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- 1ST INTERNET DOLLAR MILESTONE SHOWCASE -->
+      <div class="first-dollar-showcase" id="milestone">
+        <div class="first-dollar-grid">
+          <div class="first-dollar-content">
+            <div class="first-dollar-pill">
+              <span class="pill-dot"></span>
+              <span>1ST INTERNET DOLLAR • THE ENERGETIC SPARK</span>
+            </div>
+            <h3 class="first-dollar-title">
+              From $0 to Real Revenue: <span>The Turning Point</span>
+            </h3>
+            <p class="first-dollar-desc">
+              Going from $0 to your very first dollar earned on the internet is the single most electrifying moment in a software engineer's journey. It’s not about the dollar amount—it’s the profound realization that someone across the globe paid for something you engineered from scratch. That first milestone was pure <strong>energetic fuel</strong> that transformed abstract coding into unstoppable entrepreneurial conviction.
+            </p>
+            <div class="first-dollar-insights">
+              <div class="insight-item">
+                <span class="insight-icon">⚡</span>
+                <div class="insight-text">
+                  <span class="insight-title">Authentic Market Validation</span>
+                  <span class="insight-desc">Proof that building high-utility, developer-first tools solves real pain points worth paying for.</span>
+                </div>
+              </div>
+              <div class="insight-item">
+                <span class="insight-icon">🔥</span>
+                <div class="insight-text">
+                  <span class="insight-title">High-Voltage Motivation &amp; Fuel</span>
+                  <span class="insight-desc">The psychological breakthrough that replaced doubt with the drive to ship 20+ multi-platform apps.</span>
+                </div>
+              </div>
+              <div class="insight-item">
+                <span class="insight-icon">💎</span>
+                <div class="insight-text">
+                  <span class="insight-title">Obsession with Polished Quality</span>
+                  <span class="insight-desc">Cemented the standard: never ship disposable garbage; always build dependable, durable software for high audiences.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="first-dollar-media">
+            <div class="revenue-card-frame">
+              <img src="./assets/first_internet_dollar.jpg" alt="Dodo Payments Revenue Milestone - First Internet Dollar" class="revenue-img" loading="lazy">
+              <div class="revenue-card-footer">
+                <div class="revenue-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                  <span>DODO PAYMENTS • 0 → $90+ RUN-RATE</span>
+                </div>
+                <div class="revenue-status">
+                  ✓ Verified Organic Growth
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
