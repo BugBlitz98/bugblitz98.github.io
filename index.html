@@ -77,7 +77,24 @@
         transition: width 0.2s, height 0.2s, background-color 0.2s;
         box-shadow: 0 0 10px var(--lime);
       }
+    /* Hide custom cursor on mobile/touch screens */
+    #cursor, #cursor-ring {
+      display: none !important;
+    }
+    @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+      #cursor {
+        display: block !important;
+        position: fixed; top: 0; left: 0; z-index: 9999;
+        width: 8px; height: 8px;
+        background: var(--lime);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.04s ease-out, width 0.2s, height 0.2s, background 0.2s;
+        box-shadow: 0 0 10px var(--lime);
+      }
       #cursor-ring {
+        display: block !important;
         position: fixed; top: 0; left: 0; z-index: 9998;
         width: 36px; height: 36px;
         border: 1px solid rgba(204, 255, 0, 0.45);
@@ -95,10 +112,6 @@
         border-color: rgba(204, 255, 0, 0.65);
         background: rgba(204, 255, 0, 0.06);
       }
-    }
-
-    @media (hover: none) or (pointer: coarse) {
-      #cursor, #cursor-ring { display: none !important; }
     }
 
     /* ─── AMBIENT NOISE & GRID ───────────────────── */
@@ -248,6 +261,151 @@
       color: #000000;
       transform: translateY(-1px);
       box-shadow: 0 0 24px rgba(255, 255, 255, 0.5);
+    }
+
+    /* ─── MOBILE 3-LINE MENU & DRAWER ───────────── */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+    .mobile-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--lime);
+    }
+    .menu-bar {
+      width: 20px;
+      height: 2px;
+      background-color: var(--text-ivory);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9990;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-drawer-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(88vw, 360px);
+      background: #080b11;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 9995;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 20px;
+      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
+      overflow-y: auto;
+    }
+    .mobile-drawer.active {
+      transform: translateX(0);
+    }
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-close-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mobile-close-btn:hover {
+      background: var(--lime);
+      color: #000000;
+    }
+    .mobile-drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 20px 0;
+      flex: 1;
+    }
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .mobile-nav-link:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(204, 255, 0, 0.3);
+      transform: translateX(4px);
+    }
+    .mobile-nav-link .nav-ico {
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+    .mobile-nav-link .nav-txt {
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-nav-link .nav-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .mobile-nav-link .nav-desc {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .mobile-drawer-footer {
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-cta-btn {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 12px;
+      background: var(--lime);
+      color: #000000;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 20px var(--lime-glow);
     }
 
     /* ─── HERO SECTION (FULL SCREEN NOIR SKYLINE STYLE) ── */
@@ -582,6 +740,14 @@
       gap: 12px; flex-wrap: wrap;
       padding-top: 4px;
     }
+    .platform-filter-group {
+      display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .platform-label {
+      font-size: 11.5px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.8px; white-space: nowrap;
+    }
     .platform-selector {
       display: inline-flex;
       background: rgba(255, 255, 255, 0.03);
@@ -589,6 +755,7 @@
       border-radius: 8px;
       padding: 3px;
       gap: 3px;
+      flex-wrap: wrap;
     }
     .plat-btn {
       background: none; border: none;
@@ -601,6 +768,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex; align-items: center; gap: 5px;
+      white-space: nowrap;
     }
     .plat-btn:hover { color: #ffffff; }
     .plat-btn.active {
@@ -609,12 +777,12 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
-    .results-counter {
-      font-size: 12.5px;
-      color: var(--muted);
-      font-family: 'JetBrains Mono', monospace;
+    .results-bar-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
     }
-    .results-counter strong { color: var(--text-ivory); }
 
     /* ─── APPLICATIONS GRID ─────────────────────── */
     .apps-section {
@@ -1375,7 +1543,8 @@
       .hero-stats {
         gap: 16px; padding: 14px 22px;
       }
-      .nav-store-links .nav-store-btn:not(.exp-nav) { display: none; }
+      .nav-store-links { display: none !important; }
+      .mobile-menu-btn { display: flex !important; }
       .author-showcase { grid-template-columns: 1fr; }
     }
 
@@ -1388,9 +1557,18 @@
       .search-and-filters { flex-direction: column; align-items: stretch; gap: 10px; }
       .search-box { max-width: 100%; min-width: 100%; }
       .platform-sub-filters {
-        flex-direction: column; align-items: flex-start; gap: 8px;
+        flex-direction: column; align-items: flex-start; gap: 10px;
       }
-      .platform-selector { width: 100%; display: flex; flex-wrap: wrap; gap: 6px; }
+      .platform-filter-group {
+        width: 100%; flex-direction: column; align-items: flex-start; gap: 6px;
+      }
+      .platform-selector {
+        width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px;
+      }
+      .plat-btn {
+        justify-content: center; text-align: center; padding: 8px 6px; font-size: 11px;
+      }
+      .results-bar-text { margin-top: 2px; }
       .hero-stats {
         display: grid; grid-template-columns: repeat(2, 1fr);
         border-radius: 16px; width: 100%; max-width: 440px;
@@ -1489,8 +1667,98 @@
           Explore Apps &amp; Web
         </a>
       </div>
+
+      <!-- Mobile 3-Line Hamburger Menu Button -->
+      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle Navigation Menu" onclick="toggleMobileMenu()">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
     </div>
   </header>
+
+  <!-- MOBILE DRAWER MENU & BACKDROP -->
+  <div id="mobileDrawer" class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="brand-link">
+        <div class="brand-icon">V</div>
+        <div class="logo-text">
+          VISUO LABS
+          <span class="logo-author">by Animesh Manna</span>
+        </div>
+      </div>
+      <button class="mobile-close-btn" aria-label="Close Menu" onclick="toggleMobileMenu()">✕</button>
+    </div>
+    <nav class="mobile-drawer-nav">
+      <a href="#experience" class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <span class="nav-ico">⚡</span>
+        <div class="nav-txt">
+          <span class="nav-title">8+ Years Experience</span>
+          <span class="nav-desc">Technical evolution since 2017</span>
+        </div>
+      </a>
+      <a href="#apps" class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <span class="nav-ico">🚀</span>
+        <div class="nav-txt">
+          <span class="nav-title">20+ Applications</span>
+          <span class="nav-desc">Android, iOS, macOS &amp; Windows</span>
+        </div>
+      </a>
+      <a href="https://jsonviewer.tools" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🌐</span>
+        <div class="nav-txt">
+          <span class="nav-title">jsonviewer.tools</span>
+          <span class="nav-desc">Web SaaS platform</span>
+        </div>
+      </a>
+      <a href="https://yourorgtree.com" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🌳</span>
+        <div class="nav-txt">
+          <span class="nav-title">yourorgtree.com</span>
+          <span class="nav-desc">Organization hierarchy builder</span>
+        </div>
+      </a>
+      <a href="https://mongolens.com" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🍃</span>
+        <div class="nav-txt">
+          <span class="nav-title">mongolens.com</span>
+          <span class="nav-desc">Visual MongoDB client</span>
+        </div>
+      </a>
+      <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🤖</span>
+        <div class="nav-txt">
+          <span class="nav-title">Google Play Developer</span>
+          <span class="nav-desc">17 Android Apps &amp; Games</span>
+        </div>
+      </a>
+      <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🍎</span>
+        <div class="nav-txt">
+          <span class="nav-title">Apple Developer</span>
+          <span class="nav-desc">7 iOS &amp; Mac Applications</span>
+        </div>
+      </a>
+      <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="mobile-nav-link">
+        <span class="nav-ico">🪟</span>
+        <div class="nav-txt">
+          <span class="nav-title">Microsoft Store</span>
+          <span class="nav-desc">Windows Desktop Suites</span>
+        </div>
+      </a>
+      <a href="#author" class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <span class="nav-ico">👤</span>
+        <div class="nav-txt">
+          <span class="nav-title">About Animesh Manna</span>
+          <span class="nav-desc">Founder &amp; Principal Engineer</span>
+        </div>
+      </a>
+    </nav>
+    <div class="mobile-drawer-footer">
+      <a href="#apps" class="mobile-cta-btn" onclick="toggleMobileMenu()">EXPLORE ALL APPS</a>
+    </div>
+  </div>
+  <div id="mobileDrawerBackdrop" class="mobile-drawer-backdrop" onclick="toggleMobileMenu()"></div>
 
   <!-- FULL SCREEN HERO SECTION (100% VIEWPORT WIDTH) -->
   <section class="hero-section">
@@ -1634,12 +1902,14 @@
 
         <!-- Secondary Platform Selectors -->
         <div class="platform-sub-filters">
-          <div class="platform-selector">
-            <span>Filter by Store:</span>
-            <button class="plat-btn active" data-platform="all">All</button>
-            <button class="plat-btn" data-platform="android">Android (Google Play)</button>
-            <button class="plat-btn" data-platform="apple">Apple (iOS &amp; Mac)</button>
-            <button class="plat-btn" data-platform="windows">Windows (Microsoft)</button>
+          <div class="platform-filter-group">
+            <span class="platform-label">Filter by Store:</span>
+            <div class="platform-selector">
+              <button class="plat-btn active" data-platform="all">All</button>
+              <button class="plat-btn" data-platform="android">Android</button>
+              <button class="plat-btn" data-platform="apple">Apple (iOS &amp; Mac)</button>
+              <button class="plat-btn" data-platform="windows">Windows</button>
+            </div>
           </div>
           <div class="results-bar-text">
             <span id="resultsCount">Showing all 20 applications</span>
@@ -2864,6 +3134,27 @@
       searchInput.focus();
       filterApps();
     });
+
+    // Mobile Drawer Toggle Functions
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.toggle('active');
+        backdrop.classList.toggle('active');
+        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+      }
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
   </script>
 </body>
 </html>
