@@ -43,9 +43,11 @@
 
 ---
 
-## 📬 Contact & Collaboration
+## 📬 Contact & Support
 
 - **Email**: [bugblitz.dev@gmail.com](mailto:bugblitz.dev@gmail.com)
+- **X (Twitter)**: [@Animesh68589159](https://x.com/Animesh68589159)
+- **Buy Me a Coffee**: [buymeacoffee.com/animeshmanna](https://buymeacoffee.com/animeshmanna)
 - **LinkedIn**: [linkedin.com/in/animesh-manna-428633157](https://www.linkedin.com/in/animesh-manna-428633157/)
 - **Peerlist**: [peerlist.io/bugblitzdev](https://peerlist.io/bugblitzdev)
 - **GitHub**: [github.com/BugBlitz98](https://github.com/BugBlitz98)
