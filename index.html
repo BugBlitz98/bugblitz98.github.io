@@ -78,11 +78,11 @@
         transform: translate(-50%, -50%);
         transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
       }
-      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .journey-card:hover, .tech-chip-badge:hover, .btn-web-platform:hover, .filter-chip:hover) #cursor {
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .step-card:hover, .journey-card:hover, .tech-chip-badge:hover, .btn-web-platform:hover, .filter-chip:hover) #cursor {
         width: 14px; height: 14px;
         background: var(--green);
       }
-      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .journey-card:hover, .tech-chip-badge:hover, .btn-web-platform:hover, .filter-chip:hover) #cursor-ring {
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .step-card:hover, .journey-card:hover, .tech-chip-badge:hover, .btn-web-platform:hover, .filter-chip:hover) #cursor-ring {
         width: 50px; height: 50px;
         border-color: rgba(34, 255, 160, 0.55);
         background: rgba(34, 255, 160, 0.05);
@@ -1012,7 +1012,7 @@
       color: var(--text-secondary);
     }
 
-    /* Founder & Product Journey Timeline */
+    /* Founder & Product Journey Step-by-Step Flow */
     .founder-journey-section {
       margin-top: 50px;
       padding-top: 40px;
@@ -1020,8 +1020,8 @@
     }
     .founder-journey-head {
       text-align: center;
-      max-width: 750px;
-      margin: 0 auto 30px;
+      max-width: 780px;
+      margin: 0 auto 36px;
     }
     .founder-journey-badge {
       display: inline-flex; align-items: center; gap: 7px;
@@ -1035,126 +1035,284 @@
     }
     .founder-journey-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(22px, 3.5vw, 32px);
+      font-size: clamp(22px, 3.5vw, 34px);
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 10px;
+      letter-spacing: -0.5px;
     }
     .founder-journey-sub {
-      font-size: 13.5px; color: var(--text-secondary); line-height: 1.6;
+      font-size: 13.5px; color: var(--text-secondary); line-height: 1.65;
     }
-    .journey-cards-grid {
+
+    /* Vertical Step Flow Pipeline */
+    .journey-steps-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .journey-step-item {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-      gap: 16px;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      position: relative;
     }
-    .journey-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
+    .step-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .step-indicator {
+      width: 58px;
+      height: 58px;
       border-radius: 16px;
-      padding: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: #ffffff;
+      z-index: 2;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .step-indicator .step-num {
+      font-size: 9.5px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+    .step-indicator .step-year {
+      font-size: 13.5px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .journey-step-item:nth-child(1) .step-indicator { border-color: rgba(62, 240, 255, 0.55); color: var(--cyan); background: rgba(62, 240, 255, 0.08); box-shadow: 0 0 20px rgba(62, 240, 255, 0.2); }
+    .journey-step-item:nth-child(2) .step-indicator { border-color: rgba(34, 255, 160, 0.55); color: var(--green); background: rgba(34, 255, 160, 0.08); box-shadow: 0 0 20px rgba(34, 255, 160, 0.2); }
+    .journey-step-item:nth-child(3) .step-indicator { border-color: rgba(245, 158, 11, 0.55); color: #f59e0b; background: rgba(245, 158, 11, 0.08); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+    .journey-step-item:nth-child(4) .step-indicator { border-color: rgba(167, 139, 250, 0.55); color: var(--purple); background: rgba(167, 139, 250, 0.08); box-shadow: 0 0 20px rgba(167, 139, 250, 0.2); }
+    .journey-step-item:nth-child(5) .step-indicator { border-color: rgba(34, 255, 160, 0.6); color: var(--green); background: linear-gradient(135deg, rgba(34, 255, 160, 0.15), rgba(62, 240, 255, 0.1)); box-shadow: 0 0 24px var(--green-glow); }
+
+    .step-track-line {
+      position: absolute;
+      top: 58px;
+      bottom: -24px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
+    }
+    .journey-step-item:last-child .step-track-line {
+      display: none;
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      overflow: hidden;
       transition: all 0.25s ease;
     }
-    .journey-card::before {
+    .step-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%), rgba(167, 139, 250, 0.09), transparent 60%);
+      background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(167, 139, 250, 0.08), transparent 60%);
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .journey-card:hover {
-      border-color: rgba(167, 139, 250, 0.4);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    .step-card:hover {
+      border-color: rgba(167, 139, 250, 0.35);
+      transform: translateX(4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
-    .journey-card:hover::before { opacity: 1; }
-    .journey-year-tag {
-      display: inline-flex; align-items: center; gap: 5px;
+    .step-card:hover::before { opacity: 1; }
+    .step-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .step-tag-pill {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 700;
-      padding: 3px 9px; border-radius: 6px;
-      margin-bottom: 12px;
-      width: fit-content;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
     }
-    .journey-year-tag.y2024 {
-      background: rgba(62, 240, 255, 0.12); color: var(--cyan); border: 1px solid rgba(62, 240, 255, 0.3);
-    }
-    .journey-year-tag.y2025 {
-      background: rgba(34, 255, 160, 0.12); color: var(--green); border: 1px solid rgba(34, 255, 160, 0.3);
-    }
-    .journey-year-tag.y2026 {
-      background: rgba(167, 139, 250, 0.12); color: var(--purple); border: 1px solid rgba(167, 139, 250, 0.3);
-    }
-    .journey-year-tag.ynext {
-      background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-    .journey-title {
+    .step-card-title {
       font-family: 'Syne', sans-serif;
-      font-size: 16.5px;
+      font-size: clamp(17px, 2.5vw, 20px);
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 8px;
       line-height: 1.3;
     }
-    .journey-desc {
-      font-size: 12.8px;
+    .step-card-desc {
+      font-size: 13.5px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 14px;
-      flex-grow: 1;
+      line-height: 1.68;
+      margin-bottom: 16px;
+    }
+    .step-card-desc strong {
+      color: #ffffff;
+    }
+
+    @media (max-width: 680px) {
+      .journey-step-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .step-rail {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .step-track-line { display: none; }
+      .step-card {
+        padding: 18px 20px;
+      }
     }
 
     /* ─── ABOUT ANIMESH MANNA (DEVELOPER SHOWCASE) ── */
     .author-showcase {
-      margin: 36px 0 70px;
+      margin: 40px 0 70px;
       background: linear-gradient(135deg, rgba(62, 240, 255, 0.06), rgba(167, 139, 250, 0.05), rgba(34, 255, 160, 0.04));
       border: 1px solid rgba(62, 240, 255, 0.25);
       border-radius: 22px;
-      padding: clamp(24px, 5vw, 42px) clamp(18px, 4vw, 36px);
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
-      position: relative; overflow: hidden;
+      padding: clamp(28px, 5vw, 44px) clamp(22px, 5vw, 40px);
+      position: relative;
+      overflow: hidden;
     }
     .author-showcase::before {
       content: '';
       position: absolute; right: -50px; bottom: -50px;
-      width: 260px; height: 260px;
+      width: 280px; height: 280px;
       background: radial-gradient(circle, rgba(62, 240, 255, 0.15), transparent 70%);
       pointer-events: none;
     }
     .author-content {
-      max-width: 640px;
       width: 100%;
+      max-width: 100%;
     }
     .author-tag {
       display: inline-flex; align-items: center; gap: 7px;
       font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 10px;
+      color: var(--cyan); margin-bottom: 12px;
     }
     .author-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(22px, 4vw, 34px);
-      font-weight: 800; line-height: 1.2;
-      color: #ffffff; margin-bottom: 12px;
+      font-size: clamp(24px, 4.2vw, 38px);
+      font-weight: 800;
+      line-height: 1.3;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
     }
     .author-desc {
-      font-size: clamp(13.5px, 2vw, 15px); color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px;
+      font-size: clamp(14px, 1.8vw, 15.5px);
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 960px;
     }
+    .author-desc strong {
+      color: #ffffff;
+    }
+
+    /* Founder Web Platforms Strip */
+    .founder-platforms {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .founder-platforms-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--green);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .founder-platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 14px;
+    }
+    .btn-web-platform {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 18px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-web-platform:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .btn-web-platform .plat-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-web-platform .plat-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Social & Developer Profile Links */
     .author-links-grid {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .btn-profile-badge {
       display: inline-flex; align-items: center; gap: 7px;
       background: #03080c;
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 8px 14px;
+      padding: 9px 15px;
       border-radius: 10px;
       text-decoration: none;
       font-size: 12px; font-weight: 600;
@@ -1167,65 +1325,6 @@
       color: var(--cyan);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-    }
-
-    /* Founder Web Platforms Strip */
-    .founder-platforms {
-      margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .founder-platforms-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--green);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .founder-platforms-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-      gap: 10px;
-    }
-    .btn-web-platform {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 10px 14px;
-      text-decoration: none;
-      color: #ffffff;
-      transition: all 0.25s ease;
-    }
-    .btn-web-platform:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--cyan);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-    .btn-web-platform .plat-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 13px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .btn-web-platform .plat-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      color: var(--cyan);
-      display: flex;
-      align-items: center;
-      gap: 3px;
     }
 
     /* ─── FOOTER ────────────────────────────────── */
@@ -1281,14 +1380,10 @@
     @media (max-width: 960px) {
       .wrap { padding: 0 20px; }
       .stores-deck { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-      .author-showcase {
-        flex-direction: column; text-align: center;
-      }
-      .author-links-grid { justify-content: center; }
       .hero-stats {
-        gap: 20px; padding: 14px 22px;
+        gap: 16px; padding: 14px 22px;
       }
-      .nav-store-links .nav-store-btn:not(.google) { display: none; }
+      .nav-store-links .nav-store-btn:not(.google):not(.exp-nav) { display: none; }
     }
 
     @media (max-width: 680px) {
@@ -2123,11 +2218,11 @@
     <section class="experience-section" id="experience">
       <div class="exp-header">
         <div class="exp-badge">
-          8+ Years Engineering Evolution
+          8+ Years Engineering Evolution • Since 2017
         </div>
         <h2 class="exp-title">8+ Years of Work Experience</h2>
         <p class="exp-sub">
-          A continuous engineering trajectory architecting scalable systems — starting from core PHP &amp; relational databases, progressing through enterprise MVC frameworks, modern reactive single-page applications, hybrid mobile apps, full-stack Node.js &amp; MongoDB architectures, to native cross-platform engineering with React Native &amp; Flutter.
+          A continuous engineering trajectory started in 2017 (at age 19) with a first "Hello World" — evolving from core PHP &amp; relational databases, progressing through enterprise MVC frameworks, modern reactive single-page applications, hybrid mobile apps, full-stack Node.js &amp; MongoDB architectures, to native cross-platform engineering with React Native &amp; Flutter.
         </p>
       </div>
 
@@ -2135,7 +2230,7 @@
       <div class="tech-arsenal-wrap">
         <div class="tech-arsenal-title">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          Chronological Technology Progression
+          Chronological Technology Progression (2017 – Present)
         </div>
         <div class="tech-arsenal-list">
           <span class="tech-chip-badge php" title="PHP Backend Development">
@@ -2177,27 +2272,27 @@
       <!-- 6-Phase Evolution Timeline Cards -->
       <div class="timeline-grid">
 
-        <!-- Phase 1: PHP & MySQL -->
+        <!-- Phase 1: PHP & MySQL (2017 Genesis) -->
         <div class="timeline-card">
           <div>
             <div class="timeline-top">
               <span class="timeline-step">Phase 01</span>
-              <span class="timeline-period">Backend Foundations</span>
+              <span class="timeline-period">2017 • Age 19 • Genesis</span>
             </div>
-            <h3 class="timeline-heading">Core PHP &amp; MySQL Engineering</h3>
+            <h3 class="timeline-heading">First "Hello World" &amp; Core PHP/MySQL</h3>
             <div class="timeline-tech-highlight">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              PHP • MySQL • Apache • Relational DBs
+              Hello World (Age 19) • PHP • MySQL • Relational DBs
             </div>
             <p class="timeline-desc">
-              Started software engineering career designing server-side architectures, custom CMS engines, relational database schema models, complex SQL query optimizations, indexing strategies, and secure session management.
+              Wrote the very first line of code ("Hello, World!") in 2017 at 19 years old. Rapidly expanded into server-side scripting, custom CMS engines, relational database schema models, complex SQL query optimizations, indexing strategies, and secure session management.
             </p>
           </div>
           <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">First "Hello World" (2017)</span>
             <span class="timeline-skill-pill">Server-Side Scripting</span>
             <span class="timeline-skill-pill">Database Normalization</span>
             <span class="timeline-skill-pill">SQL Optimization</span>
-            <span class="timeline-skill-pill">Auth &amp; Sessions</span>
           </div>
         </div>
 
@@ -2323,7 +2418,7 @@
 
       </div>
 
-      <!-- Founder & SaaS Growth Journey: 2024 - 2026+ -->
+      <!-- Founder & SaaS Growth Journey: Step-by-Step Flow -->
       <div class="founder-journey-section">
         <div class="founder-journey-head">
           <div class="founder-journey-badge">
@@ -2332,89 +2427,147 @@
           </div>
           <h3 class="founder-journey-title">From First Product to Multi-Platform Ecosystem</h3>
           <p class="founder-journey-sub">
-            The real-world journey of building SaaS platforms, implementing payments, mastering technical SEO, launching multi-platform ecosystems, and relentless engineering research.
+            The real-world step-by-step roadmap of building sustainable SaaS platforms, implementing payments, mastering technical SEO, shipping quality software, and expanding into multi-platform ecosystems.
           </p>
         </div>
 
-        <div class="journey-cards-grid">
+        <div class="journey-steps-timeline">
 
-          <!-- 2024: Genesis of jsonviewer.tools -->
-          <div class="journey-card">
-            <div>
-              <span class="journey-year-tag y2024">2024 • Product Launch</span>
-              <h4 class="journey-title">Genesis of jsonviewer.tools</h4>
-              <p class="journey-desc">
-                Started the founder product journey by building and launching <strong style="color:#ffffff;">jsonviewer.tools</strong> — an interactive graph visualizer and tree parser engineered to transform dense JSON data into intuitive visual diagrams for developers worldwide.
-              </p>
+          <!-- Step 1: 2024 -->
+          <div class="journey-step-item">
+            <div class="step-rail">
+              <div class="step-indicator">
+                <span class="step-num">Step 01</span>
+                <span class="step-year">2024</span>
+              </div>
+              <div class="step-track-line"></div>
             </div>
-            <div class="timeline-skills-wrap">
-              <span class="timeline-skill-pill">Product Inception</span>
-              <span class="timeline-skill-pill">Graph Parsing Engine</span>
-              <span class="timeline-skill-pill">Developer Tooling</span>
+            <div class="step-card">
+              <div>
+                <div class="step-card-top">
+                  <span class="step-tag-pill" style="background:rgba(62,240,255,0.12);color:var(--cyan);border:1px solid rgba(62,240,255,0.3);">2024 • Genesis &amp; Launch</span>
+                </div>
+                <h4 class="step-card-title">Genesis of jsonviewer.tools</h4>
+                <p class="step-card-desc">
+                  Started the founder product journey by architecting and launching <strong style="color:#ffffff;">jsonviewer.tools</strong> — an interactive graph visualizer and tree parser engineered to transform dense JSON data into intuitive visual diagrams for developers worldwide.
+                </p>
+              </div>
+              <div class="timeline-skills-wrap">
+                <span class="timeline-skill-pill">jsonviewer.tools</span>
+                <span class="timeline-skill-pill">Product Inception</span>
+                <span class="timeline-skill-pill">Graph Parsing Engine</span>
+                <span class="timeline-skill-pill">Developer Tooling</span>
+              </div>
             </div>
           </div>
 
-          <!-- 2025: Monetization & Payment Infrastructure -->
-          <div class="journey-card">
-            <div>
-              <span class="journey-year-tag y2025">2025 • Monetization</span>
-              <h4 class="journey-title">Payment Gateways &amp; SaaS Revenue</h4>
-              <p class="journey-desc">
-                Engineered end-to-end payment processing and monetization architecture. Implemented secure payment checkout workflows, subscription lifecycle handling, and automated billing pipelines to build sustainable web products.
-              </p>
+          <!-- Step 2: 2025 -->
+          <div class="journey-step-item">
+            <div class="step-rail">
+              <div class="step-indicator">
+                <span class="step-num">Step 02</span>
+                <span class="step-year">2025</span>
+              </div>
+              <div class="step-track-line"></div>
             </div>
-            <div class="timeline-skills-wrap">
-              <span class="timeline-skill-pill">Payment Gateways</span>
-              <span class="timeline-skill-pill">Subscription Billing</span>
-              <span class="timeline-skill-pill">SaaS Monetization</span>
-            </div>
-          </div>
-
-          <!-- 2025-2026: Mastering SEO -->
-          <div class="journey-card">
-            <div>
-              <span class="journey-year-tag y2025">2025–2026 • Growth</span>
-              <h4 class="journey-title">Overcoming SEO Struggles &amp; Scaling</h4>
-              <p class="journey-desc">
-                Confronted early organic discovery challenges head-on. Mastered programmatic SEO, Core Web Vitals performance, crawl efficiency, metadata structuring, and search intent optimization to drive consistent organic discovery.
-              </p>
-            </div>
-            <div class="timeline-skills-wrap">
-              <span class="timeline-skill-pill">Technical SEO</span>
-              <span class="timeline-skill-pill">Core Web Vitals</span>
-              <span class="timeline-skill-pill">Search Indexing</span>
+            <div class="step-card">
+              <div>
+                <div class="step-card-top">
+                  <span class="step-tag-pill" style="background:rgba(34,255,160,0.12);color:var(--green);border:1px solid rgba(34,255,160,0.3);">2025 • Monetization</span>
+                </div>
+                <h4 class="step-card-title">Payment Gateways &amp; SaaS Revenue Architecture</h4>
+                <p class="step-card-desc">
+                  Engineered end-to-end payment processing and monetization architecture. Implemented secure payment checkout workflows, subscription lifecycle handling, and automated billing pipelines to turn web tools into sustainable digital businesses.
+                </p>
+              </div>
+              <div class="timeline-skills-wrap">
+                <span class="timeline-skill-pill">Payment Gateways</span>
+                <span class="timeline-skill-pill">Subscription Billing</span>
+                <span class="timeline-skill-pill">SaaS Monetization</span>
+                <span class="timeline-skill-pill">Checkout Workflows</span>
+              </div>
             </div>
           </div>
 
-          <!-- 2026: Multi-Product Expansion -->
-          <div class="journey-card">
-            <div>
-              <span class="journey-year-tag y2026">2026 • Ecosystem Scale</span>
-              <h4 class="journey-title">MongoLens, YourOrgTree &amp; 20+ Apps</h4>
-              <p class="journey-desc">
-                Rapidly scaled into a multi-platform powerhouse: engineered and launched <strong style="color:#ffffff;">mongolens.com</strong>, <strong style="color:#ffffff;">yourorgtree.com</strong>, and published 20+ applications across Google Play, Apple App Store, and Microsoft Store.
-              </p>
+          <!-- Step 3: 2025-2026 -->
+          <div class="journey-step-item">
+            <div class="step-rail">
+              <div class="step-indicator">
+                <span class="step-num">Step 03</span>
+                <span class="step-year">'25-26</span>
+              </div>
+              <div class="step-track-line"></div>
             </div>
-            <div class="timeline-skills-wrap">
-              <span class="timeline-skill-pill">mongolens.com</span>
-              <span class="timeline-skill-pill">yourorgtree.com</span>
-              <span class="timeline-skill-pill">20+ Store Apps</span>
+            <div class="step-card">
+              <div>
+                <div class="step-card-top">
+                  <span class="step-tag-pill" style="background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);">2025–2026 • SEO &amp; Quality</span>
+                </div>
+                <h4 class="step-card-title">Mastering SEO &amp; Building Quality Products for High Audiences</h4>
+                <p class="step-card-desc">
+                  Confronted early organic discovery hurdles head-on. Rather than building throwaway tools or spamming garbage, I committed to building high-quality, durable software products that maintain a high, loyal global audience. Deeply mastered programmatic SEO, Core Web Vitals performance, crawl efficiency, metadata structuring, and search indexing to drive organic reach.
+                </p>
+              </div>
+              <div class="timeline-skills-wrap">
+                <span class="timeline-skill-pill" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">Quality-First Craft</span>
+                <span class="timeline-skill-pill" style="color:var(--green);border-color:rgba(34,255,160,0.3);">High Audience Retention</span>
+                <span class="timeline-skill-pill">Technical SEO</span>
+                <span class="timeline-skill-pill">Core Web Vitals</span>
+              </div>
             </div>
           </div>
 
-          <!-- Future Vision & Next Plan -->
-          <div class="journey-card" style="border-color:rgba(34,255,160,0.35);background:linear-gradient(135deg,rgba(34,255,160,0.04),rgba(62,240,255,0.03));">
-            <div>
-              <span class="journey-year-tag ynext" style="background:rgba(34,255,160,0.15);color:var(--green);border-color:rgba(34,255,160,0.4);">Next Plan • The Future</span>
-              <h4 class="journey-title">Advanced Research &amp; Real-Life Coding</h4>
-              <p class="journey-desc">
-                Pushing the frontiers through deep engineering research, advanced systems architecture, high-throughput real-life coding implementations, and delivering world-class, audience-first interactive digital experiences.
-              </p>
+          <!-- Step 4: 2026 -->
+          <div class="journey-step-item">
+            <div class="step-rail">
+              <div class="step-indicator">
+                <span class="step-num">Step 04</span>
+                <span class="step-year">2026</span>
+              </div>
+              <div class="step-track-line"></div>
             </div>
-            <div class="timeline-skills-wrap">
-              <span class="timeline-skill-pill" style="color:var(--green);border-color:rgba(34,255,160,0.3);">Advanced Systems R&amp;D</span>
-              <span class="timeline-skill-pill" style="color:var(--cyan);border-color:rgba(62,240,255,0.3);">Real-Life Coding Craft</span>
-              <span class="timeline-skill-pill">Audience Experience</span>
+            <div class="step-card">
+              <div>
+                <div class="step-card-top">
+                  <span class="step-tag-pill" style="background:rgba(167,139,250,0.12);color:var(--purple);border:1px solid rgba(167,139,250,0.3);">2026 • Ecosystem Scale</span>
+                </div>
+                <h4 class="step-card-title">Ecosystem Expansion: MongoLens, YourOrgTree &amp; 20+ Apps</h4>
+                <p class="step-card-desc">
+                  Rapidly scaled into a multi-platform powerhouse: engineered and launched <strong style="color:#ffffff;">mongolens.com</strong>, <strong style="color:#ffffff;">yourorgtree.com</strong>, and published <strong style="color:#ffffff;">20+ multi-platform applications</strong> across Google Play, Apple App Store, and Microsoft Store (Android, iOS, macOS &amp; Windows).
+                </p>
+              </div>
+              <div class="timeline-skills-wrap">
+                <span class="timeline-skill-pill">mongolens.com</span>
+                <span class="timeline-skill-pill">yourorgtree.com</span>
+                <span class="timeline-skill-pill">20+ Multi-Platform Apps</span>
+                <span class="timeline-skill-pill">Mobile &amp; Desktop Suites</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Next Plan -->
+          <div class="journey-step-item">
+            <div class="step-rail">
+              <div class="step-indicator">
+                <span class="step-num">Future</span>
+                <span class="step-year">Next</span>
+              </div>
+            </div>
+            <div class="step-card" style="border-color:rgba(34,255,160,0.35);background:linear-gradient(135deg,rgba(34,255,160,0.04),rgba(62,240,255,0.03));">
+              <div>
+                <div class="step-card-top">
+                  <span class="step-tag-pill" style="background:rgba(34,255,160,0.15);color:var(--green);border:1px solid rgba(34,255,160,0.4);">Next Plan • The Future Vision</span>
+                </div>
+                <h4 class="step-card-title">Advanced Systems R&amp;D &amp; Real-Life Coding Craft</h4>
+                <p class="step-card-desc">
+                  Pushing the frontiers through deep engineering research, advanced systems architecture, high-throughput real-life production coding, and delivering world-class, audience-first interactive digital experiences.
+                </p>
+              </div>
+              <div class="timeline-skills-wrap">
+                <span class="timeline-skill-pill" style="color:var(--green);border-color:rgba(34,255,160,0.3);">Advanced Systems R&amp;D</span>
+                <span class="timeline-skill-pill" style="color:var(--cyan);border-color:rgba(62,240,255,0.3);">Real-Life Coding Craft</span>
+                <span class="timeline-skill-pill">Audience-First UX</span>
+              </div>
             </div>
           </div>
 
@@ -2431,7 +2584,7 @@
         </div>
         <h2 class="author-title">Created &amp; Managed by Animesh Manna</h2>
         <p class="author-desc">
-          Founder of <a href="https://jsonviewer.tools" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:600;">jsonviewer.tools</a>, <a href="https://yourorgtree.com" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-weight:600;">yourorgtree.com</a>, and <a href="https://mongolens.com" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:600;">mongolens.com</a>. Passionate software engineer with 8+ years of expertise spanning backend architecture, full-stack web platforms, and multi-platform native engineering across Android, iOS, macOS, Windows, and Web. Focused on sleek craft, zero latency, and beautiful interactive UX.
+          Started his programming journey in <strong style="color:#ffffff;">2017 at 19 years old</strong> with a first "Hello World". Today, he is the founder of <a href="https://jsonviewer.tools" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:600;">jsonviewer.tools</a>, <a href="https://yourorgtree.com" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-weight:600;">yourorgtree.com</a>, and <a href="https://mongolens.com" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:600;">mongolens.com</a>. Passionate software engineer with 8+ years of expertise spanning backend architecture, full-stack web platforms, and multi-platform native engineering across Android, iOS, macOS, Windows, and Web. Focused on sleek craft, zero latency, and beautiful interactive UX.
         </p>
 
         <!-- Founder's Web Platforms -->
@@ -2554,7 +2707,7 @@
     }
 
     // ── 2. Card Glow Coordinates on Mouse Move
-    const allCards = document.querySelectorAll('.card, .store-card, .timeline-card, .journey-card');
+    const allCards = document.querySelectorAll('.card, .store-card, .timeline-card, .step-card, .journey-card');
     allCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
