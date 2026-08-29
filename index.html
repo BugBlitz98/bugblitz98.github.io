@@ -78,11 +78,11 @@
         transform: translate(-50%, -50%);
         transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
       }
-      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .filter-chip:hover) #cursor {
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .tech-chip-badge:hover, .filter-chip:hover) #cursor {
         width: 14px; height: 14px;
         background: var(--green);
       }
-      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .filter-chip:hover) #cursor-ring {
+      body:has(a:hover, button:hover, .card:hover, .store-card:hover, .timeline-card:hover, .tech-chip-badge:hover, .filter-chip:hover) #cursor-ring {
         width: 50px; height: 50px;
         border-color: rgba(34, 255, 160, 0.55);
         background: rgba(34, 255, 160, 0.05);
@@ -211,6 +211,18 @@
     .nav-store-btn.google:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow); }
     .nav-store-btn.apple:hover { border-color: #ffffff; color: #ffffff; box-shadow: 0 0 12px rgba(255,255,255,0.2); }
     .nav-store-btn.ms:hover { border-color: var(--microsoft); color: var(--microsoft); box-shadow: 0 0 12px rgba(0,164,239,0.25); }
+    .nav-store-btn.exp-nav {
+      background: rgba(62, 240, 255, 0.08);
+      border-color: rgba(62, 240, 255, 0.35);
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .nav-store-btn.exp-nav:hover {
+      background: rgba(62, 240, 255, 0.18);
+      border-color: var(--cyan);
+      color: #ffffff;
+      box-shadow: 0 0 14px var(--cyan-glow);
+    }
 
     /* ─── HERO SECTION ──────────────────────────── */
     .hero {
@@ -776,6 +788,219 @@
     .empty-title { font-family: 'Syne', sans-serif; font-size: 19px; color: #fff; margin-bottom: 6px; }
     .empty-desc { font-size: 13.5px; color: var(--muted); }
 
+    /* ─── 8+ YEARS WORK EXPERIENCE & TECH EVOLUTION ─ */
+    .experience-section {
+      margin: 60px 0 40px;
+      position: relative;
+    }
+    .exp-header {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 36px;
+    }
+    .exp-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--green);
+      background: rgba(34, 255, 160, 0.08);
+      border: 1px solid rgba(34, 255, 160, 0.28);
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 14px;
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+    .exp-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 4.5vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .exp-sub {
+      font-size: clamp(14px, 2vw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Tech Arsenal Horizontal Bar */
+    .tech-arsenal-wrap {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 32px;
+    }
+    .tech-arsenal-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tech-arsenal-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tech-chip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      padding: 7px 13px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #ffffff;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .tech-chip-badge:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .tech-chip-badge .chip-icon {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tech-chip-badge.php { border-color: rgba(136, 146, 190, 0.4); }
+    .tech-chip-badge.php .chip-icon { background: #8892be; box-shadow: 0 0 8px #8892be; }
+    .tech-chip-badge.mysql { border-color: rgba(0, 117, 143, 0.45); }
+    .tech-chip-badge.mysql .chip-icon { background: #00758f; box-shadow: 0 0 8px #00758f; }
+    .tech-chip-badge.codeigniter { border-color: rgba(238, 67, 38, 0.45); }
+    .tech-chip-badge.codeigniter .chip-icon { background: #ee4326; box-shadow: 0 0 8px #ee4326; }
+    .tech-chip-badge.laravel { border-color: rgba(255, 45, 32, 0.45); }
+    .tech-chip-badge.laravel .chip-icon { background: #ff2d20; box-shadow: 0 0 8px #ff2d20; }
+    .tech-chip-badge.angular { border-color: rgba(221, 0, 49, 0.45); }
+    .tech-chip-badge.angular .chip-icon { background: #dd0031; box-shadow: 0 0 8px #dd0031; }
+    .tech-chip-badge.react { border-color: rgba(97, 218, 251, 0.45); }
+    .tech-chip-badge.react .chip-icon { background: #61dafb; box-shadow: 0 0 8px #61dafb; }
+    .tech-chip-badge.ionic { border-color: rgba(56, 128, 255, 0.45); }
+    .tech-chip-badge.ionic .chip-icon { background: #3880ff; box-shadow: 0 0 8px #3880ff; }
+    .tech-chip-badge.mongodb { border-color: rgba(71, 162, 72, 0.45); }
+    .tech-chip-badge.mongodb .chip-icon { background: #47a248; box-shadow: 0 0 8px #47a248; }
+    .tech-chip-badge.nodejs { border-color: rgba(104, 160, 99, 0.45); }
+    .tech-chip-badge.nodejs .chip-icon { background: #68a063; box-shadow: 0 0 8px #68a063; }
+    .tech-chip-badge.reactnative { border-color: rgba(97, 218, 251, 0.45); }
+    .tech-chip-badge.reactnative .chip-icon { background: #61dafb; box-shadow: 0 0 8px #61dafb; }
+    .tech-chip-badge.flutter { border-color: rgba(84, 197, 248, 0.5); }
+    .tech-chip-badge.flutter .chip-icon { background: #54c5f8; box-shadow: 0 0 8px #54c5f8; }
+
+    /* Timeline Roadmap Grid */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 20px;
+    }
+    .timeline-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+    }
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(62, 240, 255, 0.08), transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .timeline-card:hover {
+      border-color: rgba(62, 240, 255, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    }
+    .timeline-card:hover::before { opacity: 1; }
+    .timeline-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+    .timeline-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(62, 240, 255, 0.08);
+      border: 1px solid rgba(62, 240, 255, 0.25);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .timeline-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .timeline-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 18.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .timeline-tech-highlight {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .timeline-skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .timeline-skill-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+    }
+
     /* ─── ABOUT ANIMESH MANNA (DEVELOPER SHOWCASE) ── */
     .author-showcase {
       margin: 36px 0 70px;
@@ -956,6 +1181,10 @@
         </div>
       </a>
       <div class="nav-store-links">
+        <a href="#experience" class="nav-store-btn exp-nav" title="8+ Years Work Experience & Technical Evolution">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          8+ Yrs Exp
+        </a>
         <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="nav-store-btn google" title="Google Play Store Profile">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3.609 1.814L13.793 12 3.61 22.186c-.337-.308-.553-.787-.553-1.341V3.155c0-.554.216-1.033.552-1.341zM15.207 13.414l2.766 2.766-12.78 7.379 10.014-10.145zm0-2.828L5.193.441l12.78 7.379-2.766 2.766zm1.414 1.414l3.535-2.04c.834-.482.834-1.266 0-1.748L16.621 12l3.535 2.04c.834.482.834 1.266 0 1.748l-3.535-3.788z"/></svg>
           Google Play
@@ -975,13 +1204,13 @@
   <main class="wrap">
     <!-- HERO SECTION -->
     <section class="hero">
-      <div class="hero-badge">Multi-Platform Ecosystem • Android • iOS • macOS • Windows</div>
+      <div class="hero-badge">8+ Years Experience • Multi-Platform Ecosystem • Android • iOS • macOS • Windows</div>
       <h1>
         <span class="text-white">Smart visual tools &amp;</span>
         <span class="text-gradient">delightful apps.</span>
       </h1>
       <p class="hero-sub">
-        Architected, developed, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a>. Interactive graph visualizers, developer diagnostics, database clients, productivity suites, and games published worldwide.
+        Architected, developed, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a> with 8+ years of engineering craft. Interactive graph visualizers, developer diagnostics, database clients, productivity suites, and games published worldwide.
       </p>
 
       <!-- 3 ECOSYSTEM HUBS (STORES DECK) -->
@@ -1044,6 +1273,11 @@
       <!-- STATS BAR -->
       <div class="hero-stats">
         <div class="stat">
+          <div class="stat-num">8+ Yrs</div>
+          <div class="stat-label">Work Experience</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
           <div class="stat-num" id="hero-apps-count">20+</div>
           <div class="stat-label">Total Applications</div>
         </div>
@@ -1054,8 +1288,8 @@
         </div>
         <div class="stat-div"></div>
         <div class="stat">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Animesh Manna</div>
+          <div class="stat-num">Full-Stack</div>
+          <div class="stat-label">Mobile &amp; Web</div>
         </div>
       </div>
     </section>
@@ -1696,16 +1930,221 @@
       </div>
     </section>
 
+    <!-- 8+ YEARS WORK EXPERIENCE & TECHNICAL EVOLUTION -->
+    <section class="experience-section" id="experience">
+      <div class="exp-header">
+        <div class="exp-badge">
+          8+ Years Engineering Evolution
+        </div>
+        <h2 class="exp-title">8+ Years of Work Experience</h2>
+        <p class="exp-sub">
+          A continuous engineering trajectory architecting scalable systems — starting from core PHP &amp; relational databases, progressing through enterprise MVC frameworks, modern reactive single-page applications, hybrid mobile apps, full-stack Node.js &amp; MongoDB architectures, to native cross-platform engineering with React Native &amp; Flutter.
+        </p>
+      </div>
+
+      <!-- Core Tech Arsenal Bar -->
+      <div class="tech-arsenal-wrap">
+        <div class="tech-arsenal-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Chronological Technology Progression
+        </div>
+        <div class="tech-arsenal-list">
+          <span class="tech-chip-badge php" title="PHP Backend Development">
+            <span class="chip-icon"></span> PHP
+          </span>
+          <span class="tech-chip-badge mysql" title="MySQL Relational Database">
+            <span class="chip-icon"></span> MySQL
+          </span>
+          <span class="tech-chip-badge codeigniter" title="CodeIgniter MVC Framework">
+            <span class="chip-icon"></span> CodeIgniter
+          </span>
+          <span class="tech-chip-badge laravel" title="Laravel Web Framework">
+            <span class="chip-icon"></span> Laravel
+          </span>
+          <span class="tech-chip-badge angular" title="Angular Framework">
+            <span class="chip-icon"></span> Angular
+          </span>
+          <span class="tech-chip-badge react" title="React UI Library">
+            <span class="chip-icon"></span> React
+          </span>
+          <span class="tech-chip-badge ionic" title="Ionic Hybrid Framework">
+            <span class="chip-icon"></span> Ionic
+          </span>
+          <span class="tech-chip-badge mongodb" title="MongoDB NoSQL Database">
+            <span class="chip-icon"></span> MongoDB
+          </span>
+          <span class="tech-chip-badge nodejs" title="Node.js & Express.js Backend">
+            <span class="chip-icon"></span> Node.js
+          </span>
+          <span class="tech-chip-badge reactnative" title="React Native Mobile">
+            <span class="chip-icon"></span> React Native
+          </span>
+          <span class="tech-chip-badge flutter" title="Flutter Multi-Platform">
+            <span class="chip-icon"></span> Flutter
+          </span>
+        </div>
+      </div>
+
+      <!-- 6-Phase Evolution Timeline Cards -->
+      <div class="timeline-grid">
+
+        <!-- Phase 1: PHP & MySQL -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 01</span>
+              <span class="timeline-period">Backend Foundations</span>
+            </div>
+            <h3 class="timeline-heading">Core PHP &amp; MySQL Engineering</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              PHP • MySQL • Apache • Relational DBs
+            </div>
+            <p class="timeline-desc">
+              Started software engineering career designing server-side architectures, custom CMS engines, relational database schema models, complex SQL query optimizations, indexing strategies, and secure session management.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">Server-Side Scripting</span>
+            <span class="timeline-skill-pill">Database Normalization</span>
+            <span class="timeline-skill-pill">SQL Optimization</span>
+            <span class="timeline-skill-pill">Auth &amp; Sessions</span>
+          </div>
+        </div>
+
+        <!-- Phase 2: CodeIgniter & Laravel -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 02</span>
+              <span class="timeline-period">Structured MVC</span>
+            </div>
+            <h3 class="timeline-heading">Enterprise MVC &amp; REST APIs</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              CodeIgniter • Laravel • Eloquent ORM
+            </div>
+            <p class="timeline-desc">
+              Progressed to scalable MVC architectural patterns, architecting robust RESTful API endpoints, middleware pipelines, Eloquent ORM relationship graphs, service layers, and enterprise web platforms with CodeIgniter and Laravel.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">MVC Patterns</span>
+            <span class="timeline-skill-pill">RESTful API Design</span>
+            <span class="timeline-skill-pill">Eloquent ORM</span>
+            <span class="timeline-skill-pill">Middleware Architecture</span>
+          </div>
+        </div>
+
+        <!-- Phase 3: Angular & React -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 03</span>
+              <span class="timeline-period">Modern Frontend</span>
+            </div>
+            <h3 class="timeline-heading">Single Page Apps (SPAs) &amp; Reactive UI</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Angular • React • TypeScript • Redux / RxJS
+            </div>
+            <p class="timeline-desc">
+              Transitioned to modern component-driven frontend architecture. Built reactive, high-performance SPAs with TypeScript, complex client-side state management (RxJS, Redux, Context API, Hooks), and fluid interactive interfaces.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">Component-Driven UI</span>
+            <span class="timeline-skill-pill">State Management</span>
+            <span class="timeline-skill-pill">TypeScript</span>
+            <span class="timeline-skill-pill">SPA Optimization</span>
+          </div>
+        </div>
+
+        <!-- Phase 4: Ionic -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 04</span>
+              <span class="timeline-period">Hybrid Mobile</span>
+            </div>
+            <h3 class="timeline-heading">Hybrid Cross-Platform Mobile Apps</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Ionic Framework • Cordova • Capacitor
+            </div>
+            <p class="timeline-desc">
+              Expanded frontend mastery to mobile ecosystems with Ionic, wrapping unified web apps into native iOS &amp; Android containers, integrating native device APIs (camera, geolocation, storage, push notifications), and PWAs.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">Hybrid Mobile Development</span>
+            <span class="timeline-skill-pill">Capacitor Plugins</span>
+            <span class="timeline-skill-pill">Device API Bridges</span>
+            <span class="timeline-skill-pill">Cross-Platform UX</span>
+          </div>
+        </div>
+
+        <!-- Phase 5: Fullstack Node.js & MongoDB -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 05</span>
+              <span class="timeline-period">Full-Stack Ecosystems</span>
+            </div>
+            <h3 class="timeline-heading">Full-Stack Node.js &amp; MongoDB</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Node.js • Express • MongoDB • MERN/MEAN
+            </div>
+            <p class="timeline-desc">
+              Engineered end-to-end full-stack architectures with Node.js and MongoDB. Designed high-concurrency event-driven microservices, NoSQL aggregation pipelines, real-time WebSocket communication, and JWT-authenticated systems.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">Node.js Microservices</span>
+            <span class="timeline-skill-pill">MongoDB Aggregations</span>
+            <span class="timeline-skill-pill">NoSQL Schema Design</span>
+            <span class="timeline-skill-pill">Real-Time WebSockets</span>
+          </div>
+        </div>
+
+        <!-- Phase 6: React Native & Flutter -->
+        <div class="timeline-card">
+          <div>
+            <div class="timeline-top">
+              <span class="timeline-step">Phase 06</span>
+              <span class="timeline-period">Multi-Platform Native</span>
+            </div>
+            <h3 class="timeline-heading">React Native &amp; Flutter Ecosystems</h3>
+            <div class="timeline-tech-highlight">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Flutter • Dart • React Native • iOS • Android • Desktop
+            </div>
+            <p class="timeline-desc">
+              Architecting and publishing 20+ applications across Google Play, Apple App Store, and Microsoft Store. Delivering 60fps graph visualizers (JSON/XML/YAML), 3D GLB engines, infinite mindmap canvases, and developer tools.
+            </p>
+          </div>
+          <div class="timeline-skills-wrap">
+            <span class="timeline-skill-pill">Flutter &amp; Dart</span>
+            <span class="timeline-skill-pill">React Native</span>
+            <span class="timeline-skill-pill">Multi-Platform (Mobile &amp; Desktop)</span>
+            <span class="timeline-skill-pill">App Store Publishing</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- DEVELOPER PROFILE SHOWCASE: ANIMESH MANNA -->
     <section class="author-showcase" id="author">
       <div class="author-content">
         <div class="author-tag">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          Sole Creator &amp; Maintainer
+          Sole Creator &amp; Maintainer • 8+ Years Experience
         </div>
         <h2 class="author-title">Created &amp; Managed by Animesh Manna</h2>
         <p class="author-desc">
-          Passionate software engineer crafting developer tooling, visual data representations, productivity software, and casual games across Android, Apple (iOS &amp; macOS), and Windows. Focused on sleek craft, zero latency, and beautiful interactive UX.
+          Passionate software engineer with 8+ years of expertise spanning backend architecture, full-stack systems, and multi-platform native engineering across Android, Apple (iOS &amp; macOS), and Windows. Focused on sleek craft, zero latency, and beautiful interactive UX.
         </p>
         <div class="author-links-grid">
           <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="btn-profile-badge" style="border-color:rgba(62,240,255,0.35);">
@@ -1745,6 +2184,7 @@
         <div class="footer-desc">Crafted &amp; Engineered by Animesh Manna • Available across Android, iOS, Mac &amp; Windows.</div>
       </div>
       <div class="footer-links">
+        <a href="#experience" class="footer-link">Experience</a>
         <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="footer-link">Google Play</a>
         <a href="https://apps.apple.com/us/developer/animesh-manna/id6789635189" target="_blank" rel="noopener" class="footer-link">Apple App Store</a>
         <a href="https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN" target="_blank" rel="noopener" class="footer-link">Microsoft Store</a>
@@ -1786,7 +2226,7 @@
     }
 
     // ── 2. Card Glow Coordinates on Mouse Move
-    const allCards = document.querySelectorAll('.card, .store-card');
+    const allCards = document.querySelectorAll('.card, .store-card, .timeline-card');
     allCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
