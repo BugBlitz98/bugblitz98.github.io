@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Visuo Labs</title>
+  <meta name="description" content="Privacy Policy for Visuo Labs applications, websites, and extensions created by Animesh Manna." />
+  <meta name="author" content="Animesh Manna" />
+  <meta name="theme-color" content="#050709" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050709;
+      --bg-card: rgba(13, 17, 24, 0.78);
+      --surface: rgba(255, 255, 255, 0.045);
+      --border: rgba(255, 255, 255, 0.09);
+      --lime: #ccff00;
+      --cyan: #3ef0ff;
+      --green: #22ffa0;
+      --text: #fbfbf7;
+      --text-secondary: #a2a9b4;
+      --muted: #68707c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(204, 255, 0, 0.08), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(62, 240, 255, 0.07), transparent 26%),
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: auto, auto, 58px 58px, 58px 58px;
+      z-index: 0;
+    }
+    .wrap {
+      width: min(100% - 32px, 1020px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(5, 7, 9, 0.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+      color: #050709;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+    }
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .brand-sub { color: var(--text-secondary); font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav-link:hover { color: var(--lime); border-color: rgba(204, 255, 0, 0.35); }
+    main { padding: 64px 0 80px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      border: 1px solid rgba(204, 255, 0, 0.28);
+      background: rgba(204, 255, 0, 0.08);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+    .lead {
+      color: var(--text-secondary);
+      max-width: 780px;
+      font-size: 17px;
+      margin-bottom: 34px;
+    }
+    .policy-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 92px;
+      border: 1px solid var(--border);
+      background: rgba(13, 17, 24, 0.62);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .toc-title {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .toc a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 0;
+    }
+    .toc a:hover { color: var(--lime); }
+    .content {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: clamp(22px, 4vw, 42px);
+    }
+    section + section {
+      margin-top: 32px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    p, li { color: var(--text-secondary); font-size: 15px; }
+    ul { margin: 12px 0 0 20px; }
+    li + li { margin-top: 8px; }
+    strong { color: var(--text); }
+    a { color: var(--cyan); }
+    .notice {
+      border: 1px solid rgba(34, 255, 160, 0.24);
+      background: rgba(34, 255, 160, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 28px;
+      color: var(--text-secondary);
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; }
+    .footer-links a:hover { color: var(--lime); }
+    @media (max-width: 800px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .nav-links { justify-content: flex-start; }
+      .policy-shell { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      main { padding-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">VL</span>
+        <span class="brand-title">Visuo Labs <span class="brand-sub">Apps by Animesh Manna</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Policy navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#apps" class="nav-link">Apps</a>
+        <a href="terms.html" class="nav-link">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="eyebrow">PRIVACY POLICY • LAST UPDATED AUGUST 30, 2026</div>
+    <h1>Privacy Policy</h1>
+    <p class="lead">
+      This Privacy Policy explains how Visuo Labs and Animesh Manna handle information across websites, mobile apps, desktop apps, browser extensions, and editor extensions.
+    </p>
+
+    <div class="policy-shell">
+      <aside class="toc" aria-label="Privacy sections">
+        <div class="toc-title">Sections</div>
+        <a href="#scope">Scope</a>
+        <a href="#data">Information We Handle</a>
+        <a href="#usage">How We Use Information</a>
+        <a href="#storage">Local Storage</a>
+        <a href="#third-parties">Third Parties</a>
+        <a href="#children">Children</a>
+        <a href="#rights">Your Choices</a>
+        <a href="#contact">Contact</a>
+      </aside>
+
+      <article class="content">
+        <div class="notice">
+          Many Visuo Labs tools are designed for local-first utility. Where an app processes developer content such as JSON, XML, YAML, diagrams, notes, or documents locally, that content stays on your device unless you choose to export, share, sync, or submit it through a connected service.
+        </div>
+
+        <section id="scope">
+          <h2>1. Scope</h2>
+          <p>
+            This policy applies to Visuo Labs websites, products, apps, Chrome extensions, VS Code-compatible extensions, and related support channels that link to this page. Store listings or individual products may include extra privacy notes when a specific platform requires them.
+          </p>
+        </section>
+
+        <section id="data">
+          <h2>2. Information We Handle</h2>
+          <p>Depending on the product and how you use it, we may handle:</p>
+          <ul>
+            <li><strong>Information you provide:</strong> support emails, feedback, bug reports, and information included in collaboration inquiries.</li>
+            <li><strong>App content:</strong> files, JSON payloads, notes, charts, diagrams, or other material you open or create inside a product.</li>
+            <li><strong>Technical data:</strong> device type, browser type, app version, operating system, diagnostics, crash reports, and basic performance data.</li>
+            <li><strong>Store and payment data:</strong> purchase, subscription, or install status handled by platforms such as Google Play, Apple App Store, Microsoft Store, Chrome Web Store, Open VSX, or payment providers.</li>
+          </ul>
+        </section>
+
+        <section id="usage">
+          <h2>3. How We Use Information</h2>
+          <p>We use information to operate, improve, secure, and support the products. This includes responding to support requests, fixing bugs, understanding reliability issues, improving user experience, preventing abuse, and complying with applicable platform or legal requirements.</p>
+        </section>
+
+        <section id="storage">
+          <h2>4. Local Storage and User Content</h2>
+          <p>
+            Several tools store data locally on your device or in your browser storage so the app can remember preferences, recent work, drafts, or offline content. You can usually remove this data by clearing app storage, browser storage, uninstalling the app, or using in-app delete/export controls where available.
+          </p>
+        </section>
+
+        <section id="third-parties">
+          <h2>5. Third-Party Services</h2>
+          <p>
+            Products may rely on third-party platforms for hosting, analytics, crash reporting, app distribution, payments, or customer support. These providers process data under their own policies. Examples may include app stores, browser extension stores, hosting providers, analytics providers, and payment processors.
+          </p>
+        </section>
+
+        <section id="children">
+          <h2>6. Children</h2>
+          <p>
+            Visuo Labs products are not directed to children under 13. If you believe a child has provided personal information through a support or contact channel, please contact us so we can review and delete it where appropriate.
+          </p>
+        </section>
+
+        <section id="rights">
+          <h2>7. Your Choices</h2>
+          <p>
+            You may request access, correction, or deletion of personal information you have provided directly to us. You can also manage app permissions from your device, browser, editor, or store account settings. Some data, such as transaction records, may be retained by platform providers according to their rules.
+          </p>
+        </section>
+
+        <section id="changes">
+          <h2>8. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy as products, platforms, or legal requirements change. The latest version will be posted on this page with an updated date.
+          </p>
+        </section>
+
+        <section id="contact">
+          <h2>9. Contact</h2>
+          <p>
+            For privacy questions or requests, contact <a href="mailto:bugblitz.dev@gmail.com">bugblitz.dev@gmail.com</a>.
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Visuo Labs • Animesh Manna</span>
+      <span class="footer-links">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="mailto:bugblitz.dev@gmail.com">Contact</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>

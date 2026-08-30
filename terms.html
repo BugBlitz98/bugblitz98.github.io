@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Visuo Labs</title>
+  <meta name="description" content="Terms of Service for Visuo Labs applications, websites, and extensions created by Animesh Manna." />
+  <meta name="author" content="Animesh Manna" />
+  <meta name="theme-color" content="#050709" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050709;
+      --bg-card: rgba(13, 17, 24, 0.78);
+      --surface: rgba(255, 255, 255, 0.045);
+      --border: rgba(255, 255, 255, 0.09);
+      --lime: #ccff00;
+      --cyan: #3ef0ff;
+      --green: #22ffa0;
+      --text: #fbfbf7;
+      --text-secondary: #a2a9b4;
+      --muted: #68707c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(62, 240, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(204, 255, 0, 0.07), transparent 26%),
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: auto, auto, 58px 58px, 58px 58px;
+      z-index: 0;
+    }
+    .wrap {
+      width: min(100% - 32px, 1020px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(5, 7, 9, 0.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+      color: #050709;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+    }
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .brand-sub { color: var(--text-secondary); font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav-link:hover { color: var(--lime); border-color: rgba(204, 255, 0, 0.35); }
+    main { padding: 64px 0 80px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      border: 1px solid rgba(204, 255, 0, 0.28);
+      background: rgba(204, 255, 0, 0.08);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+    .lead {
+      color: var(--text-secondary);
+      max-width: 780px;
+      font-size: 17px;
+      margin-bottom: 34px;
+    }
+    .policy-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 92px;
+      border: 1px solid var(--border);
+      background: rgba(13, 17, 24, 0.62);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .toc-title {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .toc a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 0;
+    }
+    .toc a:hover { color: var(--lime); }
+    .content {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: clamp(22px, 4vw, 42px);
+    }
+    section + section {
+      margin-top: 32px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    p, li { color: var(--text-secondary); font-size: 15px; }
+    ul { margin: 12px 0 0 20px; }
+    li + li { margin-top: 8px; }
+    strong { color: var(--text); }
+    a { color: var(--cyan); }
+    .notice {
+      border: 1px solid rgba(62, 240, 255, 0.24);
+      background: rgba(62, 240, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 28px;
+      color: var(--text-secondary);
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; }
+    .footer-links a:hover { color: var(--lime); }
+    @media (max-width: 800px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .nav-links { justify-content: flex-start; }
+      .policy-shell { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      main { padding-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">VL</span>
+        <span class="brand-title">Visuo Labs <span class="brand-sub">Apps by Animesh Manna</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Policy navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#apps" class="nav-link">Apps</a>
+        <a href="privacy.html" class="nav-link">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="eyebrow">TERMS OF SERVICE • LAST UPDATED AUGUST 30, 2026</div>
+    <h1>Terms of Service</h1>
+    <p class="lead">
+      These Terms govern your access to and use of Visuo Labs websites, apps, browser extensions, editor extensions, and related services created by Animesh Manna.
+    </p>
+
+    <div class="policy-shell">
+      <aside class="toc" aria-label="Terms sections">
+        <div class="toc-title">Sections</div>
+        <a href="#acceptance">Acceptance</a>
+        <a href="#use">Use of Products</a>
+        <a href="#accounts">Stores and Purchases</a>
+        <a href="#content">Your Content</a>
+        <a href="#ownership">Ownership</a>
+        <a href="#availability">Availability</a>
+        <a href="#disclaimers">Disclaimers</a>
+        <a href="#contact">Contact</a>
+      </aside>
+
+      <article class="content">
+        <div class="notice">
+          These terms are written for practical clarity. Some app stores, extension marketplaces, payment providers, or platforms may apply additional terms when you install, purchase, subscribe to, or use a Visuo Labs product through them.
+        </div>
+
+        <section id="acceptance">
+          <h2>1. Acceptance of Terms</h2>
+          <p>
+            By accessing or using Visuo Labs products, you agree to these Terms. If you do not agree, do not use the products. “Visuo Labs,” “we,” “us,” and “our” refer to the products and services created and maintained by Animesh Manna.
+          </p>
+        </section>
+
+        <section id="use">
+          <h2>2. Use of Products</h2>
+          <p>You agree to use the products only for lawful and responsible purposes. You must not:</p>
+          <ul>
+            <li>Use the products to violate laws, rights, platform rules, or third-party terms.</li>
+            <li>Attempt to disrupt, reverse engineer, overload, scrape, or compromise any hosted service except where allowed by law.</li>
+            <li>Upload or process content that you do not have the right to use.</li>
+            <li>Misrepresent your identity, affiliation, or ownership of content.</li>
+          </ul>
+        </section>
+
+        <section id="accounts">
+          <h2>3. Stores, Purchases, and Subscriptions</h2>
+          <p>
+            Some products are distributed through Google Play, Apple App Store, Microsoft Store, Chrome Web Store, Open VSX, or other platforms. Purchases, refunds, subscriptions, license management, and account controls may be handled by those platforms or payment providers under their own terms.
+          </p>
+        </section>
+
+        <section id="content">
+          <h2>4. Your Content</h2>
+          <p>
+            You retain ownership of files, payloads, notes, diagrams, code, and other content you create, import, process, or export using the products. You are responsible for your content and for ensuring you have the rights needed to use it.
+          </p>
+        </section>
+
+        <section id="ownership">
+          <h2>5. Product Ownership</h2>
+          <p>
+            The products, websites, designs, interfaces, source code, branding, logos, and related materials are owned by Animesh Manna or Visuo Labs unless otherwise stated. These Terms do not grant you ownership rights in the products.
+          </p>
+        </section>
+
+        <section id="availability">
+          <h2>6. Changes and Availability</h2>
+          <p>
+            Products may change over time. Features may be added, modified, paused, or removed. We aim to keep products reliable, but we do not guarantee uninterrupted access, compatibility with every device, or permanent availability of any feature.
+          </p>
+        </section>
+
+        <section id="disclaimers">
+          <h2>7. Disclaimers and Limitation of Liability</h2>
+          <p>
+            Products are provided “as is” and “as available.” To the maximum extent permitted by law, we disclaim warranties of merchantability, fitness for a particular purpose, and non-infringement. We are not liable for indirect, incidental, special, consequential, or punitive damages, or for loss of data, profits, or business opportunities.
+          </p>
+        </section>
+
+        <section id="termination">
+          <h2>8. Termination</h2>
+          <p>
+            We may suspend or restrict access to hosted services if use appears abusive, unlawful, harmful, or in violation of these Terms. You may stop using the products at any time.
+          </p>
+        </section>
+
+        <section id="changes">
+          <h2>9. Changes to These Terms</h2>
+          <p>
+            We may update these Terms as products, platforms, or legal requirements change. The latest version will be posted on this page with an updated date.
+          </p>
+        </section>
+
+        <section id="contact">
+          <h2>10. Contact</h2>
+          <p>
+            For questions about these Terms, contact <a href="mailto:bugblitz.dev@gmail.com">bugblitz.dev@gmail.com</a>.
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Visuo Labs • Animesh Manna</span>
+      <span class="footer-links">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="mailto:bugblitz.dev@gmail.com">Contact</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
