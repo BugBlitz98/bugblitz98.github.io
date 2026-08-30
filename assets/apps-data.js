@@ -73,31 +73,34 @@ const APPS_DATA = [
     tagline: "Interactive Graph Tree & Node Parser for JSON Payloads",
     category: "dev-tools",
     categoryLabel: "Developer Tool",
-    platforms: ["android", "web"],
+    platforms: ["android", "web", "chrome", "vscode"],
     featured: true,
     badge: "Top Tool",
     iconUrl: "https://play-lh.googleusercontent.com/-xvRVghF7zwDGoV2RQZjTV93q_UHQHwlCjbCQRVtpQ7X9BR2li6E3LhoD-akmnqs7bgQnaqV-ZeELmAo3hZ6WQ=s180-rw",
     fallbackEmoji: "🌿",
     heroImage: "./assets/app_mockup_devtool.jpg",
-    shortDesc: "Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads seamlessly in app and on the web.",
-    fullDesc: "JSON Viewer converts deeply nested, monolithic JSON payloads into interactive visual graph trees and expandable node diagrams. Whether you're debugging microservice REST APIs, inspecting database dumps, or exploring configuration files, navigate payloads effortlessly with instant search, tree filtering, and syntax validation. Available as an Android mobile app and a high-traffic SaaS web platform at jsonviewer.tools.",
+    shortDesc: "Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads across Android, web, Chrome, and VS Code.",
+    fullDesc: "JSON Viewer converts deeply nested, monolithic JSON payloads into interactive visual graph trees and expandable node diagrams. Whether you're debugging microservice REST APIs, inspecting database dumps, or exploring configuration files, navigate payloads effortlessly with instant search, tree filtering, and syntax validation. Available as an Android mobile app, a high-traffic SaaS web platform at jsonviewer.tools, a popular Chrome extension, and a VS Code extension on Open VSX.",
     features: [
       { title: "Interactive Graph & Tree Visualization", desc: "Convert rigid raw text into expandable, color-coded node graphs with collapsible branches." },
       { title: "High-Throughput Parsing", desc: "Engineered to stream and parse multi-megabyte JSON payloads with sub-millisecond rendering." },
       { title: "Real-Time Key & Value Search", desc: "Quickly pinpoint specific keys, array indices, nested objects, and regex patterns." },
       { title: "Syntax Error Highlighter", desc: "Identifies line numbers and character offsets of missing commas, brackets, or invalid types." },
       { title: "Multi-Format Exporter", desc: "Format, minify, and export cleaned JSON, CSV structures, or visual diagram screenshots." },
-      { title: "Web & Mobile Parity", desc: "Sync workflows between the mobile Android utility and the global web SaaS jsonviewer.tools." }
+      { title: "Web & Mobile Parity", desc: "Sync workflows between the mobile Android utility and the global web SaaS jsonviewer.tools." },
+      { title: "Browser & Editor Extensions", desc: "Use JSON visualization directly inside Chrome and VS Code through official extension channels." }
     ],
     techStack: [
       { label: "Mobile Engine", value: "Flutter / Dart with custom tree traversal algorithms" },
       { label: "Web Platform", value: "Modern Reactive Web (jsonviewer.tools)" },
       { label: "Parser Specs", value: "Streaming AST tokenizer with deep nested node virtualization" },
-      { label: "Supported Platforms", value: "Android & All Modern Web Browsers" }
+      { label: "Supported Platforms", value: "Android, Web Browsers, Chrome Extension & VS Code Extension" }
     ],
     links: [
       { type: "web", label: "Open jsonviewer.tools (Web SaaS)", url: "https://jsonviewer.tools" },
-      { type: "android", label: "Get on Google Play", url: "https://play.google.com/store/apps/details?id=com.jsonviewer" }
+      { type: "android", label: "Get on Google Play", url: "https://play.google.com/store/apps/details?id=com.jsonviewer" },
+      { type: "chrome", label: "Add Chrome Extension", url: "https://chromewebstore.google.com/detail/json-viewer-%E2%80%93-visualize-j/lpcemjdcamlnebgbeanjpjjdplnccllm" },
+      { type: "vscode", label: "Install VS Code Extension", url: "https://open-vsx.org/extension/jsonviewertools/animesh-jsonviz78/" }
     ]
   },
   {

@@ -550,6 +550,18 @@
       transform: translateY(-4px);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 164, 239, 0.25);
     }
+    .store-card.chrome:hover {
+      border-color: rgba(245, 158, 11, 0.5);
+      background: rgba(245, 158, 11, 0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.18);
+    }
+    .store-card.vscode:hover {
+      border-color: rgba(62, 240, 255, 0.5);
+      background: rgba(62, 240, 255, 0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px var(--cyan-glow);
+    }
 
     .store-card-header {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
@@ -585,6 +597,8 @@
     .store-card.google .store-card-link { color: var(--cyan); }
     .store-card.apple .store-card-link { color: #ffffff; }
     .store-card.ms .store-card-link { color: var(--microsoft); }
+    .store-card.chrome .store-card-link { color: var(--amber); }
+    .store-card.vscode .store-card-link { color: var(--cyan); }
 
     /* ─── STATS PILL BAR ────────────────────────── */
     .hero-stats {
@@ -926,7 +940,9 @@
     .card-actions {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 6px;
+      flex-wrap: wrap;
     }
     .btn-get-app {
       display: inline-flex;
@@ -2128,8 +2144,26 @@
 
   <!-- FULL SCREEN HERO SECTION (100% VIEWPORT WIDTH) -->
   <section class="hero-section">
-    <div class="wrap hero-in      <p class="hero-sub">
-        Architected, engineered, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a> with 8+ years of engineering craft. Founder of <a href="https://jsonviewer.tools" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:600;">jsonviewer.tools</a>, <a href="https://yourorgtree.com" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-weight:600;">yourorgtree.com</a>, and <a href="https://mongolens.com" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:600;">mongolens.com</a> alongside 20+ applications across Google Play, Apple App Store, and Microsoft Store.
+    <div class="wrap hero-inner">
+      <div class="hero-top-pill">
+        <span class="pill-dot"></span>
+        <span>EXPERIENCED FOUNDER • 8+ YEARS CODE CRAFT • 20+ APPS</span>
+      </div>
+      <h1 class="hero-headline">
+        BUILDING QUALITY SOFTWARE &amp; SAAS PLATFORMS
+        <span class="hero-headline-lime">FOR GLOBAL AUDIENCES</span>
+      </h1>
+      <div class="hero-subnav-pills">
+        <span>INCEPTION</span>
+        <span class="subnav-dot">•</span>
+        <span>MONETIZATION</span>
+        <span class="subnav-dot">•</span>
+        <span>SEO MASTERY</span>
+        <span class="subnav-dot">•</span>
+        <span>MULTI-PLATFORM SCALE</span>
+      </div>
+      <p class="hero-sub">
+        Architected, engineered, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a> with 8+ years of engineering craft. Founder of <a href="https://jsonviewer.tools" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:600;">jsonviewer.tools</a>, <a href="https://yourorgtree.com" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-weight:600;">yourorgtree.com</a>, and <a href="https://mongolens.com" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:600;">mongolens.com</a> alongside 20+ applications across Google Play, Apple App Store, Microsoft Store, Chrome Web Store, and Open VSX.
       </p>
 
       <div style="display:flex; justify-content:center; gap:12px; margin-top:22px; flex-wrap:wrap;">
@@ -2141,7 +2175,7 @@
         </a>
       </div>
 
-      <!-- 3 ECOSYSTEM HUBS (STORES DECK) -->
+      <!-- ECOSYSTEM HUBS (STORES DECK) -->
       <div class="stores-deck">
         <!-- Google Play -->
         <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="store-card google">
@@ -2196,6 +2230,42 @@
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </a>
+
+        <!-- Chrome Web Store -->
+        <a href="https://chromewebstore.google.com/detail/json-viewer-%E2%80%93-visualize-j/lpcemjdcamlnebgbeanjpjjdplnccllm" target="_blank" rel="noopener" class="store-card chrome">
+          <div class="store-card-header">
+            <div class="store-icon-wrap" style="color:var(--amber);">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L3.34 5A9.98 9.98 0 0 1 12 2zm4.33 7H21.3A10 10 0 0 1 12 22l4.33-7.5A5 5 0 0 0 16.33 9zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-5.2-4.5A5 5 0 0 0 12 17h2.88l-4.33 4.75A10 10 0 0 1 2 12c0-1.9.53-3.67 1.45-5.18L6.8 10.5z"/></svg>
+            </div>
+            <span class="store-badge">Popular Extension</span>
+          </div>
+          <div>
+            <div class="store-card-title">Chrome Web Store</div>
+            <div class="store-card-desc">JSON Viewer extension for visualizing, formatting, and exploring JSON directly inside Chrome.</div>
+          </div>
+          <div class="store-card-link">
+            Add Chrome Extension
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
+
+        <!-- Open VSX -->
+        <a href="https://open-vsx.org/extension/jsonviewertools/animesh-jsonviz78/" target="_blank" rel="noopener" class="store-card vscode">
+          <div class="store-card-header">
+            <div class="store-icon-wrap" style="color:var(--cyan);">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M21.29 4.1 17.5 2.27a1.23 1.23 0 0 0-1.41.24L8.86 9.1 4.4 5.72a.82.82 0 0 0-1.05.05L1.92 7.08a.83.83 0 0 0 0 1.23L5.79 12l-3.87 3.69a.83.83 0 0 0 0 1.23l1.43 1.31c.3.28.75.3 1.05.05l4.46-3.38 7.23 6.59c.37.34.91.43 1.41.24l3.79-1.83c.43-.2.71-.64.71-1.12V5.22c0-.48-.28-.92-.71-1.12zM17.08 15.98 11.59 12l5.49-3.98v7.96z"/></svg>
+            </div>
+            <span class="store-badge">Editor Extension</span>
+          </div>
+          <div>
+            <div class="store-card-title">Open VSX / VS Code</div>
+            <div class="store-card-desc">JSON visualization extension for VS Code-compatible editors, published via Open VSX.</div>
+          </div>
+          <div class="store-card-link">
+            Install VS Code Extension
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </a>
       </div>
 
       <!-- STATS BAR -->
@@ -2211,8 +2281,8 @@
         </div>
         <div class="stat-div"></div>
         <div class="stat">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Major Stores</div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Major Channels</div>
         </div>
         <div class="stat-div"></div>
         <div class="stat">
@@ -2266,6 +2336,9 @@
               <button class="plat-btn" data-platform="android">Android</button>
               <button class="plat-btn" data-platform="apple">Apple (iOS &amp; Mac)</button>
               <button class="plat-btn" data-platform="windows">Windows</button>
+              <button class="plat-btn" data-platform="web">Web</button>
+              <button class="plat-btn" data-platform="chrome">Chrome</button>
+              <button class="plat-btn" data-platform="vscode">VS Code</button>
             </div>
           </div>
           <div class="results-bar-text">
@@ -2345,8 +2418,8 @@
           </div>
         </div>
 
-        <!-- 3. JSON Viewer (Android) -->
-        <div class="card featured-card" data-category="dev-tools" data-platforms="android" data-title="json viewer graph visualizer tree formatter parser android" data-pkg="com.jsonviewer">
+        <!-- 3. JSON Viewer (Android, Web, Chrome & VS Code) -->
+        <div class="card featured-card" data-category="dev-tools" data-platforms="android web chrome vscode" data-title="json viewer graph visualizer tree formatter parser android chrome extension vscode open vsx" data-pkg="com.jsonviewer">
           <div class="card-top">
             <div class="icon-container">
               <img class="app-icon-img" src="https://play-lh.googleusercontent.com/-xvRVghF7zwDGoV2RQZjTV93q_UHQHwlCjbCQRVtpQ7X9BR2li6E3LhoD-akmnqs7bgQnaqV-ZeELmAo3hZ6WQ=s180-rw" alt="JSON Viewer Icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
@@ -2360,11 +2433,13 @@
           <div class="platform-badges">
             <span class="plat-badge">🤖 Android</span>
             <span class="plat-badge">🌐 jsonviewer.tools</span>
+            <span class="plat-badge">Chrome Extension</span>
+            <span class="plat-badge">VS Code</span>
             <span class="plat-badge">Google Play</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">JSON Viewer - Graph Visualizer</h3>
-            <p class="card-desc">Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads seamlessly in app and on the web.</p>
+            <p class="card-desc">Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads across Android, web, Chrome, and VS Code.</p>
           </div>
           <div class="card-footer">
             <a href="app.html?id=json-viewer" class="btn-details-link" title="View Specifications, Features & Details">
@@ -2378,6 +2453,14 @@
               <a href="https://play.google.com/store/apps/details?id=com.jsonviewer" target="_blank" rel="noopener" class="btn-get-app">
                 Google Play
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="https://chromewebstore.google.com/detail/json-viewer-%E2%80%93-visualize-j/lpcemjdcamlnebgbeanjpjjdplnccllm" target="_blank" rel="noopener" class="btn-get-app" title="Add Chrome Extension">
+                Chrome
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="https://open-vsx.org/extension/jsonviewertools/animesh-jsonviz78/" target="_blank" rel="noopener" class="btn-get-app web-btn" title="Install VS Code Extension">
+                VS Code
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
               </a>
             </div>
           </div>

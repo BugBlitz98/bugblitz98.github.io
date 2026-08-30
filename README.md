@@ -13,7 +13,7 @@
   - [jsonviewer.tools](https://jsonviewer.tools) — Online JSON visualizer, graph diagram generator, and formatter.
   - [yourorgtree.com](https://yourorgtree.com) — Interactive organization chart & hierarchy builder.
   - [mongolens.com](https://mongolens.com) — Modern visual MongoDB client and database explorer.
-- 📱 **Multi-Platform App Developer**: 20+ applications published across Android, iOS, macOS, and Windows.
+- 📱 **Multi-Platform App Developer**: 20+ applications published across Android, iOS, macOS, Windows, Chrome Web Store, and Open VSX.
 - ⚡ **1st Internet Dollar Milestone**: Proven SaaS monetization from $0 to recurring global revenue via Dodo Payments, fueling continuous high-quality software development.
 
 ---
@@ -41,6 +41,8 @@
 | **Apple App Store** | iOS & macOS | 7 Apps (Easy Prescription Maker, Canvas Notes Studio Mac, Graph Notes, Pocket Donkey) | [Apple Developer Profile](https://apps.apple.com/us/developer/animesh-manna/id6789635189) |
 | **Microsoft Store** | Windows 10/11 | Canvas Notes Studio (Infinite Mindmap Canvas), YourOrgTree Organization Hierarchy Maker | [Microsoft Store Profile](https://apps.microsoft.com/search/publisher?name=Visuo+Labs&hl=en-US&gl=IN) |
 | **Web SaaS** | Web Browsers | jsonviewer.tools, yourorgtree.com, mongolens.com | [jsonviewer.tools](https://jsonviewer.tools) |
+| **Chrome Web Store** | Browser Extension | Popular JSON Viewer extension for visualizing JSON inside Chrome | [Chrome Extension](https://chromewebstore.google.com/detail/json-viewer-%E2%80%93-visualize-j/lpcemjdcamlnebgbeanjpjjdplnccllm) |
+| **Open VSX** | VS Code Extension | JSON visualization extension for VS Code-compatible editors | [VS Code Extension](https://open-vsx.org/extension/jsonviewertools/animesh-jsonviz78/) |
 
 ---
 
