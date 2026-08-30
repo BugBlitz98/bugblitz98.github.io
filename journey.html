@@ -442,7 +442,9 @@
       .apps-preview-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 540px) {
-      .hero-overlay-stats { grid-template-columns: 1fr; }
+      .hero-overlay-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .overlay-stat-item { padding: 12px 14px; }
+      .stat-val { font-size: 22px; }
       .journey-hero { padding: 36px 0 20px; }
       .wrap { padding: 0 16px; }
     }
