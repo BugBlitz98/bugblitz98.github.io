@@ -52,7 +52,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -74,6 +74,9 @@
       --purple: #a78bfa;
       --purple-glow: rgba(167, 139, 250, 0.25);
       --amber: #f59e0b;
+      --apple: #f5f5f7;
+      --microsoft: #00a4ef;
+      --android: #3ef0ff;
 
       /* Typography & Layout */
       --text: #fbfbf7;
@@ -160,7 +163,7 @@
     }
 
     .wrap {
-      max-width: 1160px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
       position: relative;
@@ -183,18 +186,21 @@
       text-decoration: none; color: inherit;
     }
     .brand-icon {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 11px;
       background: linear-gradient(135deg, var(--lime), var(--cyan));
-      color: #050709; font-weight: 800; font-size: 16px;
+      color: #050709; font-weight: 800; font-size: 17px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Space Grotesk', sans-serif;
+      box-shadow: 0 4px 14px var(--lime-glow);
     }
     .logo-text {
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700; font-size: 18px; display: flex; flex-direction: column;
+      font-weight: 800; font-size: 18px; display: flex; flex-direction: column;
+      letter-spacing: 0.5px;
     }
     .logo-author {
       font-size: 11px; font-weight: 500; color: var(--text-secondary);
+      letter-spacing: 0;
     }
     .nav-actions {
       display: flex; align-items: center; gap: 12px;
@@ -208,6 +214,7 @@
     }
     .btn-nav-ghost:hover {
       border-color: var(--lime); color: var(--lime); background: rgba(204,255,0,0.08);
+      transform: translateY(-1px);
     }
 
     /* Breadcrumbs */
@@ -225,12 +232,12 @@
 
     /* App Detail Hero Header */
     .app-hero {
-      padding: 30px 0 40px;
+      padding: 24px 0 36px;
       border-bottom: 1px solid var(--border);
     }
     .app-hero-main {
-      display: flex; gap: 32px; align-items: flex-start;
-      margin-bottom: 32px;
+      display: flex; gap: 30px; align-items: flex-start;
+      margin-bottom: 28px;
     }
     .app-hero-icon-box {
       width: 110px; height: 110px; border-radius: 24px;
@@ -241,16 +248,16 @@
       display: flex; align-items: center; justify-content: center;
     }
     .app-hero-icon-img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .app-hero-icon-fallback {
       font-size: 48px;
     }
     .app-hero-info {
-      flex: 1;
+      flex: 1; min-width: 0;
     }
     .app-badges-row {
-      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px;
     }
     .badge-pill {
       padding: 4px 12px; border-radius: 6px;
@@ -260,23 +267,46 @@
       border: 1px solid rgba(204, 255, 0, 0.3);
     }
     .badge-platform {
-      padding: 4px 10px; border-radius: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 11px; border-radius: 6px;
       font-size: 11.5px; font-weight: 600;
       background: var(--surface); color: var(--text-secondary);
       border: 1px solid var(--border);
     }
+    .badge-platform svg {
+      width: 14px; height: 14px; flex-shrink: 0;
+    }
+    .badge-platform.android {
+      color: var(--cyan); border-color: rgba(62, 240, 255, 0.3); background: rgba(62, 240, 255, 0.08);
+    }
+    .badge-platform.apple, .badge-platform.mac {
+      color: #ffffff; border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.08);
+    }
+    .badge-platform.windows {
+      color: var(--microsoft); border-color: rgba(0, 164, 239, 0.3); background: rgba(0, 164, 239, 0.08);
+    }
+    .badge-platform.web {
+      color: var(--lime); border-color: rgba(204, 255, 0, 0.3); background: rgba(204, 255, 0, 0.08);
+    }
+    .badge-platform.chrome {
+      color: var(--amber); border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.08);
+    }
+    .badge-platform.vscode {
+      color: var(--cyan); border-color: rgba(62, 240, 255, 0.3); background: rgba(62, 240, 255, 0.08);
+    }
+
     .app-hero-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(28px, 4.5vw, 42px);
+      font-size: clamp(28px, 4.5vw, 40px);
       font-weight: 800; line-height: 1.15; margin-bottom: 8px;
     }
     .app-hero-tagline {
-      font-size: 17px; color: var(--text-secondary); line-height: 1.5;
+      font-size: 16.5px; color: var(--text-secondary); line-height: 1.5;
     }
 
     /* Actions Bar */
     .hero-actions-bar {
-      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
     }
     .btn-action-primary {
       display: inline-flex; align-items: center; gap: 10px;
@@ -284,6 +314,9 @@
       background: var(--lime); color: #050709;
       font-size: 14px; font-weight: 800; text-decoration: none;
       transition: all 0.2s; box-shadow: 0 4px 20px var(--lime-glow);
+    }
+    .btn-action-primary svg {
+      width: 18px; height: 18px; flex-shrink: 0;
     }
     .btn-action-primary:hover {
       transform: translateY(-2px); box-shadow: 0 8px 30px var(--lime-glow);
@@ -295,14 +328,26 @@
       font-size: 14px; font-weight: 600; text-decoration: none;
       border: 1px solid var(--border); transition: all 0.2s;
     }
+    .btn-action-store svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+    }
     .btn-action-store:hover {
       border-color: rgba(255,255,255,0.4); background: var(--surface-hover);
       transform: translateY(-2px);
     }
+    .btn-action-store.android:hover {
+      border-color: var(--cyan); color: var(--cyan); background: rgba(62, 240, 255, 0.1);
+    }
+    .btn-action-store.apple:hover, .btn-action-store.mac:hover {
+      border-color: #ffffff; color: #ffffff; background: rgba(255, 255, 255, 0.12);
+    }
+    .btn-action-store.windows:hover {
+      border-color: var(--microsoft); color: var(--microsoft); background: rgba(0, 164, 239, 0.12);
+    }
 
     /* Tab Navigation */
     .tabs-container {
-      margin-top: 36px;
+      margin-top: 32px;
     }
     .tab-bar {
       display: flex; gap: 8px; border-bottom: 1px solid var(--border);
@@ -324,135 +369,136 @@
 
     /* Tab Panels */
     .tab-panel {
-      display: none; padding: 40px 0;
+      display: none; padding: 36px 0;
     }
     .tab-panel.active { display: block; }
 
     /* Overview Content */
     .overview-grid {
-      display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: start;
     }
     .content-box {
-      font-size: 16px; line-height: 1.8; color: #d0d6e0;
-    /* Platform Icons Showcase Card */
-    .platform-icons-showcase {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      font-size: 15.5px; line-height: 1.8; color: #d0d6e0;
     }
-    .platform-icon-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    .content-box p {
+      margin-bottom: 16px;
+    }
+
+    /* Media Showcase Box */
+    .showcase-media-box {
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-    }
-    .platform-icon-card:hover {
-      border-color: rgba(204, 255, 0, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-    }
-    .p-icon-wrap {
-      width: 80px; height: 80px;
       border-radius: 18px;
       overflow: hidden;
-      flex-shrink: 0;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+    .showcase-media-img {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .showcase-media-box:hover .showcase-media-img {
+      transform: scale(1.02);
+    }
+    .showcase-caption {
+      padding: 14px 18px;
+      background: rgba(13, 17, 24, 0.95);
+      border-top: 1px solid var(--border);
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+      font-size: 13px;
+      color: var(--text-secondary);
     }
-    .p-icon-img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+
+    /* Platform Availability Cards in Overview */
+    .platform-avail-section {
+      margin-top: 26px;
     }
-    .p-icon-fallback {
-      font-size: 34px;
-    }
-    .p-icon-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .p-icon-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
+    .platform-avail-title {
+      font-size: 13px;
       font-weight: 700;
       font-family: 'JetBrains Mono', monospace;
-      padding: 3px 9px;
-      border-radius: 6px;
-      margin-bottom: 6px;
+      color: var(--lime);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
     }
-    .p-icon-badge.android {
-      background: rgba(62, 240, 255, 0.1);
+    .platform-avail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .platform-avail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .platform-avail-card:hover {
+      border-color: var(--lime);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+    }
+    .platform-avail-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .platform-avail-icon.android {
+      background: rgba(62, 240, 255, 0.12);
       color: var(--cyan);
       border: 1px solid rgba(62, 240, 255, 0.3);
     }
-    .p-icon-badge.apple, .p-icon-badge.mac {
+    .platform-avail-icon.apple, .platform-avail-icon.mac {
       background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
-    .p-icon-badge.windows {
-      background: rgba(0, 164, 239, 0.1);
+    .platform-avail-icon.windows {
+      background: rgba(0, 164, 239, 0.12);
       color: var(--microsoft);
       border: 1px solid rgba(0, 164, 239, 0.3);
     }
-    .p-icon-badge.web {
-      background: rgba(204, 255, 0, 0.1);
+    .platform-avail-icon.web {
+      background: rgba(204, 255, 0, 0.12);
       color: var(--lime);
       border: 1px solid rgba(204, 255, 0, 0.3);
     }
-    .p-icon-badge.chrome {
-      background: rgba(245, 158, 11, 0.1);
+    .platform-avail-icon.chrome {
+      background: rgba(245, 158, 11, 0.12);
       color: var(--amber);
       border: 1px solid rgba(245, 158, 11, 0.3);
     }
-    .p-icon-badge.vscode {
-      background: rgba(62, 240, 255, 0.1);
+    .platform-avail-icon.vscode {
+      background: rgba(62, 240, 255, 0.12);
       color: var(--cyan);
       border: 1px solid rgba(62, 240, 255, 0.3);
     }
-    .p-icon-title {
-      font-size: 15.5px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .platform-avail-info {
+      flex: 1; min-width: 0;
     }
-    .p-icon-sub {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    .platform-avail-name {
+      font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px;
+      display: flex; align-items: center; gap: 6px;
     }
-    .p-icon-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--lime);
-      text-decoration: none;
-      transition: all 0.2s;
+    .platform-avail-sub {
+      font-size: 12px; color: var(--text-secondary);
     }
-    .p-icon-btn:hover {
-      text-decoration: underline;
-      gap: 7px;
+    .platform-avail-action {
+      font-size: 12px; font-weight: 700; color: var(--lime);
+      display: flex; align-items: center; gap: 4px; flex-shrink: 0;
     }
 
     /* Features Grid */
@@ -462,11 +508,11 @@
     .feature-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px; padding: 24px;
+      border-radius: 16px; padding: 22px 24px;
       transition: all 0.2s;
     }
     .feature-card:hover {
-      border-color: rgba(204, 255, 0, 0.3);
+      border-color: rgba(204, 255, 0, 0.35);
       transform: translateY(-2px);
     }
     .feature-card-title {
@@ -475,6 +521,33 @@
     }
     .feature-card-desc {
       font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    }
+
+    /* Channel Cards in Stores Tab */
+    .channel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s ease;
+    }
+    .channel-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+    .channel-left {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .channel-info-title {
+      font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 4px;
+    }
+    .channel-info-desc {
+      font-size: 13px; color: var(--text-secondary);
     }
 
     /* Specs & Tech Table */
@@ -488,6 +561,7 @@
       font-size: 14px;
     }
     .specs-table tr:last-child td { border-bottom: none; }
+    .specs-table tr:hover td { background: rgba(255,255,255,0.02); }
     .specs-label {
       font-weight: 700; color: var(--lime); width: 220px;
       font-family: 'JetBrains Mono', monospace; font-size: 13px;
@@ -524,7 +598,7 @@
       border-color: var(--lime); background: rgba(204,255,0,0.06);
     }
     .switch-icon {
-      width: 32px; height: 32px; border-radius: 8px; object-fit: cover;
+      width: 32px; height: 32px; border-radius: 8px; object-fit: cover; flex-shrink: 0;
     }
     .switch-name {
       font-size: 13px; font-weight: 700; color: #fff;
@@ -551,6 +625,7 @@
     @media (max-width: 540px) {
       .switcher-grid { grid-template-columns: 1fr; }
       .specs-label { width: 140px; }
+      .channel-card { flex-direction: column; align-items: flex-start; }
       .wrap { padding: 0 16px; }
     }
   </style>
@@ -578,7 +653,7 @@
       </a>
       <div class="nav-actions">
         <a href="journey.html" class="btn-nav-ghost">
-          ⚡ Founder Story & Journey
+          ⚡ Founder Story &amp; Journey
         </a>
         <a href="index.html#apps" class="btn-nav-ghost">
           ← All 20 Apps
@@ -607,14 +682,14 @@
 
         <div class="app-hero-info">
           <div class="app-badges-row" id="appBadgesContainer">
-            <!-- Dynamic Badges -->
+            <!-- Dynamic Badges with conditional Platform Icons -->
           </div>
           <h1 class="app-hero-title" id="appTitle">Loading Application...</h1>
           <p class="app-hero-tagline" id="appTagline"></p>
         </div>
       </div>
 
-      <!-- Action Buttons Bar -->
+      <!-- Action Buttons Bar with Branded Platform Logos -->
       <div class="hero-actions-bar" id="appActionsContainer">
         <!-- Dynamic Store Links -->
       </div>
@@ -638,11 +713,19 @@
             Product Deep Dive
           </h2>
           <div id="appFullDesc"></div>
+
+          <!-- Conditional Platform Availability Grid -->
+          <div class="platform-avail-section">
+            <div class="platform-avail-title">AVAILABLE ON PLATFORMS &amp; STORES</div>
+            <div class="platform-avail-grid" id="platformAvailGrid">
+              <!-- Dynamically populated conditional platform cards -->
+            </div>
+          </div>
           
           <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-top:24px;">
             <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--lime); margin-bottom:6px;">ENGINEERED BY ANIMESH MANNA</div>
             <div style="font-size:14px; color:#fff; font-weight:700; margin-bottom:4px;">Multi-Platform Quality Guarantee</div>
-            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:0;">
               This application is actively maintained with zero latency optimizations, robust local privacy sandboxing, and regular compatibility updates across new OS versions.
             </p>
           </div>
@@ -687,7 +770,7 @@
       <h2 style="font-family:'Space Grotesk',sans-serif; font-size:24px; margin-bottom:20px; color:#fff;">
         Official Download &amp; Launch Channels
       </h2>
-      <div class="features-grid" id="appDownloadChannelsContainer">
+      <div style="display:flex; flex-direction:column; gap:14px;" id="appDownloadChannelsContainer">
         <!-- Injected Store Detail Cards -->
       </div>
     </div>
@@ -727,6 +810,17 @@
   <!-- Scripts: Data & Rendering Engine -->
   <script src="./assets/apps-data.js"></script>
   <script>
+    // Platform SVG Icons Library
+    const ICONS = {
+      android: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.213 2.213 0 0 1-.61-.371A2.215 2.215 0 0 1 2.25 20V4c0-.702.28-1.34.75-1.814a2.21 2.21 0 0 1 .609-.372zm11.235 11.236l2.155-2.155-2.155-2.155-7.79-7.79 7.79 7.79 3.204 1.85a1.5 1.5 0 0 1 0 2.61l-3.204 1.85zm-1.052 1.052L4.743 23.15a2.235 2.235 0 0 0 1.258.1c.44-.09.846-.317 1.183-.512l6.61-3.816zM4.743.85L13.792 9.9 7.184 6.084A3.91 3.91 0 0 0 6.001 5.57 2.235 2.235 0 0 0 4.743.85z"/></svg>`,
+      apple: `<svg viewBox="0 0 170 170" fill="currentColor"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.74-7.85-12.13-14.42-6.52-9.78-11.59-20.78-15.22-33-3.62-12.23-5.43-23.78-5.43-34.66 0-14.56 3.62-26.4 10.86-35.53 7.24-9.13 16.3-13.78 27.18-13.95 5.22 0 10.98 1.45 17.27 4.35 6.29 2.9 10.14 4.35 11.55 4.35 1.63 0 5.86-1.57 12.69-4.7 6.83-3.14 12.73-4.52 17.7-4.14 13.9.76 24.58 5.66 32.03 14.69-12.17 7.39-18.15 17.39-17.93 30 0 10.22 3.91 18.91 11.74 26.08 3.91 3.7 8.37 6.41 13.37 8.15-2.82 8.26-6.19 16.41-10.11 24.45zM119.22 33.15c0-7.61 2.72-14.67 8.15-21.19 5.43-6.52 12.07-10.76 19.9-12.71.65 1.74.98 3.48.98 5.22 0 7.6-2.83 14.78-8.48 21.52-5.65 6.74-12.39 10.87-20.22 12.39-.22-1.74-.33-3.48-.33-5.23z"/></svg>`,
+      mac: `<svg viewBox="0 0 170 170" fill="currentColor"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.74-7.85-12.13-14.42-6.52-9.78-11.59-20.78-15.22-33-3.62-12.23-5.43-23.78-5.43-34.66 0-14.56 3.62-26.4 10.86-35.53 7.24-9.13 16.3-13.78 27.18-13.95 5.22 0 10.98 1.45 17.27 4.35 6.29 2.9 10.14 4.35 11.55 4.35 1.63 0 5.86-1.57 12.69-4.7 6.83-3.14 12.73-4.52 17.7-4.14 13.9.76 24.58 5.66 32.03 14.69-12.17 7.39-18.15 17.39-17.93 30 0 10.22 3.91 18.91 11.74 26.08 3.91 3.7 8.37 6.41 13.37 8.15-2.82 8.26-6.19 16.41-10.11 24.45zM119.22 33.15c0-7.61 2.72-14.67 8.15-21.19 5.43-6.52 12.07-10.76 19.9-12.71.65 1.74.98 3.48.98 5.22 0 7.6-2.83 14.78-8.48 21.52-5.65 6.74-12.39 10.87-20.22 12.39-.22-1.74-.33-3.48-.33-5.23z"/></svg>`,
+      windows: `<svg viewBox="0 0 88 88" fill="currentColor"><path d="M0 12.402l35.689-4.86.016 34.423-35.67.203zm35.67 33.529l.029 34.453L.028 75.48l-.02-22.146zm4.327-39.043L87.986 0v41.526l-47.989.373zm47.988 38.643l-.002 41.529-47.986-6.758-.027-34.629z"/></svg>`,
+      web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`,
+      chrome: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A6.002 6.002 0 0 1 12 6h9.757A12.003 12.003 0 0 0 12 0zm-1.127 12a1.128 1.128 0 1 1 2.254 0 1.128 1.128 0 0 1-2.254 0zm10.742-3.864H13.67a6.007 6.007 0 0 1 4.243 4.243l6.848-3.953C23.633 6.643 21.615 4.887 21.615 4.887zM6.136 13.67A6.006 6.006 0 0 1 10.379 9.427L6.426 2.579A12.016 12.016 0 0 0 0 12c0 4.09 2.051 7.702 5.187 9.873l3.953-6.848a6.036 6.036 0 0 1-3.004-1.355zm6.864 4.33a5.99 5.99 0 0 1-4.243-1.757l-3.953 6.848C7.169 23.633 9.487 24 12 24c5.79 0 10.638-4.103 11.727-9.524H15.74a5.998 5.998 0 0 1-2.74 3.524z"/></svg>`,
+      vscode: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.276a1 1 0 0 0 0 1.448l3.414 3.276-3.414 3.276a1 1 0 0 0 0 1.448l1.322 1.217a1 1 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.94-2.377A1.5 1.5 0 0 0 24 19.86V4.14a1.5 1.5 0 0 0-.85-1.553zm-5.65 14.503l-6.82-5.09 6.82-5.09v10.18z"/></svg>`
+    };
+
     // Tab Switcher
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -735,7 +829,9 @@
       const targetPanel = document.getElementById('tab-' + tabId);
       if (targetPanel) targetPanel.classList.add('active');
       
-      event.currentTarget.classList.add('active');
+      if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
+      }
     }
 
     // Dynamic Render Logic
@@ -748,7 +844,6 @@
       const pageTitleStr = `${app.title} | Visuo Labs`;
       const pageDescStr = `${app.title} - ${app.tagline}. ${app.shortDesc}`;
       const appUrl = `https://bugblitz98.github.io/app.html?id=${app.id}`;
-      const appImg = app.iconUrl || 'https://bugblitz98.github.io/assets/app_mockup_productivity.jpg';
 
       document.title = pageTitleStr;
       const titleElem = document.getElementById('pageTitle');
@@ -819,34 +914,45 @@
         fallback.style.display = 'block';
       }
 
-      // 4. Badges
+      // 4. Badges (with official conditional SVG icons)
       const badgesContainer = document.getElementById('appBadgesContainer');
-      let badgesHtml = `<span class="badge-pill">${app.badge || 'Live Tool'}</span>`;
+      let badgesHtml = `<span class="badge-pill">${app.badge || 'Live Application'}</span>`;
       badgesHtml += `<span class="badge-platform">${app.categoryLabel}</span>`;
       if (app.platforms) {
         app.platforms.forEach(p => {
           let label = p.toUpperCase();
-          if (p === 'apple') label = '🍏 Apple App Store';
-          if (p === 'android') label = '🤖 Google Play';
-          if (p === 'windows') label = '🪟 Microsoft Store';
-          if (p === 'mac') label = '🍎 macOS';
-          if (p === 'web') label = '🌐 Web SaaS';
+          let iconSvg = ICONS[p] || '';
+          if (p === 'apple') label = 'Apple App Store';
+          if (p === 'android') label = 'Google Play';
+          if (p === 'windows') label = 'Microsoft Store';
+          if (p === 'mac') label = 'macOS';
+          if (p === 'web') label = 'Web SaaS';
           if (p === 'chrome') label = 'Chrome Web Store';
           if (p === 'vscode') label = 'VS Code Extension';
-          badgesHtml += `<span class="badge-platform">${label}</span>`;
+          badgesHtml += `<span class="badge-platform ${p}">${iconSvg} ${label}</span>`;
         });
       }
       badgesContainer.innerHTML = badgesHtml;
 
-      // 5. Hero Actions
+      // 5. Hero Actions with Branded Platform Logos
       const actionsContainer = document.getElementById('appActionsContainer');
       let actionsHtml = '';
       if (app.links && app.links.length > 0) {
         app.links.forEach((l, i) => {
+          const type = l.type || 'web';
+          const iconSvg = ICONS[type] || '';
           if (i === 0) {
-            actionsHtml += `<a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary">${l.label} ↗</a>`;
+            actionsHtml += `
+              <a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary">
+                ${iconSvg} <span>${l.label} ↗</span>
+              </a>
+            `;
           } else {
-            actionsHtml += `<a href="${l.url}" target="_blank" rel="noopener" class="btn-action-store">${l.label} ↗</a>`;
+            actionsHtml += `
+              <a href="${l.url}" target="_blank" rel="noopener" class="btn-action-store ${type}">
+                ${iconSvg} <span>${l.label} ↗</span>
+              </a>
+            `;
           }
         });
       }
@@ -857,7 +963,46 @@
       if (app.heroImage) showcaseImg.src = app.heroImage;
       document.getElementById('appShowcaseCaption').textContent = `${app.title} Visual Specification`;
 
-      // 7. Features Tab
+      // 7. Conditional Platform Availability Cards in Overview Tab
+      const platformAvailGrid = document.getElementById('platformAvailGrid');
+      let availHtml = '';
+      const platformDetails = {
+        android: { name: 'Android (Google Play)', desc: 'Optimized for modern Android phones & tablets', btnText: 'Install on Play Store' },
+        apple: { name: 'iOS App Store', desc: 'Native build for iPhone & iPad (iOS 16+)', btnText: 'Get on App Store' },
+        mac: { name: 'macOS App Store', desc: 'Universal binary for Apple Silicon & Intel', btnText: 'Download for Mac' },
+        windows: { name: 'Microsoft Store', desc: 'High performance for Windows 11 / 10', btnText: 'Get on Windows' },
+        web: { name: 'Web SaaS Platform', desc: 'Zero-install cloud browser experience', btnText: 'Launch Web App' },
+        chrome: { name: 'Chrome Web Store', desc: 'Direct browser extension integration', btnText: 'Add to Chrome' },
+        vscode: { name: 'VS Code Extension', desc: 'Integrated IDE developer tooling', btnText: 'Install Extension' }
+      };
+
+      if (app.platforms && app.platforms.length > 0) {
+        app.platforms.forEach(p => {
+          const info = platformDetails[p] || { name: p.toUpperCase(), desc: 'Verified release channel', btnText: 'Open Store' };
+          const iconSvg = ICONS[p] || '';
+          // Find matching link if available
+          const matchingLink = app.links ? app.links.find(l => l.type === p) || app.links[0] : null;
+          const linkUrl = matchingLink ? matchingLink.url : '#';
+
+          availHtml += `
+            <a href="${linkUrl}" target="_blank" rel="noopener" class="platform-avail-card">
+              <div class="platform-avail-icon ${p}">
+                <div style="width:22px; height:22px; display:flex; align-items:center; justify-content:center;">${iconSvg}</div>
+              </div>
+              <div class="platform-avail-info">
+                <div class="platform-avail-name">${info.name}</div>
+                <div class="platform-avail-sub">${info.desc}</div>
+              </div>
+              <div class="platform-avail-action">
+                <span>↗</span>
+              </div>
+            </a>
+          `;
+        });
+      }
+      platformAvailGrid.innerHTML = availHtml;
+
+      // 8. Features Tab
       const featuresContainer = document.getElementById('appFeaturesContainer');
       let featHtml = '';
       if (app.features && app.features.length > 0) {
@@ -877,7 +1022,7 @@
       }
       featuresContainer.innerHTML = featHtml;
 
-      // 8. Tech Specs Tab
+      // 9. Tech Specs Tab
       const techTableBody = document.getElementById('appTechTableBody');
       let techHtml = '';
       if (app.techStack && app.techStack.length > 0) {
@@ -902,19 +1047,26 @@
       `;
       techTableBody.innerHTML = techHtml;
 
-      // 9. Store Channels Tab
+      // 10. Store Channels Tab
       const channelsContainer = document.getElementById('appDownloadChannelsContainer');
       let chanHtml = '';
       if (app.links && app.links.length > 0) {
         app.links.forEach(l => {
+          const type = l.type || 'web';
+          const iconSvg = ICONS[type] || '';
           chanHtml += `
-            <div class="feature-card" style="display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div class="feature-card-title">${l.label}</div>
-                <div class="feature-card-desc">Official verified release channel.</div>
+            <div class="channel-card">
+              <div class="channel-left">
+                <div class="platform-avail-icon ${type}">
+                  <div style="width:24px; height:24px; display:flex; align-items:center; justify-content:center;">${iconSvg}</div>
+                </div>
+                <div>
+                  <div class="channel-info-title">${l.label}</div>
+                  <div class="channel-info-desc">Official verified release channel managed by Visuo Labs.</div>
+                </div>
               </div>
-              <a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary" style="padding:8px 16px; font-size:13px;">
-                Open / Install ↗
+              <a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary" style="padding:10px 18px; font-size:13px; white-space:nowrap;">
+                Install / Open ↗
               </a>
             </div>
           `;
@@ -922,7 +1074,7 @@
       }
       channelsContainer.innerHTML = chanHtml;
 
-      // 10. Switcher Grid
+      // 11. Switcher Grid
       const switcherGrid = document.getElementById('appSwitcherGrid');
       let switchHtml = '';
       APPS_DATA.forEach(item => {
