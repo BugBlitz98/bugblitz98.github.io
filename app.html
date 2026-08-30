@@ -5,7 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title id="pageTitle">Application Details | Visuo Labs</title>
   <meta name="description" id="pageMetaDesc" content="Explore detailed specifications, features, and downloads for Visuo Labs applications crafted by Animesh Manna." />
+  <meta name="keywords" content="Visuo Labs, Animesh Manna, Multi-Platform Apps, iOS Apps, Android Apps, Developer Tools, Productivity Apps" />
+  <meta name="author" content="Animesh Manna" />
+  <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#050709" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" id="canonicalUrl" href="https://bugblitz98.github.io/app.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" id="ogUrl" content="https://bugblitz98.github.io/app.html" />
+  <meta property="og:site_name" content="Visuo Labs" />
+  <meta property="og:title" id="ogTitle" content="Application Details | Visuo Labs" />
+  <meta property="og:description" id="ogDesc" content="Explore detailed specifications, features, and downloads for Visuo Labs applications crafted by Animesh Manna." />
+  <meta property="og:image" id="ogImage" content="https://bugblitz98.github.io/assets/app_mockup_productivity.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" id="ogImageAlt" content="Visuo Labs App Details" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Animesh68589159" />
+  <meta name="twitter:creator" content="@Animesh68589159" />
+  <meta name="twitter:url" id="twitterUrl" content="https://bugblitz98.github.io/app.html" />
+  <meta name="twitter:title" id="twitterTitle" content="Application Details | Visuo Labs" />
+  <meta name="twitter:description" id="twitterDesc" content="Explore detailed specifications, features, and downloads for Visuo Labs applications crafted by Animesh Manna." />
+  <meta name="twitter:image" id="twitterImage" content="https://bugblitz98.github.io/assets/app_mockup_productivity.jpg" />
+
+  <!-- Structured Data Container (Schema.org JSON-LD) -->
+  <script type="application/ld+json" id="appJsonLd">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Visuo Labs Apps",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "iOS, Android, Windows, macOS, Web",
+    "author": {
+      "@type": "Person",
+      "name": "Animesh Manna",
+      "url": "https://bugblitz98.github.io/journey.html"
+    }
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -702,9 +744,62 @@
       const appId = params.get('id') || 'canvas-notes-studio';
       const app = getAppById(appId);
 
-      // 1. Page Title & Meta
-      document.title = `${app.title} | Visuo Labs`;
-      document.getElementById('pageTitle').textContent = `${app.title} - Visuo Labs`;
+      // 1. Page Title & Meta Tags
+      const pageTitleStr = `${app.title} | Visuo Labs`;
+      const pageDescStr = `${app.title} - ${app.tagline}. ${app.shortDesc}`;
+      const appUrl = `https://bugblitz98.github.io/app.html?id=${app.id}`;
+      const appImg = app.iconUrl || 'https://bugblitz98.github.io/assets/app_mockup_productivity.jpg';
+
+      document.title = pageTitleStr;
+      const titleElem = document.getElementById('pageTitle');
+      if (titleElem) titleElem.textContent = pageTitleStr;
+      
+      const metaDescElem = document.getElementById('pageMetaDesc');
+      if (metaDescElem) metaDescElem.setAttribute('content', pageDescStr);
+
+      const canonicalElem = document.getElementById('canonicalUrl');
+      if (canonicalElem) canonicalElem.setAttribute('href', appUrl);
+
+      // Open Graph Updates
+      const ogTitle = document.getElementById('ogTitle');
+      if (ogTitle) ogTitle.setAttribute('content', pageTitleStr);
+      const ogDesc = document.getElementById('ogDesc');
+      if (ogDesc) ogDesc.setAttribute('content', pageDescStr);
+      const ogUrl = document.getElementById('ogUrl');
+      if (ogUrl) ogUrl.setAttribute('content', appUrl);
+      const ogImage = document.getElementById('ogImage');
+      if (ogImage && app.iconUrl) ogImage.setAttribute('content', app.iconUrl);
+
+      // Twitter Updates
+      const twTitle = document.getElementById('twitterTitle');
+      if (twTitle) twTitle.setAttribute('content', pageTitleStr);
+      const twDesc = document.getElementById('twitterDesc');
+      if (twDesc) twDesc.setAttribute('content', pageDescStr);
+      const twUrl = document.getElementById('twitterUrl');
+      if (twUrl) twUrl.setAttribute('content', appUrl);
+      const twImage = document.getElementById('twitterImage');
+      if (twImage && app.iconUrl) twImage.setAttribute('content', app.iconUrl);
+
+      // Structured Data (JSON-LD) Update
+      const jsonLdElem = document.getElementById('appJsonLd');
+      if (jsonLdElem) {
+        jsonLdElem.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": app.title,
+          "description": app.shortDesc || app.tagline,
+          "applicationCategory": app.categoryLabel || "DeveloperApplication",
+          "operatingSystem": (app.platforms || ["Web", "iOS", "Android", "Windows", "macOS"]).join(", "),
+          "image": app.iconUrl || "https://bugblitz98.github.io/assets/app_mockup_productivity.jpg",
+          "url": appUrl,
+          "author": {
+            "@type": "Person",
+            "name": "Animesh Manna",
+            "url": "https://bugblitz98.github.io/journey.html"
+          }
+        });
+      }
+
       document.getElementById('breadcrumbAppName').textContent = app.title;
 
       // 2. Hero Info
