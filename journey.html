@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Founder Story & 8+ Years Engineering Journey | Animesh Manna</title>
+  <meta name="description" content="Explore the 8+ year engineering journey of Animesh Manna from a first Hello World in 2017 to founding jsonviewer.tools, mongolens.com, yourorgtree.com, and shipping 20+ apps." />
+  <meta name="keywords" content="Animesh Manna, Founder Story, Software Engineering Journey, jsonviewer.tools, mongolens.com, yourorgtree.com, Visuo Labs, Dodo Payments, Indie Hacker" />
+  <meta name="author" content="Animesh Manna" />
+  <meta name="theme-color" content="#050709" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050709;
+      --bg-alt: #080b10;
+      --bg-card: rgba(13, 17, 24, 0.76);
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.085);
+      --border-hover: rgba(204, 255, 0, 0.45);
+      
+      /* Accents */
+      --lime: #ccff00;
+      --lime-glow: rgba(204, 255, 0, 0.3);
+      --cyan: #3ef0ff;
+      --cyan-glow: rgba(62, 240, 255, 0.25);
+      --green: #22ffa0;
+      --green-glow: rgba(34, 255, 160, 0.2);
+      --purple: #a78bfa;
+      --purple-glow: rgba(167, 139, 250, 0.25);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+
+      /* Typography */
+      --text: #fbfbf7;
+      --text-secondary: #9ea4b0;
+      --muted: #646b76;
+      --dim: #121620;
+      --card-radius: 18px;
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Cursor */
+    #cursor, #cursor-ring {
+      display: none;
+    }
+    @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        display: block !important;
+        position: fixed; top: 0; left: 0; z-index: 9999;
+        width: 8px; height: 8px;
+        background: var(--lime);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.04s ease-out;
+        box-shadow: 0 0 10px var(--lime);
+      }
+      #cursor-ring {
+        display: block !important;
+        position: fixed; top: 0; left: 0; z-index: 9998;
+        width: 36px; height: 36px;
+        border: 1px solid rgba(204, 255, 0, 0.45);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out;
+      }
+    }
+
+    /* Ambient Noise & Grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.7;
+    }
+
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 15%, black 0%, transparent 80%);
+    }
+
+    .orb {
+      position: fixed; border-radius: 50%; filter: blur(140px);
+      pointer-events: none; z-index: 0;
+    }
+    .orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(204, 255, 0, 0.08), transparent 70%);
+      top: -200px; left: -180px;
+    }
+    .orb-2 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(62, 240, 255, 0.07), transparent 70%);
+      bottom: -160px; right: -140px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Top Navigation */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(5, 7, 9, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand-link {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: inherit;
+    }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--lime), var(--cyan));
+      color: #050709; font-weight: 800; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 18px; letter-spacing: 0.5px;
+      display: flex; flex-direction: column;
+    }
+    .logo-author {
+      font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    }
+    .nav-links-right {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 100px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-back:hover {
+      border-color: var(--lime); background: rgba(204,255,0,0.08); color: var(--lime);
+    }
+    .btn-nav-apps {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 100px;
+      background: var(--lime); color: #050709; font-size: 13px; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-apps:hover {
+      box-shadow: 0 0 20px var(--lime-glow); transform: translateY(-1px);
+    }
+
+    /* Hero Banner */
+    .journey-hero {
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      background: rgba(204, 255, 0, 0.08);
+      border: 1px solid rgba(204, 255, 0, 0.3);
+      color: var(--lime); font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--lime); box-shadow: 0 0 8px var(--lime);
+    }
+    .journey-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 800; line-height: 1.12; margin-bottom: 20px;
+    }
+    .journey-title span {
+      background: linear-gradient(135deg, var(--lime), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .journey-lead {
+      font-size: 18px; line-height: 1.65; color: var(--text-secondary);
+      max-width: 860px; margin-bottom: 36px;
+    }
+
+    /* Hero Visual Card */
+    .hero-media-box {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      margin-bottom: 40px;
+    }
+    .hero-media-img {
+      width: 100%; height: auto; max-height: 520px;
+      object-fit: cover; display: block;
+    }
+    .hero-media-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,7,9,0.92) 0%, rgba(5,7,9,0.3) 50%, transparent 100%);
+      display: flex; align-items: flex-end; padding: 32px;
+    }
+    .hero-overlay-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      width: 100%;
+    }
+    .overlay-stat-item {
+      background: rgba(13, 17, 24, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+    }
+    .stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px; font-weight: 700; color: var(--lime);
+    }
+    .stat-lbl {
+      font-size: 12px; color: var(--text-secondary); margin-top: 2px; font-weight: 500;
+    }
+
+    /* Story Chapters Grid */
+    .story-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      padding: 60px 0;
+      align-items: start;
+    }
+
+    /* Sticky Sidebar Navigation */
+    .story-sidebar {
+      position: sticky; top: 100px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+    .sidebar-heading {
+      font-size: 12px; font-weight: 700; color: var(--lime);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .sidebar-nav-list {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+    .sidebar-nav-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px;
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 13.5px; font-weight: 600; transition: all 0.2s;
+    }
+    .sidebar-nav-link:hover, .sidebar-nav-link.active {
+      background: var(--surface-hover); color: var(--text);
+      border-left: 3px solid var(--lime); padding-left: 14px;
+    }
+    .sidebar-nav-link.active { color: var(--lime); }
+
+    /* Chapter Content */
+    .chapter-section {
+      margin-bottom: 70px;
+      scroll-margin-top: 100px;
+    }
+    .chapter-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 12px; border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .chapter-h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 700; margin-bottom: 16px; line-height: 1.25;
+    }
+    .chapter-body {
+      font-size: 16px; line-height: 1.8; color: #d0d6e0;
+      margin-bottom: 24px;
+    }
+    .chapter-body p { margin-bottom: 16px; }
+
+    /* Callout & Detail Boxes */
+    .story-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 28px; margin-bottom: 24px;
+      transition: all 0.25s;
+    }
+    .story-card:hover {
+      border-color: rgba(204, 255, 0, 0.35);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .card-meta-tag {
+      font-size: 11.5px; font-family: 'JetBrains Mono', monospace;
+      color: var(--lime); margin-bottom: 8px; font-weight: 600;
+    }
+    .story-card-title {
+      font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text);
+    }
+
+    /* Milestone Revenue Card Frame */
+    .milestone-frame {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px;
+      background: linear-gradient(135deg, rgba(204,255,0,0.04), rgba(62,240,255,0.03));
+      border: 1px solid rgba(204, 255, 0, 0.3);
+      border-radius: var(--card-radius); padding: 28px; margin-bottom: 30px;
+    }
+    .milestone-img-wrap {
+      border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .milestone-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .insight-bullet {
+      display: flex; gap: 12px; margin-bottom: 14px;
+    }
+    .insight-ico {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(204,255,0,0.12); color: var(--lime);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 14px;
+    }
+    .insight-title {
+      font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px;
+    }
+    .insight-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+    }
+
+    /* Tech Matrix Chips */
+    .tech-pill-grid {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+    }
+    .tech-pill {
+      padding: 6px 12px; border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text);
+    }
+
+    /* Apps Quick Gallery */
+    .apps-preview-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+      margin-top: 20px;
+    }
+    .app-preview-card {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      text-decoration: none; color: inherit; transition: all 0.2s;
+    }
+    .app-preview-card:hover {
+      border-color: var(--lime); background: var(--surface-hover);
+      transform: translateX(4px);
+    }
+    .app-preview-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .app-p-icon {
+      width: 40px; height: 40px; border-radius: 10px; object-fit: cover;
+    }
+    .app-p-title { font-size: 14px; font-weight: 700; color: #fff; }
+    .app-p-sub { font-size: 12px; color: var(--text-secondary); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0; background: var(--bg);
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .story-layout { grid-template-columns: 1fr; }
+      .story-sidebar { display: none; }
+      .hero-overlay-stats { grid-template-columns: repeat(2, 1fr); }
+      .milestone-frame { grid-template-columns: 1fr; }
+      .apps-preview-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .hero-overlay-stats { grid-template-columns: 1fr; }
+      .journey-hero { padding: 36px 0 20px; }
+      .wrap { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Background Ambience -->
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">V</div>
+        <div class="logo-text">
+          VISUO LABS
+          <span class="logo-author">by Animesh Manna</span>
+        </div>
+      </a>
+      <div class="nav-links-right">
+        <a href="index.html" class="btn-nav-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Home
+        </a>
+        <a href="index.html#apps" class="btn-nav-apps">
+          Explore 20+ Apps
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="journey-hero">
+    <div class="wrap">
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        <span>Founder Memoir • 8+ Years Engineering Trajectory (2017 – Present)</span>
+      </div>
+      <h1 class="journey-title">
+        From First "Hello World" at 19 <br>
+        To <span>20+ Multi-Platform Apps & SaaS Platforms</span>
+      </h1>
+      <p class="journey-lead">
+        The unfiltered story of relentless engineering craft, architectural evolution across 6 distinct technology eras, breaking through the $0 to $1 milestone with Dodo Payments, mastering technical SEO, and building high-utility software for a loyal global audience.
+      </p>
+
+      <!-- Hero Visual Banner with Live Stats -->
+      <div class="hero-media-box">
+        <img src="./assets/journey_hero.jpg" alt="Animesh Manna Engineering Workspace" class="hero-media-img">
+        <div class="hero-media-overlay">
+          <div class="hero-overlay-stats">
+            <div class="overlay-stat-item">
+              <div class="stat-val">2017</div>
+              <div class="stat-lbl">First Line of Code (Age 19)</div>
+            </div>
+            <div class="overlay-stat-item">
+              <div class="stat-val">8+ Years</div>
+              <div class="stat-lbl">Continuous Engineering</div>
+            </div>
+            <div class="overlay-stat-item">
+              <div class="stat-val">20+ Apps</div>
+              <div class="stat-lbl">Google Play, Apple & Windows</div>
+            </div>
+            <div class="overlay-stat-item">
+              <div class="stat-val">3 SaaS</div>
+              <div class="stat-lbl">Web Platforms In Production</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Story Content with Sticky Sidebar -->
+  <main class="wrap story-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="story-sidebar">
+      <div class="sidebar-heading">Story Chapters</div>
+      <ul class="sidebar-nav-list">
+        <li><a href="#ch1" class="sidebar-nav-link active">01. The Genesis (2017)</a></li>
+        <li><a href="#ch2" class="sidebar-nav-link">02. 6-Phase Tech Evolution</a></li>
+        <li><a href="#ch3" class="sidebar-nav-link">03. Inception of jsonviewer.tools</a></li>
+        <li><a href="#ch4" class="sidebar-nav-link">04. The 1st Internet Dollar</a></li>
+        <li><a href="#ch5" class="sidebar-nav-link">05. SEO & Audience Retention</a></li>
+        <li><a href="#ch6" class="sidebar-nav-link">06. Multi-Platform Empire (20+ Apps)</a></li>
+        <li><a href="#ch7" class="sidebar-nav-link">07. Future Horizon & R&D</a></li>
+      </ul>
+    </aside>
+
+    <!-- Chapters -->
+    <div class="story-content">
+
+      <!-- Chapter 1 -->
+      <section id="ch1" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(204,255,0,0.12); color:var(--lime); border:1px solid rgba(204,255,0,0.3);">
+          CHAPTER 01 • 2017
+        </div>
+        <h2 class="chapter-h2">The Genesis: Writing "Hello World" at Age 19</h2>
+        <div class="chapter-body">
+          <p>
+            In 2017, at 19 years old, I sat before a terminal and typed my very first lines of code: <code>echo "Hello, World!";</code>. What started as pure curiosity quickly turned into an all-consuming passion for systems architecture, algorithmic thinking, and building tools that eliminate friction for other human beings.
+          </p>
+          <p>
+            I began in the bedrock of the web: pure PHP, raw relational MySQL databases, manual SQL normalization, and Apache servers. Crafting database schemas from scratch and writing custom query optimizers instilled a deep respect for foundational computer science principles that modern heavy frameworks often obscure.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <div class="card-meta-tag">FOUNDATIONAL LESSON</div>
+          <div class="story-card-title">Understanding the Low-Level Before the Frameworks</div>
+          <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+            Starting with raw SQL queries, session management, and procedural scripts meant understanding query execution plans, indexes, memory bounds, and socket handshakes. When moving to modern high-level abstraction frameworks, performance bottlenecks became immediately transparent rather than black boxes.
+          </p>
+        </div>
+      </section>
+
+      <!-- Chapter 2 -->
+      <section id="ch2" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(62,240,255,0.12); color:var(--cyan); border:1px solid rgba(62,240,255,0.3);">
+          CHAPTER 02 • 2017 – 2026
+        </div>
+        <h2 class="chapter-h2">The 6-Phase Technical Evolution</h2>
+        <div class="chapter-body">
+          <p>
+            Over the span of 8+ years, my technical mastery expanded systematically through 6 major engineering paradigm shifts:
+          </p>
+        </div>
+
+        <!-- 6 Phase Cards -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div class="story-card">
+            <div class="card-meta-tag">PHASE 01 • 2017</div>
+            <div class="story-card-title">Core PHP & Relational Database Architecture</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              Server-side scripting, relational modeling, complex SQL JOINs, B-Tree indexing, session serialization, and secure authentication flows.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">PHP 7</span>
+              <span class="tech-pill">MySQL</span>
+              <span class="tech-pill">Apache</span>
+              <span class="tech-pill">SQL Normalization</span>
+            </div>
+          </div>
+
+          <div class="story-card">
+            <div class="card-meta-tag">PHASE 02 • ENTERPRISE MVC</div>
+            <div class="story-card-title">CodeIgniter, Laravel & RESTful Middleware</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              Migrated to structured enterprise architectures: Service-Repository patterns, Eloquent ORM graphs, automated migrations, routing pipelines, and JSON API standards.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">Laravel</span>
+              <span class="tech-pill">CodeIgniter</span>
+              <span class="tech-pill">RESTful APIs</span>
+              <span class="tech-pill">Eloquent ORM</span>
+            </div>
+          </div>
+
+          <div class="story-card">
+            <div class="card-meta-tag">PHASE 03 • REACTIVE FRONTEND</div>
+            <div class="story-card-title">Single Page Apps (Angular, React & TypeScript)</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              Modern component-driven web apps, reactive streams with RxJS, Redux/Context state management, Virtual DOM optimization, and sub-millisecond client interactions.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">React</span>
+              <span class="tech-pill">Angular</span>
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">RxJS</span>
+            </div>
+          </div>
+
+          <div class="story-card">
+            <div class="card-meta-tag">PHASE 04 • HYBRID MOBILE</div>
+            <div class="story-card-title">Ionic Framework, Cordova & Capacitor Containers</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              Bridging the web and mobile divide. Building hybrid native wrappers, camera hardware bridges, background geolocation, and cross-platform UX.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">Ionic</span>
+              <span class="tech-pill">Capacitor</span>
+              <span class="tech-pill">Mobile Bridges</span>
+            </div>
+          </div>
+
+          <div class="story-card">
+            <div class="card-meta-tag">PHASE 05 • FULL-STACK RUNTIME</div>
+            <div class="story-card-title">Node.js, Express & MongoDB NoSQL Microservices</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              Event-driven non-blocking I/O architectures, complex MongoDB aggregation pipelines, WebSocket real-time streams, and JWT authentication microservices.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Express</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">WebSockets</span>
+            </div>
+          </div>
+
+          <div class="story-card" style="border-color:rgba(204,255,0,0.35); background:linear-gradient(135deg,rgba(204,255,0,0.03),rgba(62,240,255,0.02));">
+            <div class="card-meta-tag" style="color:var(--lime);">PHASE 06 • MULTI-PLATFORM NATIVE (CURRENT)</div>
+            <div class="story-card-title">React Native, Flutter & Multi-OS Desktop Suites</div>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">
+              High-performance 60fps mobile and desktop apps across Google Play, Apple App Store, and Microsoft Store. GPU-accelerated canvas rendering, GLB 3D engines, and spatial mindmaps.
+            </p>
+            <div class="tech-pill-grid">
+              <span class="tech-pill">Flutter / Dart</span>
+              <span class="tech-pill">React Native</span>
+              <span class="tech-pill">macOS Native</span>
+              <span class="tech-pill">Windows Native</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter 3 -->
+      <section id="ch3" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(34,255,160,0.12); color:var(--green); border:1px solid rgba(34,255,160,0.3);">
+          CHAPTER 03 • 2024
+        </div>
+        <h2 class="chapter-h2">The Inception of jsonviewer.tools</h2>
+        <div class="chapter-body">
+          <p>
+            Every software engineer spends hundreds of hours staring at unformatted, massive JSON API responses. Existing online viewers were slow, choked on large payloads, and displayed plain tree text without giving a bird's-eye architectural view.
+          </p>
+          <p>
+            In 2024, I engineered and launched <strong style="color:#fff;">jsonviewer.tools</strong> — an interactive graph visualizer that converts dense hierarchical JSON into connected visual node diagrams. It became the cornerstone of Visuo Labs, proving that developers hunger for visual, fast, zero-latency tooling.
+          </p>
+        </div>
+
+        <div class="story-card" style="border-left: 4px solid var(--green);">
+          <div class="card-meta-tag" style="color:var(--green);">WEB SAAS PLATFORM</div>
+          <div class="story-card-title">jsonviewer.tools • Live Global Platform</div>
+          <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin-bottom:14px;">
+            Trusted daily by thousands of developers, data engineers, and API architects worldwide to inspect payloads, format schemas, and debug JSON visually.
+          </p>
+          <a href="https://jsonviewer.tools" target="_blank" rel="noopener" class="btn-nav-apps" style="font-size:12px; padding:6px 14px;">
+            Visit jsonviewer.tools ↗
+          </a>
+        </div>
+      </section>
+
+      <!-- Chapter 4 -->
+      <section id="ch4" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(245,158,11,0.12); color:var(--amber); border:1px solid rgba(245,158,11,0.3);">
+          CHAPTER 04 • MONETIZATION MILESTONE
+        </div>
+        <h2 class="chapter-h2">The 1st Internet Dollar: The Electrifying Spark</h2>
+        <div class="chapter-body">
+          <p>
+            Going from $0 to your very first dollar earned on the internet is a rite of passage. It is not about the numerical sum—it is the profound realization that a complete stranger thousands of miles away paid for software you designed and architected from scratch.
+          </p>
+          <p>
+            Partnering with <strong>Dodo Payments</strong>, I integrated checkout pipelines and monetization workflows, immediately witnessing organic conversions grow to a sustained run-rate. That single milestone served as high-voltage motivation that spurred the creation of 20+ multi-platform applications.
+          </p>
+        </div>
+
+        <!-- Milestone Visual Frame -->
+        <div class="milestone-frame">
+          <div class="milestone-img-wrap">
+            <img src="./assets/first_internet_dollar.jpg" alt="Dodo Payments Revenue Milestone Proof" loading="lazy">
+          </div>
+          <div>
+            <div class="card-meta-tag" style="color:var(--amber);">VERIFIED MILESTONE • DODO PAYMENTS</div>
+            <div class="story-card-title" style="font-size:20px; margin-bottom:16px;">
+              From $0 to Real Sustainable Revenue
+            </div>
+            
+            <div class="insight-bullet">
+              <div class="insight-ico">⚡</div>
+              <div>
+                <div class="insight-title">Irrefutable Market Validation</div>
+                <div class="insight-desc">Proof that solving developer pain points with sleek UI commands real commercial willingness to pay.</div>
+              </div>
+            </div>
+
+            <div class="insight-bullet">
+              <div class="insight-ico">🔥</div>
+              <div>
+                <div class="insight-title">Unstoppable Conviction</div>
+                <div class="insight-desc">The psychological leap that replaced self-doubt with high-velocity shipping across 3 app stores.</div>
+              </div>
+            </div>
+
+            <div class="insight-bullet">
+              <div class="insight-ico">💎</div>
+              <div>
+                <div class="insight-title">Long-Term Quality Standard</div>
+                <div class="insight-desc">Never build disposable throwaways; always craft durable, high-performance software for global scale.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter 5 -->
+      <section id="ch5" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(167,139,250,0.12); color:var(--purple); border:1px solid rgba(167,139,250,0.3);">
+          CHAPTER 05 • ORGANIC DISCOVERY
+        </div>
+        <h2 class="chapter-h2">Mastering SEO & Building for High Audiences</h2>
+        <div class="chapter-body">
+          <p>
+            Early on, distribution was the hardest battle. Without millions in ad spend, how do you stand out among crowded stores and web search results?
+          </p>
+          <p>
+            I made a deliberate decision: <strong>never resort to low-quality spam or throwaway clones</strong>. Instead, I mastered programmatic SEO, Core Web Vitals optimization, semantic schema data, high-intent keyword targeting, and blazing fast page performance. When combined with real utility and zero latency, organic search engines reward genuine craft.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <div class="card-meta-tag">CORE PRINCIPLES OF DISTRIBUTION</div>
+          <div class="story-card-title">The Visuo Labs Product Philosophy</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--text-secondary); margin-top:12px;">
+            <li>✓ <strong>Sub-100ms Interactions:</strong> Every tool must feel instantaneous with zero layout shift.</li>
+            <li>✓ <strong>Privacy & Local-First:</strong> Keep user payloads on their local machine whenever feasible.</li>
+            <li>✓ <strong>Aesthetic Delight:</strong> Sleek dark mode, crisp typography, and visual graph beauty.</li>
+            <li>✓ <strong>Deep Multi-Platform Presence:</strong> Android, iOS, macOS, Windows, and Web simultaneously.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Chapter 6 -->
+      <section id="ch6" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(204,255,0,0.12); color:var(--lime); border:1px solid rgba(204,255,0,0.3);">
+          CHAPTER 06 • ECOSYSTEM
+        </div>
+        <h2 class="chapter-h2">The 20+ Multi-Platform Applications Empire</h2>
+        <div class="chapter-body">
+          <p>
+            Today, the Visuo Labs ecosystem spans across Google Play (17 Android Apps), Apple App Store (7 iOS & macOS Apps), Microsoft Store (Windows Suites), and 3 live Web SaaS platforms:
+          </p>
+        </div>
+
+        <!-- Quick Links into App Details Pages -->
+        <div class="apps-preview-grid">
+          <a href="app.html?id=canvas-notes-studio" class="app-preview-card">
+            <div class="app-preview-left">
+              <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/d9/b3/3fd9b35e-ccb9-2b03-3445-6d9dc9ed5893/icon.png/180x180bb.png" class="app-p-icon" alt="Canvas Notes Studio">
+              <div>
+                <div class="app-p-title">Canvas Notes Studio</div>
+                <div class="app-p-sub">macOS & Windows Desktop</div>
+              </div>
+            </div>
+            <span style="color:var(--lime); font-size:13px; font-weight:700;">Details →</span>
+          </a>
+
+          <a href="app.html?id=easy-prescription-maker" class="app-preview-card">
+            <div class="app-preview-left">
+              <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c4/78/24/c4782443-aaaa-68ae-8134-56fa974fe69e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/180x180wa.png" class="app-p-icon" alt="Easy Prescription Maker">
+              <div>
+                <div class="app-p-title">Easy Prescription Maker</div>
+                <div class="app-p-sub">iOS Medical Tool</div>
+              </div>
+            </div>
+            <span style="color:var(--lime); font-size:13px; font-weight:700;">Details →</span>
+          </a>
+
+          <a href="app.html?id=json-viewer" class="app-preview-card">
+            <div class="app-preview-left">
+              <img src="https://play-lh.googleusercontent.com/-xvRVghF7zwDGoV2RQZjTV93q_UHQHwlCjbCQRVtpQ7X9BR2li6E3LhoD-akmnqs7bgQnaqV-ZeELmAo3hZ6WQ=s180-rw" class="app-p-icon" alt="JSON Viewer">
+              <div>
+                <div class="app-p-title">JSON Viewer</div>
+                <div class="app-p-sub">Android & jsonviewer.tools</div>
+              </div>
+            </div>
+            <span style="color:var(--lime); font-size:13px; font-weight:700;">Details →</span>
+          </a>
+
+          <a href="app.html?id=mongolens" class="app-preview-card">
+            <div class="app-preview-left">
+              <img src="https://play-lh.googleusercontent.com/rZCuYqwtbdRCnHwr6oM3kXrGK4XfCQ5ag5ESFjtdHTKzn4s7-gZZnKGG6ap4KmPhS9q3B8hAt9AK-2VZh3Mc=s180-rw" class="app-p-icon" alt="MongoLens">
+              <div>
+                <div class="app-p-title">MongoLens Client</div>
+                <div class="app-p-sub">Android & mongolens.com</div>
+              </div>
+            </div>
+            <span style="color:var(--lime); font-size:13px; font-weight:700;">Details →</span>
+          </a>
+        </div>
+
+        <div style="margin-top:20px; text-align:center;">
+          <a href="index.html#apps" class="btn-nav-apps" style="display:inline-flex;">
+            Browse Full Catalog of All 20 Applications →
+          </a>
+        </div>
+      </section>
+
+      <!-- Chapter 7 -->
+      <section id="ch7" class="chapter-section">
+        <div class="chapter-badge" style="background:rgba(34,255,160,0.12); color:var(--green); border:1px solid rgba(34,255,160,0.3);">
+          CHAPTER 07 • THE FUTURE
+        </div>
+        <h2 class="chapter-h2">Future Horizon: Advanced Systems & R&D</h2>
+        <div class="chapter-body">
+          <p>
+            The software landscape is accelerating faster than ever before. Looking ahead, my focus remains rooted in real-life, high-throughput production coding, deep systems research, spatial computing, offline-first local AI inference, and creating digital products that inspire awe.
+          </p>
+          <p>
+            To every aspiring builder reading this: start small, write that first line of code, embrace the iterative grind, and never compromise on craft.
+          </p>
+        </div>
+
+        <div class="story-card" style="text-align:center; padding:36px 20px;">
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-size:22px; margin-bottom:12px;">Let's Collaborate & Build Together</h3>
+          <p style="color:var(--text-secondary); max-width:500px; margin:0 auto 24px; font-size:14px;">
+            Have a project, consulting inquiry, or partnership opportunity? Reach out directly.
+          </p>
+          <a href="mailto:bugblitz.dev@gmail.com?subject=Founder%20Collaboration" class="btn-nav-apps">
+            ✉️ Contact Animesh Manna
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-copy">
+        © 2026 Visuo Labs • Story & Craft by <a href="https://www.linkedin.com/in/animesh-manna-428633157/" target="_blank" rel="noopener" style="color:var(--lime); text-decoration:none;">Animesh Manna</a>.
+      </div>
+      <div style="display:flex; gap:16px;">
+        <a href="index.html" style="color:var(--text-secondary); text-decoration:none; font-size:13px;">Home</a>
+        <a href="index.html#apps" style="color:var(--text-secondary); text-decoration:none; font-size:13px;">All Apps</a>
+        <a href="https://github.com/BugBlitz98" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:13px;">GitHub</a>
+        <a href="https://x.com/Animesh68589159" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:13px;">X (Twitter)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Smooth Cursor & Active Sidebar Tracking -->
+  <script>
+    // Smooth Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY;
+
+    if (cursor && ring) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
+      });
+      function renderRing() {
+        ringX += (mouseX - ringX) * 0.16;
+        ringY += (mouseY - ringY) * 0.16;
+        ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+        requestAnimationFrame(renderRing);
+      }
+      renderRing();
+    }
+
+    // Active Sidebar ScrollSpy
+    const sections = document.querySelectorAll('.chapter-section');
+    const navLinks = document.querySelectorAll('.sidebar-nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 150;
+        if (pageYOffset >= top) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

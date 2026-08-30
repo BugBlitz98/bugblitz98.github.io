@@ -961,6 +961,28 @@
       box-shadow: 0 4px 16px var(--lime-glow);
     }
 
+    .btn-details-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(204, 255, 0, 0.08);
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      color: var(--lime);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-details-link:hover {
+      background: var(--lime);
+      color: #000000;
+      box-shadow: 0 0 14px var(--lime-glow);
+      transform: translateY(-1px);
+    }
+
     /* Empty state */
     .empty-state {
       grid-column: 1 / -1;
@@ -1963,8 +1985,12 @@
         </div>
       </a>
       <div class="nav-store-links">
-        <a href="#experience" class="nav-store-btn exp-nav" title="8+ Years Work Experience & Technical Evolution">
+        <a href="journey.html" class="nav-store-btn exp-nav" title="Founder Story & 8+ Years Journey" style="border-color:rgba(204,255,0,0.4); background:rgba(204,255,0,0.08); color:var(--lime);">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Story &amp; Journey
+        </a>
+        <a href="#experience" class="nav-store-btn" title="8+ Years Work Experience & Technical Evolution">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
           8+ Yrs Exp
         </a>
         <a href="https://play.google.com/store/apps/dev?id=6046479877521936919" target="_blank" rel="noopener" class="nav-store-btn" title="Google Play Store Profile">
@@ -2002,8 +2028,15 @@
       <button class="mobile-close-btn" aria-label="Close Menu" onclick="toggleMobileMenu()">✕</button>
     </div>
     <nav class="mobile-drawer-nav">
-      <a href="#experience" class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <a href="journey.html" class="mobile-nav-link" style="border-left:3px solid var(--lime); background:rgba(204,255,0,0.06);">
         <span class="nav-ico">⚡</span>
+        <div class="nav-txt">
+          <span class="nav-title" style="color:var(--lime);">Founder Story &amp; Journey</span>
+          <span class="nav-desc">8+ Years Memoir, Inception &amp; Revenue</span>
+        </div>
+      </a>
+      <a href="#experience" class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <span class="nav-ico">🛠️</span>
         <div class="nav-txt">
           <span class="nav-title">8+ Years Experience</span>
           <span class="nav-desc">Technical evolution since 2017</span>
@@ -2095,27 +2128,18 @@
 
   <!-- FULL SCREEN HERO SECTION (100% VIEWPORT WIDTH) -->
   <section class="hero-section">
-    <div class="wrap hero-inner">
-      <div class="hero-top-pill">
-        <span class="pill-dot"></span>
-        <span>EXPERIENCED FOUNDER • 8+ YEARS CODE CRAFT • 20+ APPS</span>
-      </div>
-      <h1 class="hero-headline">
-        BUILDING QUALITY SOFTWARE &amp; SAAS PLATFORMS
-        <span class="hero-headline-lime">FOR GLOBAL AUDIENCES</span>
-      </h1>
-      <div class="hero-subnav-pills">
-        <span>INCEPTION</span>
-        <span class="subnav-dot">•</span>
-        <span>MONETIZATION</span>
-        <span class="subnav-dot">•</span>
-        <span>SEO MASTERY</span>
-        <span class="subnav-dot">•</span>
-        <span>MULTI-PLATFORM SCALE</span>
-      </div>
-      <p class="hero-sub">
+    <div class="wrap hero-in      <p class="hero-sub">
         Architected, engineered, and managed by <a href="#author" class="hero-author-tag">Animesh Manna</a> with 8+ years of engineering craft. Founder of <a href="https://jsonviewer.tools" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-weight:600;">jsonviewer.tools</a>, <a href="https://yourorgtree.com" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;font-weight:600;">yourorgtree.com</a>, and <a href="https://mongolens.com" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:600;">mongolens.com</a> alongside 20+ applications across Google Play, Apple App Store, and Microsoft Store.
       </p>
+
+      <div style="display:flex; justify-content:center; gap:12px; margin-top:22px; flex-wrap:wrap;">
+        <a href="journey.html" class="nav-store-btn exp-nav" style="padding:10px 22px; font-size:13.5px; border-color:rgba(204,255,0,0.5); background:rgba(204,255,0,0.1); color:var(--lime);">
+          ⚡ Read Founder Story &amp; 8+ Yrs Journey →
+        </a>
+        <a href="#apps" class="nav-store-btn" style="padding:10px 22px; font-size:13.5px;">
+          🚀 Browse All 20+ Applications
+        </a>
+      </div>
 
       <!-- 3 ECOSYSTEM HUBS (STORES DECK) -->
       <div class="stores-deck">
@@ -2276,7 +2300,9 @@
             <p class="card-desc">Visual note-taking and infinite mindmap canvas. Connect thoughts, organize complex ideas visually, with local-first secure storage.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Canvas Notes Studio">Mac / Windows</span>
+            <a href="app.html?id=canvas-notes-studio" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://apps.apple.com/us/app/canvas-notes-studio/id6794408320?mt=12" target="_blank" rel="noopener" class="btn-get-app apple-btn" title="Get for Mac">
                 Mac App
@@ -2309,7 +2335,9 @@
             <p class="card-desc">Professional digital prescription and Rx generator for healthcare practitioners. Create, print, and export patient prescriptions in seconds.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Easy Prescription Maker">iOS App Store</span>
+            <a href="app.html?id=easy-prescription-maker" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://apps.apple.com/us/app/easy-prescription-maker/id6796944989" target="_blank" rel="noopener" class="btn-get-app apple-btn">
               Get on App Store
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2339,7 +2367,9 @@
             <p class="card-desc">Transform raw JSON into interactive graph trees and visual node diagrams. Parse, format, and debug complex payloads seamlessly in app and on the web.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.jsonviewer">jsonviewer.tools</span>
+            <a href="app.html?id=json-viewer" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://jsonviewer.tools" target="_blank" rel="noopener" class="btn-get-app web-btn" title="Open Web App">
                 Web App
@@ -2374,7 +2404,9 @@
             <p class="card-desc">Organize thoughts, brain dump ideas, and connect concepts in a non-linear visual node graph network. Think in interconnected webs.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Graph Notes">Android &amp; iOS</span>
+            <a href="app.html?id=graph-notes" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://play.google.com/store/apps/details?id=com.graphnotes" target="_blank" rel="noopener" class="btn-get-app">Play</a>
               <a href="https://apps.apple.com/us/app/graph-notes-visual-notes/id6799601737" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
@@ -2403,7 +2435,9 @@
             <p class="card-desc">Smooth 3D model viewer for GLB and glTF files. Rotate, inspect meshes, textures, animations, and lighting in real time.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="GLB Viewer">3D Viewer</span>
+            <a href="app.html?id=glb-viewer" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://play.google.com/store/apps/details?id=com.glbviewer" target="_blank" rel="noopener" class="btn-get-app">Play</a>
               <a href="https://apps.apple.com/us/app/glb-viewer-3d-model-viewer/id6792433740" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
@@ -2433,7 +2467,9 @@
             <p class="card-desc">Design professional company hierarchies, team organizational trees, and reporting workflows with easy export options.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Org Chart Builder">All Platforms</span>
+            <a href="app.html?id=org-chart-builder" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://play.google.com/store/apps/details?id=com.orgchartbuilder" target="_blank" rel="noopener" class="btn-get-app">Play</a>
               <a href="https://apps.apple.com/us/app/organization-chart-builder/id6789635187" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
@@ -2461,7 +2497,9 @@
             <p class="card-desc">Render nested XML structures as clean, readable interactive node graphs without squinting at tedious raw markup.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.animesh.xmlviewer">com.animesh.xmlviewer</span>
+            <a href="app.html?id=xml-viewer" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.animesh.xmlviewer" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2489,7 +2527,9 @@
             <p class="card-desc">Visualize YAML configuration files into interactive diagrams. Ideal for inspecting CI/CD pipelines, Kubernetes, and Docker configs.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.animesh.yamlviewer">com.animesh.yamlviewer</span>
+            <a href="app.html?id=yaml-viewer" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.animesh.yamlviewer" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2518,7 +2558,9 @@
             <p class="card-desc">Connect and manage MongoDB databases seamlessly. Run queries, view collections, and edit documents with an intuitive UI.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.mongolens">mongolens.com</span>
+            <a href="app.html?id=mongolens" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://mongolens.com" target="_blank" rel="noopener" class="btn-get-app web-btn" title="Open mongolens.com">
                 Website
@@ -2552,7 +2594,9 @@
             <p class="card-desc">Write Mermaid-js markdown syntax and generate flowcharts, sequence diagrams, class models, and state graphs instantly.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.mermaidviewer">com.mermaidviewer</span>
+            <a href="app.html?id=mermaid-studio" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.mermaidviewer" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2580,7 +2624,9 @@
             <p class="card-desc">Instant web coding sandbox on mobile. Write HTML, CSS, and JS with instant preview, console debugger, and offline support.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="app.htmlrunner">app.htmlrunner</span>
+            <a href="app.html?id=html-runner" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=app.htmlrunner" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2608,7 +2654,9 @@
             <p class="card-desc">Compare two JSON files side-by-side with color-coded diff highlighting, key matching, and syntax error detection.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.jsoncompare">com.jsoncompare</span>
+            <a href="app.html?id=json-compare" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.jsoncompare" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2636,7 +2684,9 @@
             <p class="card-desc">Create sleek, customizable charts (bar, line, pie, radar) with customizable color palettes, live data inputs, and high-res image exports.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.chartmaker">com.chartmaker</span>
+            <a href="app.html?id=chart-maker" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.chartmaker" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2664,7 +2714,9 @@
             <p class="card-desc">Build customized weekly workout splits, timetable schedules, and exercise routines with ease to stay consistent at the gym.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.gymtimetablemaker">com.gymtimetablemaker</span>
+            <a href="app.html?id=gym-timetable-maker" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.gymtimetablemaker" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2693,7 +2745,9 @@
             <p class="card-desc">Engaging logic puzzle game. Connect matching color nodes and paths without overlapping lines across hundreds of stages.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Connect Path Puzzle">Multi-Platform</span>
+            <a href="app.html?id=connect-path-puzzle" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://play.google.com/store/apps/details?id=com.pathflow" target="_blank" rel="noopener" class="btn-get-app">Play</a>
               <a href="https://apps.apple.com/us/app/connect-path-puzzle/id6792431900" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
@@ -2721,7 +2775,9 @@
             <p class="card-desc">Fast-paced, adrenaline-filled endless runner arcade game! Dodge hurdles, collect power-ups, and sprint for high scores.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.cowrunnermobile">com.cowrunnermobile</span>
+            <a href="app.html?id=cow-dash" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.cowrunnermobile" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2750,7 +2806,9 @@
             <p class="card-desc">Hilarious talking donkey companion! Repeats what you say in comical voices, performs funny dances, and offers mini-games.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="Talking Donkey">Android &amp; iOS</span>
+            <a href="app.html?id=pocket-donkey" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://play.google.com/store/apps/details?id=com.mytalkingdonkey" target="_blank" rel="noopener" class="btn-get-app">Play</a>
               <a href="https://apps.apple.com/us/app/pocket-donkey/id6789635717" target="_blank" rel="noopener" class="btn-get-app apple-btn">iOS</a>
@@ -2778,7 +2836,9 @@
             <p class="card-desc">Vibrant bubble shooter game powered with expressive animated emoji bubbles, chain reactions, and power boosters.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.facepop">com.facepop</span>
+            <a href="app.html?id=facepop" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.facepop" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2806,7 +2866,9 @@
             <p class="card-desc">Fly through mythical skies, maneuver through tight obstacles, and collect coins in this addictive dragon flight simulator.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="com.flymydragon">com.flymydragon</span>
+            <a href="app.html?id=fly-my-dragon" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <a href="https://play.google.com/store/apps/details?id=com.flymydragon" target="_blank" rel="noopener" class="btn-get-app">
               Google Play
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2834,7 +2896,9 @@
             <p class="card-desc">Interactive organizational hierarchy &amp; team chart maker. Visualize company structures, department trees, and export high-res charts directly in browser &amp; Windows.</p>
           </div>
           <div class="card-footer">
-            <span class="package-id" title="YourOrgTree">yourorgtree.com</span>
+            <a href="app.html?id=yourorgtree" class="btn-details-link" title="View Specifications, Features & Details">
+              Details &amp; Specs →
+            </a>
             <div class="card-actions">
               <a href="https://yourorgtree.com" target="_blank" rel="noopener" class="btn-get-app web-btn" title="Open Web App">
                 Web App
@@ -2853,6 +2917,27 @@
           <div class="empty-icon">🔍</div>
           <div class="empty-title">No applications found</div>
           <p class="empty-desc">Try searching with different terms or reset your category/platform filters.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8+ YEARS WORK EXPERIENCE & TECHNICAL EVOLUTION -->
+    <section class="experience-section" id="experience">
+      <div class="exp-header">
+        <div class="exp-badge">
+          8+ Years Engineering Evolution • Since 2017
+        </div>
+        <h2 class="exp-title">8+ Years of Work Experience</h2>
+        <p class="exp-sub">
+          A continuous engineering trajectory started in 2017 (at age 19) with a first "Hello World" — evolving from core PHP &amp; relational databases, progressing through enterprise MVC frameworks, modern reactive single-page applications, hybrid mobile apps, full-stack Node.js &amp; MongoDB architectures, to native cross-platform engineering with React Native &amp; Flutter.
+        </p>
+        <div style="margin-top:18px;">
+          <a href="journey.html" class="nav-store-btn exp-nav" style="display:inline-flex; padding:9px 22px; font-size:13.5px; border-color:rgba(204,255,0,0.45); background:rgba(204,255,0,0.08); color:var(--lime);">
+            ⚡ Read In-Depth 8-Year Technical &amp; Monetization Memoir →
+          </a>
+        </div>
+      </div>eset your category/platform filters.</p>
         </div>
 
       </div>

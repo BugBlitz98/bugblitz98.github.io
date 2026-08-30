@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="pageTitle">Application Details | Visuo Labs</title>
+  <meta name="description" id="pageMetaDesc" content="Explore detailed specifications, features, and downloads for Visuo Labs applications crafted by Animesh Manna." />
+  <meta name="theme-color" content="#050709" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050709;
+      --bg-alt: #080b10;
+      --bg-card: rgba(13, 17, 24, 0.78);
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.085);
+      --border-hover: rgba(204, 255, 0, 0.45);
+      
+      /* Accents */
+      --lime: #ccff00;
+      --lime-glow: rgba(204, 255, 0, 0.3);
+      --cyan: #3ef0ff;
+      --cyan-glow: rgba(62, 240, 255, 0.25);
+      --green: #22ffa0;
+      --green-glow: rgba(34, 255, 160, 0.2);
+      --purple: #a78bfa;
+      --purple-glow: rgba(167, 139, 250, 0.25);
+      --amber: #f59e0b;
+
+      /* Typography & Layout */
+      --text: #fbfbf7;
+      --text-secondary: #9ea4b0;
+      --muted: #646b76;
+      --card-radius: 18px;
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Cursor */
+    #cursor, #cursor-ring {
+      display: none;
+    }
+    @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        display: block !important;
+        position: fixed; top: 0; left: 0; z-index: 9999;
+        width: 8px; height: 8px;
+        background: var(--lime);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.04s ease-out;
+        box-shadow: 0 0 10px var(--lime);
+      }
+      #cursor-ring {
+        display: block !important;
+        position: fixed; top: 0; left: 0; z-index: 9998;
+        width: 36px; height: 36px;
+        border: 1px solid rgba(204, 255, 0, 0.45);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out;
+      }
+    }
+
+    /* Background Orbs & Grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.7;
+    }
+
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .orb {
+      position: fixed; border-radius: 50%; filter: blur(140px);
+      pointer-events: none; z-index: 0;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(204, 255, 0, 0.07), transparent 70%);
+      top: -150px; left: -150px;
+    }
+    .orb-2 {
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(62, 240, 255, 0.06), transparent 70%);
+      bottom: 10%; right: -120px;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(5, 7, 9, 0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand-link {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: inherit;
+    }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--lime), var(--cyan));
+      color: #050709; font-weight: 800; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 18px; display: flex; flex-direction: column;
+    }
+    .logo-author {
+      font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    }
+    .nav-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-nav-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 100px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-ghost:hover {
+      border-color: var(--lime); color: var(--lime); background: rgba(204,255,0,0.08);
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-nav {
+      padding: 24px 0 10px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted);
+    }
+    .breadcrumb-nav a {
+      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+    }
+    .breadcrumb-nav a:hover { color: var(--lime); }
+    .breadcrumb-separator { opacity: 0.5; }
+    .breadcrumb-active { color: var(--text); font-weight: 600; }
+
+    /* App Detail Hero Header */
+    .app-hero {
+      padding: 30px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .app-hero-main {
+      display: flex; gap: 32px; align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .app-hero-icon-box {
+      width: 110px; height: 110px; border-radius: 24px;
+      overflow: hidden; flex-shrink: 0;
+      background: var(--surface-hover);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .app-hero-icon-img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .app-hero-icon-fallback {
+      font-size: 48px;
+    }
+    .app-hero-info {
+      flex: 1;
+    }
+    .app-badges-row {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px;
+    }
+    .badge-pill {
+      padding: 4px 12px; border-radius: 6px;
+      font-size: 11.5px; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(204, 255, 0, 0.12); color: var(--lime);
+      border: 1px solid rgba(204, 255, 0, 0.3);
+    }
+    .badge-platform {
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 11.5px; font-weight: 600;
+      background: var(--surface); color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .app-hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4.5vw, 42px);
+      font-weight: 800; line-height: 1.15; margin-bottom: 8px;
+    }
+    .app-hero-tagline {
+      font-size: 17px; color: var(--text-secondary); line-height: 1.5;
+    }
+
+    /* Actions Bar */
+    .hero-actions-bar {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+    .btn-action-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 24px; border-radius: 12px;
+      background: var(--lime); color: #050709;
+      font-size: 14px; font-weight: 800; text-decoration: none;
+      transition: all 0.2s; box-shadow: 0 4px 20px var(--lime-glow);
+    }
+    .btn-action-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 30px var(--lime-glow);
+    }
+    .btn-action-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 20px; border-radius: 12px;
+      background: var(--surface); color: var(--text);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .btn-action-store:hover {
+      border-color: rgba(255,255,255,0.4); background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Tab Navigation */
+    .tabs-container {
+      margin-top: 36px;
+    }
+    .tab-bar {
+      display: flex; gap: 8px; border-bottom: 1px solid var(--border);
+      overflow-x: auto; padding-bottom: 2px;
+    }
+    .tab-btn {
+      padding: 12px 20px; border: none; background: transparent;
+      color: var(--text-secondary); font-size: 14px; font-weight: 700;
+      cursor: pointer; position: relative; transition: all 0.2s;
+      white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--lime); }
+    .tab-btn.active::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 3px; background: var(--lime); border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 10px var(--lime);
+    }
+
+    /* Tab Panels */
+    .tab-panel {
+      display: none; padding: 40px 0;
+    }
+    .tab-panel.active { display: block; }
+
+    /* Overview Content */
+    .overview-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px;
+    }
+    .content-box {
+      font-size: 16px; line-height: 1.8; color: #d0d6e0;
+    }
+    .content-box p { margin-bottom: 20px; }
+
+    /* Showcase Image Box */
+    .showcase-media-box {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      background: var(--bg-card);
+    }
+    .showcase-media-img {
+      width: 100%; height: auto; object-fit: cover; display: block;
+    }
+    .showcase-caption {
+      padding: 14px 18px; font-size: 12px; color: var(--text-secondary);
+      background: rgba(13, 17, 24, 0.9); border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+      transition: all 0.2s;
+    }
+    .feature-card:hover {
+      border-color: rgba(204, 255, 0, 0.3);
+      transform: translateY(-2px);
+    }
+    .feature-card-title {
+      font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .feature-card-desc {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    }
+
+    /* Specs & Tech Table */
+    .specs-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--bg-card); border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .specs-table td {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .specs-table tr:last-child td { border-bottom: none; }
+    .specs-label {
+      font-weight: 700; color: var(--lime); width: 220px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    }
+    .specs-value {
+      color: #d0d6e0;
+    }
+
+    /* Quick App Switcher Section */
+    .app-switcher-section {
+      padding: 50px 0; border-top: 1px solid var(--border); margin-top: 40px;
+    }
+    .switcher-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 24px;
+    }
+    .switcher-title {
+      font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700;
+    }
+    .switcher-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .switcher-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      text-decoration: none; color: inherit; transition: all 0.2s;
+    }
+    .switcher-item:hover, .switcher-item.current {
+      border-color: var(--lime); background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+    .switcher-item.current {
+      border-color: var(--lime); background: rgba(204,255,0,0.06);
+    }
+    .switch-icon {
+      width: 32px; height: 32px; border-radius: 8px; object-fit: cover;
+    }
+    .switch-name {
+      font-size: 13px; font-weight: 700; color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0; background: var(--bg);
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .app-hero-main { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .switcher-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .switcher-grid { grid-template-columns: 1fr; }
+      .specs-label { width: 140px; }
+      .wrap { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Background Grid & Glow -->
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">V</div>
+        <div class="logo-text">
+          VISUO LABS
+          <span class="logo-author">by Animesh Manna</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="journey.html" class="btn-nav-ghost">
+          ⚡ Founder Story & Journey
+        </a>
+        <a href="index.html#apps" class="btn-nav-ghost">
+          ← All 20 Apps
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="index.html#apps">Applications</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-active" id="breadcrumbAppName">Application Details</span>
+    </nav>
+
+    <!-- App Hero Header -->
+    <section class="app-hero">
+      <div class="app-hero-main">
+        <div class="app-hero-icon-box">
+          <img id="appIconImg" class="app-hero-icon-img" src="" alt="App Icon" onerror="this.style.display='none';document.getElementById('appIconFallback').style.display='block';">
+          <div id="appIconFallback" class="app-hero-icon-fallback" style="display:none;">📱</div>
+        </div>
+
+        <div class="app-hero-info">
+          <div class="app-badges-row" id="appBadgesContainer">
+            <!-- Dynamic Badges -->
+          </div>
+          <h1 class="app-hero-title" id="appTitle">Loading Application...</h1>
+          <p class="app-hero-tagline" id="appTagline"></p>
+        </div>
+      </div>
+
+      <!-- Action Buttons Bar -->
+      <div class="hero-actions-bar" id="appActionsContainer">
+        <!-- Dynamic Store Links -->
+      </div>
+
+      <!-- Interactive Tab Bar -->
+      <div class="tabs-container">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab('overview')">Overview &amp; Story</button>
+          <button class="tab-btn" onclick="switchTab('features')">Key Features</button>
+          <button class="tab-btn" onclick="switchTab('tech')">Technical Architecture</button>
+          <button class="tab-btn" onclick="switchTab('downloads')">Stores &amp; Platforms</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 1: Overview -->
+    <div id="tab-overview" class="tab-panel active">
+      <div class="overview-grid">
+        <div class="content-box">
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-size:24px; margin-bottom:16px; color:#fff;">
+            Product Deep Dive
+          </h2>
+          <div id="appFullDesc"></div>
+          
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-top:24px;">
+            <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--lime); margin-bottom:6px;">ENGINEERED BY ANIMESH MANNA</div>
+            <div style="font-size:14px; color:#fff; font-weight:700; margin-bottom:4px;">Multi-Platform Quality Guarantee</div>
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">
+              This application is actively maintained with zero latency optimizations, robust local privacy sandboxing, and regular compatibility updates across new OS versions.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="showcase-media-box">
+            <img id="appShowcaseImg" src="./assets/app_mockup_devtool.jpg" alt="Application Interface Preview" class="showcase-media-img">
+            <div class="showcase-caption">
+              <span id="appShowcaseCaption">Visuo Labs UI Experience</span>
+              <span style="color:var(--lime); font-weight:700;">Verified Build ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Key Features -->
+    <div id="tab-features" class="tab-panel">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-size:24px; margin-bottom:20px; color:#fff;">
+        Engineered Capabilities &amp; Features
+      </h2>
+      <div class="features-grid" id="appFeaturesContainer">
+        <!-- Injected Features -->
+      </div>
+    </div>
+
+    <!-- Tab 3: Technical Architecture -->
+    <div id="tab-tech" class="tab-panel">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-size:24px; margin-bottom:20px; color:#fff;">
+        Technical Architecture &amp; System Specs
+      </h2>
+      <table class="specs-table">
+        <tbody id="appTechTableBody">
+          <!-- Injected Tech Specs -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tab 4: Downloads & Platforms -->
+    <div id="tab-downloads" class="tab-panel">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-size:24px; margin-bottom:20px; color:#fff;">
+        Official Download &amp; Launch Channels
+      </h2>
+      <div class="features-grid" id="appDownloadChannelsContainer">
+        <!-- Injected Store Detail Cards -->
+      </div>
+    </div>
+
+    <!-- Quick Switcher to Other Apps -->
+    <section class="app-switcher-section">
+      <div class="switcher-header">
+        <div>
+          <div style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--lime); margin-bottom:4px;">VISUO LABS ECOSYSTEM</div>
+          <div class="switcher-title">Explore Other 20+ Applications</div>
+        </div>
+        <a href="index.html#apps" style="color:var(--lime); text-decoration:none; font-size:13px; font-weight:700;">View All Grid →</a>
+      </div>
+
+      <div class="switcher-grid" id="appSwitcherGrid">
+        <!-- Dynamic App Switcher Grid -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        © 2026 Visuo Labs • Application engineered &amp; managed by <a href="https://www.linkedin.com/in/animesh-manna-428633157/" target="_blank" rel="noopener" style="color:var(--lime); text-decoration:none;">Animesh Manna</a>.
+      </div>
+      <div style="display:flex; gap:16px;">
+        <a href="index.html" style="color:var(--text-secondary); text-decoration:none;">Home</a>
+        <a href="journey.html" style="color:var(--text-secondary); text-decoration:none;">Story &amp; Journey</a>
+        <a href="index.html#contact" style="color:var(--lime); text-decoration:none;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Data & Rendering Engine -->
+  <script src="./assets/apps-data.js"></script>
+  <script>
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      
+      const targetPanel = document.getElementById('tab-' + tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+      
+      event.currentTarget.classList.add('active');
+    }
+
+    // Dynamic Render Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const appId = params.get('id') || 'canvas-notes-studio';
+      const app = getAppById(appId);
+
+      // 1. Page Title & Meta
+      document.title = `${app.title} | Visuo Labs`;
+      document.getElementById('pageTitle').textContent = `${app.title} - Visuo Labs`;
+      document.getElementById('breadcrumbAppName').textContent = app.title;
+
+      // 2. Hero Info
+      document.getElementById('appTitle').textContent = app.title;
+      document.getElementById('appTagline').textContent = app.tagline;
+      document.getElementById('appFullDesc').innerHTML = `<p>${app.fullDesc}</p><p>${app.shortDesc}</p>`;
+
+      // 3. Icon
+      const iconImg = document.getElementById('appIconImg');
+      const fallback = document.getElementById('appIconFallback');
+      if (app.iconUrl) {
+        iconImg.src = app.iconUrl;
+        fallback.textContent = app.fallbackEmoji || '📱';
+      } else {
+        iconImg.style.display = 'none';
+        fallback.textContent = app.fallbackEmoji || '📱';
+        fallback.style.display = 'block';
+      }
+
+      // 4. Badges
+      const badgesContainer = document.getElementById('appBadgesContainer');
+      let badgesHtml = `<span class="badge-pill">${app.badge || 'Live Tool'}</span>`;
+      badgesHtml += `<span class="badge-platform">${app.categoryLabel}</span>`;
+      if (app.platforms) {
+        app.platforms.forEach(p => {
+          let label = p.toUpperCase();
+          if (p === 'apple') label = '🍏 Apple App Store';
+          if (p === 'android') label = '🤖 Google Play';
+          if (p === 'windows') label = '🪟 Microsoft Store';
+          if (p === 'mac') label = '🍎 macOS';
+          if (p === 'web') label = '🌐 Web SaaS';
+          badgesHtml += `<span class="badge-platform">${label}</span>`;
+        });
+      }
+      badgesContainer.innerHTML = badgesHtml;
+
+      // 5. Hero Actions
+      const actionsContainer = document.getElementById('appActionsContainer');
+      let actionsHtml = '';
+      if (app.links && app.links.length > 0) {
+        app.links.forEach((l, i) => {
+          if (i === 0) {
+            actionsHtml += `<a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary">${l.label} ↗</a>`;
+          } else {
+            actionsHtml += `<a href="${l.url}" target="_blank" rel="noopener" class="btn-action-store">${l.label} ↗</a>`;
+          }
+        });
+      }
+      actionsContainer.innerHTML = actionsHtml;
+
+      // 6. Showcase Image
+      const showcaseImg = document.getElementById('appShowcaseImg');
+      if (app.heroImage) showcaseImg.src = app.heroImage;
+      document.getElementById('appShowcaseCaption').textContent = `${app.title} Visual Specification`;
+
+      // 7. Features Tab
+      const featuresContainer = document.getElementById('appFeaturesContainer');
+      let featHtml = '';
+      if (app.features && app.features.length > 0) {
+        app.features.forEach((f, idx) => {
+          featHtml += `
+            <div class="feature-card">
+              <div class="feature-card-title">
+                <span style="color:var(--lime); font-family:'JetBrains Mono',monospace; font-size:12px;">0${idx+1}.</span>
+                ${f.title}
+              </div>
+              <div class="feature-card-desc">${f.desc}</div>
+            </div>
+          `;
+        });
+      } else {
+        featHtml = '<p style="color:var(--text-secondary);">Features loaded directly in live app interface.</p>';
+      }
+      featuresContainer.innerHTML = featHtml;
+
+      // 8. Tech Specs Tab
+      const techTableBody = document.getElementById('appTechTableBody');
+      let techHtml = '';
+      if (app.techStack && app.techStack.length > 0) {
+        app.techStack.forEach(t => {
+          techHtml += `
+            <tr>
+              <td class="specs-label">${t.label}</td>
+              <td class="specs-value">${t.value}</td>
+            </tr>
+          `;
+        });
+      }
+      techHtml += `
+        <tr>
+          <td class="specs-label">Architect / Maintainer</td>
+          <td class="specs-value">Animesh Manna (Visuo Labs)</td>
+        </tr>
+        <tr>
+          <td class="specs-label">Privacy & Security</td>
+          <td class="specs-value">Local Sandbox Encrypted • No Unwanted Telemetry</td>
+        </tr>
+      `;
+      techTableBody.innerHTML = techHtml;
+
+      // 9. Store Channels Tab
+      const channelsContainer = document.getElementById('appDownloadChannelsContainer');
+      let chanHtml = '';
+      if (app.links && app.links.length > 0) {
+        app.links.forEach(l => {
+          chanHtml += `
+            <div class="feature-card" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div class="feature-card-title">${l.label}</div>
+                <div class="feature-card-desc">Official verified release channel.</div>
+              </div>
+              <a href="${l.url}" target="_blank" rel="noopener" class="btn-action-primary" style="padding:8px 16px; font-size:13px;">
+                Open / Install ↗
+              </a>
+            </div>
+          `;
+        });
+      }
+      channelsContainer.innerHTML = chanHtml;
+
+      // 10. Switcher Grid
+      const switcherGrid = document.getElementById('appSwitcherGrid');
+      let switchHtml = '';
+      APPS_DATA.forEach(item => {
+        const isCurrent = item.id === app.id;
+        switchHtml += `
+          <a href="app.html?id=${item.id}" class="switcher-item ${isCurrent ? 'current' : ''}">
+            ${item.iconUrl ? `<img src="${item.iconUrl}" class="switch-icon" alt="${item.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">` : ''}
+            <div style="display:${item.iconUrl ? 'none' : 'block'}; font-size:20px;">${item.fallbackEmoji || '📱'}</div>
+            <div style="overflow:hidden;">
+              <div class="switch-name">${item.title}</div>
+              <div style="font-size:11px; color:var(--text-secondary);">${item.categoryLabel}</div>
+            </div>
+          </a>
+        `;
+      });
+      switcherGrid.innerHTML = switchHtml;
+    });
+
+    // Smooth Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY;
+
+    if (cursor && ring) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
+      });
+      function renderRing() {
+        ringX += (mouseX - ringX) * 0.16;
+        ringY += (mouseY - ringY) * 0.16;
+        ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+        requestAnimationFrame(renderRing);
+      }
+      renderRing();
+    }
+  </script>
+</body>
+</html>
