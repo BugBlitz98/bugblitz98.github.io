@@ -218,36 +218,66 @@
     .hero-media-box {
       border-radius: var(--card-radius);
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-      margin-bottom: 40px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
+      background: #03060a;
     }
     .hero-media-img {
-      width: 100%; height: 550px; max-height: 600px;
-      object-fit: cover; object-position: center 35%; display: block;
-    }
-    .hero-media-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,7,9,0.92) 0%, rgba(5,7,9,0.3) 50%, transparent 100%);
-      display: flex; align-items: flex-end; padding: 32px;
-    }
-    .hero-overlay-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
       width: 100%;
+      height: clamp(460px, 60vh, 640px);
+      object-fit: cover;
+      object-position: center 82%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .hero-media-box:hover .hero-media-img {
+      transform: scale(1.015);
+    }
+    .hero-media-caption {
+      position: absolute;
+      top: 18px; right: 20px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(5, 7, 10, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--lime);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Stats bar below image */
+    .hero-overlay-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      width: 100%;
+      margin-top: 16px;
+      margin-bottom: 40px;
     }
     .overlay-stat-item {
-      background: rgba(13, 17, 24, 0.7);
+      background: var(--bg-card);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 18px;
+      border-radius: 12px;
+      padding: 16px 20px;
+      transition: all 0.25s ease;
+    }
+    .overlay-stat-item:hover {
+      border-color: rgba(204, 255, 0, 0.35);
+      transform: translateY(-2px);
     }
     .stat-val {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 26px; font-weight: 700; color: var(--lime);
     }
     .stat-lbl {
-      font-size: 12px; color: var(--text-secondary); margin-top: 2px; font-weight: 500;
+      font-size: 12px; color: var(--text-secondary); margin-top: 3px; font-weight: 500;
     }
 
     /* Story Chapters Grid */
@@ -466,28 +496,31 @@
         The unfiltered story of relentless engineering craft, architectural evolution across 6 distinct technology eras, breaking through the $0 to $1 milestone with Dodo Payments, mastering technical SEO, and building high-utility software for a loyal global audience.
       </p>
 
-      <!-- Hero Visual Banner with Live Stats -->
+      <!-- Hero Visual Banner -->
       <div class="hero-media-box">
-        <img src="./assets/journey_hero.jpg" alt="Animesh Manna Engineering Workspace" class="hero-media-img">
-        <div class="hero-media-overlay">
-          <div class="hero-overlay-stats">
-            <div class="overlay-stat-item">
-              <div class="stat-val">2017</div>
-              <div class="stat-lbl">First Line of Code (Age 19)</div>
-            </div>
-            <div class="overlay-stat-item">
-              <div class="stat-val">8+ Years</div>
-              <div class="stat-lbl">Continuous Engineering</div>
-            </div>
-            <div class="overlay-stat-item">
-              <div class="stat-val">20+ Apps</div>
-              <div class="stat-lbl">Google Play, Apple & Windows</div>
-            </div>
-            <div class="overlay-stat-item">
-              <div class="stat-val">3 SaaS</div>
-              <div class="stat-lbl">Web Platforms In Production</div>
-            </div>
-          </div>
+        <img src="./assets/journey_hero.jpg" alt="Animesh Manna Coding Workspace" class="hero-media-img">
+        <div class="hero-media-caption">
+          <span>🌙 Night Coding • Full Moon Trajectory</span>
+        </div>
+      </div>
+
+      <!-- Live Statistics Bar (Unobstructed below photo) -->
+      <div class="hero-overlay-stats">
+        <div class="overlay-stat-item">
+          <div class="stat-val">2017</div>
+          <div class="stat-lbl">First Line of Code (Age 19)</div>
+        </div>
+        <div class="overlay-stat-item">
+          <div class="stat-val">8+ Years</div>
+          <div class="stat-lbl">Continuous Engineering</div>
+        </div>
+        <div class="overlay-stat-item">
+          <div class="stat-val">20+ Apps</div>
+          <div class="stat-lbl">Google Play, Apple &amp; Windows</div>
+        </div>
+        <div class="overlay-stat-item">
+          <div class="stat-val">3 SaaS</div>
+          <div class="stat-lbl">Web Platforms In Production</div>
         </div>
       </div>
     </div>

@@ -498,26 +498,27 @@
       border-color: #ffffff;
     }
 
-    /* ─── PLATFORM HUBS (3 STORES DECK) ─────────── */
+    /* ─── PLATFORM HUBS (5 STORES DECK - FULL WIDTH SIDE BY SIDE) ─────────── */
     .stores-deck {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-      gap: 16px;
-      margin-top: 42px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 36px;
+      width: 100%;
       opacity: 0; animation: fadeInUp 0.8s 0.6s ease forwards;
     }
     .store-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 22px;
+      border-radius: 12px;
+      padding: 14px 14px 12px;
       text-align: left;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
+      gap: 10px;
       transition: all 0.3s cubic-bezier(0.2,0,0,1);
       position: relative;
       overflow: hidden;
@@ -526,7 +527,7 @@
     .store-card::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(350px circle at var(--smx,50%) var(--smy,50%), rgba(255,255,255,0.06), transparent 50%);
+      background: radial-gradient(280px circle at var(--smx,50%) var(--smy,50%), rgba(255,255,255,0.06), transparent 50%);
       opacity: 0; transition: opacity 0.3s;
       pointer-events: none;
     }
@@ -535,64 +536,74 @@
     .store-card.google:hover {
       border-color: rgba(62, 240, 255, 0.5);
       background: rgba(62, 240, 255, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px var(--cyan-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px var(--cyan-glow);
     }
     .store-card.apple:hover {
       border-color: rgba(255, 255, 255, 0.45);
       background: rgba(255, 255, 255, 0.05);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255,255,255,0.15);
     }
     .store-card.ms:hover {
       border-color: rgba(0, 164, 239, 0.5);
       background: rgba(0, 164, 239, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 164, 239, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 164, 239, 0.25);
     }
     .store-card.chrome:hover {
       border-color: rgba(245, 158, 11, 0.5);
       background: rgba(245, 158, 11, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.18);
     }
     .store-card.vscode:hover {
       border-color: rgba(62, 240, 255, 0.5);
       background: rgba(62, 240, 255, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px var(--cyan-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px var(--cyan-glow);
     }
 
     .store-card-header {
-      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      display: flex; align-items: center; justify-content: space-between; gap: 6px;
     }
     .store-icon-wrap {
-      width: 42px; height: 42px; border-radius: 11px;
+      width: 32px; height: 32px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       flex-shrink: 0;
     }
+    .store-icon-wrap svg {
+      width: 17px; height: 17px;
+    }
     .store-badge {
-      font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace;
-      padding: 3px 8px; border-radius: 6px;
+      font-size: 10px; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+      padding: 2.5px 6.5px; border-radius: 5px;
       background: rgba(255, 255, 255, 0.06);
       color: var(--text-secondary);
       white-space: nowrap;
     }
     .store-card-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px; font-weight: 700;
+      font-size: 14.5px; font-weight: 700;
       color: #ffffff;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .store-card-desc {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.55;
+      font-size: 11.5px; color: var(--text-secondary); line-height: 1.38;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .store-card-link {
-      font-size: 12.5px; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 4px;
+      font-size: 11.5px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 2px;
     }
     .store-card.google .store-card-link { color: var(--cyan); }
     .store-card.apple .store-card-link { color: #ffffff; }
@@ -1887,9 +1898,12 @@
     .footer-copy a:hover { color: var(--lime); }
 
     /* ─── RESPONSIVE BREAKPOINTS ────────────────── */
+    @media (max-width: 1100px) {
+      .stores-deck { grid-template-columns: repeat(3, 1fr); }
+    }
+
     @media (max-width: 960px) {
       .wrap { padding: 0 20px; }
-      .stores-deck { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
       .hero-stats {
         gap: 16px; padding: 14px 22px;
       }
@@ -1900,6 +1914,7 @@
 
     @media (max-width: 680px) {
       .wrap { padding: 0 16px; }
+      .stores-deck { grid-template-columns: repeat(2, 1fr); }
       header { height: auto; padding: 12px 0; }
       .nav-inner { gap: 10px; }
       .controls-section { top: 58px; padding: 14px 0 10px; }
@@ -1955,7 +1970,7 @@
       .hero-headline { font-size: clamp(32px, 11vw, 46px); }
       .hero-top-pill { font-size: 9.5px; padding: 5px 12px; letter-spacing: 0.8px; }
       .stores-deck { grid-template-columns: 1fr; }
-      .store-card { padding: 18px; }
+      .store-card { padding: 14px; }
       .hero-stats { grid-template-columns: 1fr 1fr; padding: 12px 10px; }
       .filter-chip { font-size: 12px; padding: 6px 12px; }
       .card { padding: 16px; }
