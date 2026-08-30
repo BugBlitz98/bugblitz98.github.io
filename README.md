@@ -14,7 +14,7 @@
   - [yourorgtree.com](https://yourorgtree.com) — Interactive organization chart & hierarchy builder.
   - [mongolens.com](https://mongolens.com) — Modern visual MongoDB client and database explorer.
 - 📱 **Multi-Platform App Developer**: 20+ applications published across Android, iOS, macOS, Windows, Chrome Web Store, and Open VSX.
-- ⚡ **1st Internet Dollar Milestone**: Proven SaaS monetization from $0 to recurring global revenue via Dodo Payments, fueling continuous high-quality software development.
+- ⚡ **1st Internet Dollar Milestone (Feb 2025)**: Started monetization and unlocked the 1st organic internet sale on February 15, 2025 via Lemon Squeezy, fueling continuous high-quality software development.
 
 ---
 
