@@ -10,7 +10,7 @@
 **Animesh Manna** is a software engineer and founder with **8+ years of engineering craft**. His coding journey began in **2017 at 19 years old** with a first *"Hello World"*.
 
 - 🚀 **Founder of Web SaaS Platforms**:
-  - [jsonviewer.tools](https://jsonviewer.tools) — Online JSON visualizer, graph diagram generator, and formatter.
+  - [jsonviewer.tools](https://jsonviewer.tools) — Online JSON visualizer, graph diagram generator, and formatter (Engineered with **Next.js** + **MongoDB**).
   - [yourorgtree.com](https://yourorgtree.com) — Interactive organization chart & hierarchy builder.
   - [mongolens.com](https://mongolens.com) — Modern visual MongoDB client and database explorer.
 - 📱 **Multi-Platform App Developer**: 20+ applications published across Android, iOS, macOS, Windows, Chrome Web Store, and Open VSX.
@@ -27,7 +27,7 @@
       ↳ 2021: Angular & Modern Reactive SPAs
         ↳ 2022: React & Ionic Cross-Platform
           ↳ 2023: Full-Stack MongoDB & Node.js
-            ↳ 2024: React Native & Flutter Multi-Platform Mobile
+            ↳ 2024: Next.js SaaS (jsonviewer.tools) + React Native & Flutter Mobile
               ↳ 2025–2026: Multi-Store Scaling & SaaS Monetization
 ```
 

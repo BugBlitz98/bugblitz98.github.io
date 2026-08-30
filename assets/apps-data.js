@@ -91,10 +91,11 @@ const APPS_DATA = [
       { title: "Browser & Editor Extensions", desc: "Use JSON visualization directly inside Chrome and VS Code through official extension channels." }
     ],
     techStack: [
+      { label: "Web SaaS Stack", value: "Next.js (App Router, Server Components & Edge Rendering) + MongoDB Atlas" },
+      { label: "Database Architecture", value: "MongoDB NoSQL document storage with high-throughput indexing" },
       { label: "Mobile Engine", value: "Flutter / Dart with custom tree traversal algorithms" },
-      { label: "Web Platform", value: "Modern Reactive Web (jsonviewer.tools)" },
       { label: "Parser Specs", value: "Streaming AST tokenizer with deep nested node virtualization" },
-      { label: "Supported Platforms", value: "Android, Web Browsers, Chrome Extension & VS Code Extension" }
+      { label: "Supported Platforms", value: "Web (jsonviewer.tools), Android, Chrome Extension & VS Code Extension" }
     ],
     links: [
       { type: "web", label: "Open jsonviewer.tools (Web SaaS)", url: "https://jsonviewer.tools" },
